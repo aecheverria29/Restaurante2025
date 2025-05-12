@@ -47,5 +47,10 @@ namespace SistemaRestaurante.Forms
         {
             AbrirFormularioEnPanel(new PlatosForm());
         }
+
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

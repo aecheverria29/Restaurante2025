@@ -43,6 +43,11 @@
             this.btnEditar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.dgvPlatos = new System.Windows.Forms.DataGridView();
+            this.cbFiltroDisponibilidad = new System.Windows.Forms.ComboBox();
+            this.btnFiltrar = new System.Windows.Forms.Button();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlatos)).BeginInit();
             this.SuspendLayout();
@@ -162,28 +167,78 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(201, 148);
+            this.btnEliminar.Location = new System.Drawing.Point(419, 147);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(84, 23);
+            this.btnEliminar.Size = new System.Drawing.Size(361, 23);
             this.btnEliminar.TabIndex = 13;
-            this.btnEliminar.Text = "Eliminar Plato";
+            this.btnEliminar.Text = "Eliminar Plato (NO USAR QUITAR PROXIMAMENTE)";
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // dgvPlatos
             // 
             this.dgvPlatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPlatos.Location = new System.Drawing.Point(15, 190);
+            this.dgvPlatos.Location = new System.Drawing.Point(28, 214);
             this.dgvPlatos.Name = "dgvPlatos";
             this.dgvPlatos.Size = new System.Drawing.Size(765, 232);
             this.dgvPlatos.TabIndex = 14;
             this.dgvPlatos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlatos_CellClick);
             // 
+            // cbFiltroDisponibilidad
+            // 
+            this.cbFiltroDisponibilidad.FormattingEnabled = true;
+            this.cbFiltroDisponibilidad.Location = new System.Drawing.Point(201, 149);
+            this.cbFiltroDisponibilidad.Name = "cbFiltroDisponibilidad";
+            this.cbFiltroDisponibilidad.Size = new System.Drawing.Size(121, 21);
+            this.cbFiltroDisponibilidad.TabIndex = 15;
+            // 
+            // btnFiltrar
+            // 
+            this.btnFiltrar.Location = new System.Drawing.Point(328, 149);
+            this.btnFiltrar.Name = "btnFiltrar";
+            this.btnFiltrar.Size = new System.Drawing.Size(75, 23);
+            this.btnFiltrar.TabIndex = 16;
+            this.btnFiltrar.Text = "Aplicar filtro";
+            this.btnFiltrar.UseVisualStyleBackColor = true;
+            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
+            // 
+            // txtBuscar
+            // 
+            this.txtBuscar.Location = new System.Drawing.Point(28, 188);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(177, 20);
+            this.txtBuscar.TabIndex = 17;
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Location = new System.Drawing.Point(211, 185);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscar.TabIndex = 18;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Location = new System.Drawing.Point(291, 185);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(125, 23);
+            this.btnLimpiar.TabIndex = 19;
+            this.btnLimpiar.Text = "Limpiar y mostrar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
             // PlatosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(818, 463);
+            this.ClientSize = new System.Drawing.Size(912, 607);
+            this.Controls.Add(this.btnLimpiar);
+            this.Controls.Add(this.btnBuscar);
+            this.Controls.Add(this.txtBuscar);
+            this.Controls.Add(this.btnFiltrar);
+            this.Controls.Add(this.cbFiltroDisponibilidad);
             this.Controls.Add(this.dgvPlatos);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnEditar);
@@ -226,5 +281,10 @@
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.DataGridView dgvPlatos;
+        private System.Windows.Forms.ComboBox cbFiltroDisponibilidad;
+        private System.Windows.Forms.Button btnFiltrar;
+        private System.Windows.Forms.TextBox txtBuscar;
+        private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.Button btnLimpiar;
     }
 }

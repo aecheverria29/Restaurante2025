@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.btnPlatos = new System.Windows.Forms.Button();
             this.btnCerrarSesion = new System.Windows.Forms.Button();
             this.btnReportes = new System.Windows.Forms.Button();
             this.btnMesas = new System.Windows.Forms.Button();
@@ -39,7 +40,6 @@
             this.btnMenu = new System.Windows.Forms.Button();
             this.btnUsuarios = new System.Windows.Forms.Button();
             this.panelContenido = new System.Windows.Forms.Panel();
-            this.btnPlatos = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,6 +62,17 @@
             this.panelMenu.Size = new System.Drawing.Size(220, 677);
             this.panelMenu.TabIndex = 0;
             // 
+            // btnPlatos
+            // 
+            this.btnPlatos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPlatos.Location = new System.Drawing.Point(37, 152);
+            this.btnPlatos.Name = "btnPlatos";
+            this.btnPlatos.Size = new System.Drawing.Size(93, 23);
+            this.btnPlatos.TabIndex = 9;
+            this.btnPlatos.Text = "Platos";
+            this.btnPlatos.UseVisualStyleBackColor = true;
+            this.btnPlatos.Click += new System.EventHandler(this.btnPlatos_Click);
+            // 
             // btnCerrarSesion
             // 
             this.btnCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -71,6 +82,7 @@
             this.btnCerrarSesion.TabIndex = 8;
             this.btnCerrarSesion.Text = "Cerrar Sesion";
             this.btnCerrarSesion.UseVisualStyleBackColor = true;
+            this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click);
             // 
             // btnReportes
             // 
@@ -161,17 +173,6 @@
             this.panelContenido.Name = "panelContenido";
             this.panelContenido.Size = new System.Drawing.Size(792, 677);
             this.panelContenido.TabIndex = 1;
-            // 
-            // btnPlatos
-            // 
-            this.btnPlatos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPlatos.Location = new System.Drawing.Point(37, 152);
-            this.btnPlatos.Name = "btnPlatos";
-            this.btnPlatos.Size = new System.Drawing.Size(93, 23);
-            this.btnPlatos.TabIndex = 9;
-            this.btnPlatos.Text = "Platos";
-            this.btnPlatos.UseVisualStyleBackColor = true;
-            this.btnPlatos.Click += new System.EventHandler(this.btnPlatos_Click);
             // 
             // MainForm
             // 

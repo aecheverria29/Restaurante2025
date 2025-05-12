@@ -38,6 +38,8 @@ namespace SistemaRestaurante
                         MessageBox.Show("Bienvenido");
                         this.Hide();
                         MainForm main = new MainForm();
+                        main.FormClosed += (s, args) => this.Show();
+
                         main.Show();
                     }
                     else
@@ -50,6 +52,12 @@ namespace SistemaRestaurante
                     MessageBox.Show("Error al conectar: "+ex.Message);
                 }
             }
+           
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

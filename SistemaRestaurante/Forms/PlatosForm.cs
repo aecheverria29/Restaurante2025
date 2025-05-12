@@ -36,29 +36,54 @@ namespace SistemaRestaurante.Forms
                 cbSubcategoria.ValueMember = "IdSubcategoria";
             }
         }
-        private void CargarPlatos()
+        private void CargarPlatos(string filtroDisponibilidad = "Todos", string textoBusqueda = "")
         {
-            using(SqlConnection conn = DBConnection.GetConnection())
+            using (SqlConnection conn = DBConnection.GetConnection())
             {
-                SqlCommand cmd = new SqlCommand(@"
-                     SELECT p.IdPlato, p.Nombre, p.Precio, p.Descripcion,
-                     p.Disponible, p.Imagen, s.Nombre AS Subcategoria
-                     FROM Platos p
-                     INNER JOIN Subcategorias s ON p.IdSubcategoria = s.IdSubcategoria", conn);
-                SqlDataAdapter da = new SqlDataAdapter( cmd);
+                StringBuilder query = new StringBuilder(@"
+            SELECT p.IdPlato, p.Nombre, p.Precio, p.Descripcion,
+                   p.Disponible, p.Imagen, s.Nombre AS Subcategoria
+            FROM Platos p
+            INNER JOIN Subcategorias s ON p.IdSubcategoria = s.IdSubcategoria
+            WHERE 1 = 1 ");
+
+                if (filtroDisponibilidad == "Solo disponibles")
+                    query.Append(" AND p.Disponible = 1 ");
+                else if (filtroDisponibilidad == "Solo no disponibles")
+                    query.Append(" AND p.Disponible = 0 ");
+
+                if (!string.IsNullOrWhiteSpace(textoBusqueda))
+                    query.Append(" AND p.Nombre LIKE @busqueda ");
+
+                SqlCommand cmd = new SqlCommand(query.ToString(), conn);
+
+                if (!string.IsNullOrWhiteSpace(textoBusqueda))
+                    cmd.Parameters.AddWithValue("@busqueda", "%" + textoBusqueda + "%");
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 dgvPlatos.DataSource = dt;
-                
-                dgvPlatos.Columns["IdPlato"].Visible = false;
-                dgvPlatos.ReadOnly = true;
 
+                if (dgvPlatos.Columns.Contains("IdPlato"))
+                    dgvPlatos.Columns["IdPlato"].Visible = false;
 
+                if (dgvPlatos.Columns.Contains("Imagen"))
+                    dgvPlatos.Columns["Imagen"].Visible = false;
             }
         }
+
         private void PlatosForm_Load(object sender, EventArgs e)
         {
-            CargarPlatos();
+            if (cbFiltroDisponibilidad.Items.Count == 0)
+            {
+                cbFiltroDisponibilidad.Items.Add("Todos");
+                cbFiltroDisponibilidad.Items.Add("Solo disponibles");
+                cbFiltroDisponibilidad.Items.Add("Solo no disponibles");
+            }
+            cbFiltroDisponibilidad.SelectedIndex = 1; 
+            CargarPlatos("Solo disponibles", "");
+
             CargarSubcategorias();
             dgvPlatos.ReadOnly = true;
             dgvPlatos.AllowUserToAddRows = false;
@@ -83,7 +108,7 @@ namespace SistemaRestaurante.Forms
 
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Plato agregado");
-                CargarPlatos();
+                CargarPlatos("Solo disponibles", "");
                 LimpiarCampos();
             }
         }
@@ -146,7 +171,7 @@ namespace SistemaRestaurante.Forms
                 {
                     pbImagen.Image = null;
                 }
-                pbImagen.Tag = ruta; // para mantener la ruta original para editar
+                pbImagen.Tag = ruta; 
 
             }
 
@@ -180,7 +205,7 @@ namespace SistemaRestaurante.Forms
 
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Plato Actualizado");
-                    CargarPlatos();
+                    CargarPlatos("Solo disponibles", "");
                     LimpiarCampos();
                 }
             }
@@ -207,7 +232,7 @@ namespace SistemaRestaurante.Forms
                         cmd.Parameters.AddWithValue("@id", idPlato);
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Plato eliminado correctamente");
-                        CargarPlatos();
+                        CargarPlatos("Solo disponibles", "");
                         LimpiarCampos();
                     }
                 }
@@ -216,6 +241,27 @@ namespace SistemaRestaurante.Forms
             {
                 MessageBox.Show("Selecciona un plato para eliminar.");
             }
+        }
+
+        private void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            string filtro = cbFiltroDisponibilidad.SelectedItem?.ToString() ?? "Todos";
+            CargarPlatos(filtro, txtBuscar.Text);
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            string filtro = cbFiltroDisponibilidad.SelectedItem?.ToString() ?? "Todos";
+            string texto = txtBuscar.Text.Trim();
+            CargarPlatos(filtro, texto);
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtBuscar.Clear();
+            cbFiltroDisponibilidad.SelectedIndex = 1;
+            CargarPlatos("Solo disponibles", "");
+            LimpiarCampos();
         }
     }
 }
