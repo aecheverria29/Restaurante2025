@@ -52,5 +52,10 @@ namespace SistemaRestaurante.Forms
         {
             this.Close();
         }
+
+        private void btnPedidos_Click(object sender, EventArgs e)
+        {
+            AbrirFormularioEnPanel(new PedidosForm());
+        }
     }
 }

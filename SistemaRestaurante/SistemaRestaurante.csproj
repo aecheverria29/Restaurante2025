@@ -83,6 +83,12 @@
     <Compile Include="Forms\MesasForm.Designer.cs">
       <DependentUpon>MesasForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\NuevoPedidoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NuevoPedidoForm.Designer.cs">
+      <DependentUpon>NuevoPedidoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\PedidosForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +124,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MenuForm.resx">
       <DependentUpon>MenuForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NuevoPedidoForm.resx">
+      <DependentUpon>NuevoPedidoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PedidosForm.resx">
+      <DependentUpon>PedidosForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PlatosForm.resx">
       <DependentUpon>PlatosForm.cs</DependentUpon>

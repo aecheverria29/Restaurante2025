@@ -143,6 +143,7 @@
             this.btnPedidos.TabIndex = 2;
             this.btnPedidos.Text = "Pedidos";
             this.btnPedidos.UseVisualStyleBackColor = true;
+            this.btnPedidos.Click += new System.EventHandler(this.btnPedidos_Click);
             // 
             // btnMenu
             // 
