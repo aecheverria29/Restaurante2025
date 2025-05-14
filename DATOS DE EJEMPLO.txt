@@ -1,0 +1,96 @@
+
+GO
+-- Estados de mesa
+INSERT INTO EstadoMesa (NombreEstado) VALUES 
+('Disponible'), ('Ocupada'), ('Reservada'), ('En limpieza');
+
+-- Estados de pedido
+INSERT INTO EstadoPedido (NombreEstado) VALUES 
+('Pendiente'), ('En preparación'), ('Entregado'), ('Cancelado');
+
+-- Tipos de consumo
+INSERT INTO TiposConsumo (NombreTipo) VALUES 
+('Cliente'), ('Empleado'), ('Desperdicio'), ('Cortesia'), ('Reposicion');
+
+-- Roles
+INSERT INTO Roles (NombreRol) VALUES 
+('Administrador'), 
+('Mesero'), 
+('Cocinero');
+
+-- Usuarios
+INSERT INTO Usuarios (Nombre, Usuario, Contrasena, IdRol) VALUES
+('Gabriel Moreno', 'gabo_admin', 'admin123', 1),
+('Laura Pérez', 'laura_mesera', 'mesera123', 2),
+('Carlos Gómez', 'carlos_cocinero', 'cocinero123', 3);
+
+-- Categorías
+INSERT INTO Categorias (Nombre) VALUES
+('Comida'), ('Bebidas'), ('Postres');
+
+-- Subcategorías
+INSERT INTO Subcategorias (Nombre, IdCategoria) VALUES
+('Tacos', 1), ('Pupusas', 1), ('Refrescos Naturales', 2), ('Gaseosas', 2), ('Pasteles', 3);
+
+-- Platos
+INSERT INTO Platos (Nombre, Precio, Descripcion, Imagen, Disponible, IdSubcategoria) VALUES
+('Taco al Pastor', 1.50, 'Taco de cerdo marinado con piña', NULL, 1, 1),
+('Pupusa de Queso', 0.60, 'Pupusa tradicional de queso', NULL, 1, 2),
+('Jugo de Tamarindo', 0.75, 'Refresco natural de tamarindo', NULL, 1, 3),
+('Coca-Cola 355ml', 1.00, 'Bebida gaseosa fría', NULL, 1, 4),
+('Pastel de Chocolate', 1.25, 'Porción de pastel casero', NULL, 1, 5);
+
+-- Métodos de pago
+INSERT INTO MetodosPago (Nombre) VALUES
+('Efectivo'), ('Tarjeta'), ('Transferencia');
+
+-- Mesas
+INSERT INTO Mesas (NumeroMesa, IdEstadoMesa) VALUES
+('Mesa 1', 1),
+('Mesa 2', 1),
+('Mesa 3', 2);
+
+-- Turno
+INSERT INTO Turnos (IdUsuario, FechaInicio, MontoInicial) VALUES
+(1, GETDATE(), 50.00);
+
+-- Pedido 1 - Cliente (con factura)
+INSERT INTO Pedidos (Fecha, IdMesa, IdEstadoPedido, IdTipoConsumo, Justificacion) VALUES
+(GETDATE(), 3, 3, 1, NULL);
+
+INSERT INTO DetallePedido (IdPedido, IdPlato, Cantidad, PrecioUnitario, Subtotal, Comentarios) VALUES
+(1, 1, 2, 1.50, 3.00, 'Sin cebolla'),
+(1, 4, 1, 1.00, 1.00, NULL);
+
+INSERT INTO Facturas (IdPedido, Total, FechaEmision, NumeroControl, Serie, XML, EstadoEnvio, IdMetodoPago, IdTurno, Pagado) VALUES
+(1, 4.00, GETDATE(), '000123', 'A001', '<xml>...</xml>', 'Enviado', 1, 1, 1);
+
+-- Pedido 2 - Empleado
+INSERT INTO Pedidos (Fecha, IdMesa, IdEstadoPedido, IdTipoConsumo, Justificacion) VALUES
+(GETDATE(), 1, 3, 2, 'Cena para cocinero en turno nocturno');
+
+INSERT INTO DetallePedido (IdPedido, IdPlato, Cantidad, PrecioUnitario, Subtotal, Comentarios) VALUES
+(2, 2, 2, 0.60, 1.20, 'Sin curtido'),
+(2, 3, 1, 0.75, 0.75, NULL);
+
+-- Pedido 3 - Desperdicio
+INSERT INTO Pedidos (Fecha, IdMesa, IdEstadoPedido, IdTipoConsumo, Justificacion) VALUES
+(GETDATE(), 2, 3, 3, 'Se cayó al piso al servir');
+
+INSERT INTO DetallePedido (IdPedido, IdPlato, Cantidad, PrecioUnitario, Subtotal, Comentarios) VALUES
+(3, 1, 1, 1.50, 1.50, 'Plato dañado'),
+(3, 4, 1, 1.00, 1.00, NULL);
+
+-- Pedido 4 - Cortesía
+INSERT INTO Pedidos (Fecha, IdMesa, IdEstadoPedido, IdTipoConsumo, Justificacion) VALUES
+(GETDATE(), 1, 3, 4, 'Cliente frecuente, regalo del negocio');
+
+INSERT INTO DetallePedido (IdPedido, IdPlato, Cantidad, PrecioUnitario, Subtotal, Comentarios) VALUES
+(4, 5, 1, 1.25, 1.25, 'Sin azúcar');
+
+-- Pedido 5 - Reposición
+INSERT INTO Pedidos (Fecha, IdMesa, IdEstadoPedido, IdTipoConsumo, Justificacion) VALUES
+(GETDATE(), 2, 3, 5, 'La pupusa anterior estaba cruda');
+
+INSERT INTO DetallePedido (IdPedido, IdPlato, Cantidad, PrecioUnitario, Subtotal, Comentarios) VALUES
+(5, 2, 1, 0.60, 0.60, 'Bien cocida');

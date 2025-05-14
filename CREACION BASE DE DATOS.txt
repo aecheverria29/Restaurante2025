@@ -1,0 +1,189 @@
+CREATE DATABASE PlatyPlusDB;
+GO
+
+USE PlatyPlusDB;
+GO
+
+-- Roles
+CREATE TABLE Roles (
+    IdRol INT PRIMARY KEY IDENTITY(1,1),
+    NombreRol VARCHAR(100) NOT NULL
+);
+GO
+
+-- Usuarios
+CREATE TABLE Usuarios (
+    IdUsuario INT PRIMARY KEY IDENTITY(1,1),
+    Nombre VARCHAR(100) NOT NULL,
+    Usuario VARCHAR(100) UNIQUE NOT NULL,
+    Contrasena VARCHAR(255) NOT NULL,
+    IdRol INT NOT NULL,
+    FOREIGN KEY (IdRol) REFERENCES Roles(IdRol)
+);
+GO
+
+-- Categorías y Subcategorías
+CREATE TABLE Categorias (
+    IdCategoria INT PRIMARY KEY IDENTITY(1,1),
+    Nombre VARCHAR(100) NOT NULL
+);
+GO
+
+CREATE TABLE Subcategorias (
+    IdSubcategoria INT PRIMARY KEY IDENTITY(1,1),
+    Nombre VARCHAR(100) NOT NULL,
+    IdCategoria INT NOT NULL,
+    FOREIGN KEY (IdCategoria) REFERENCES Categorias(IdCategoria)
+);
+GO
+
+-- Platos
+CREATE TABLE Platos (
+    IdPlato INT PRIMARY KEY IDENTITY(1,1),
+    Nombre VARCHAR(100) NOT NULL,
+    Precio DECIMAL(10,2) NOT NULL,
+    Descripcion VARCHAR(255),
+    Imagen VARCHAR(255),
+    Disponible BIT NOT NULL DEFAULT 1,
+    IdSubcategoria INT NOT NULL,
+    FOREIGN KEY (IdSubcategoria) REFERENCES Subcategorias(IdSubcategoria)
+);
+GO
+
+-- Insumos
+CREATE TABLE Insumos (
+    IdInsumo INT PRIMARY KEY IDENTITY(1,1),
+    Nombre VARCHAR(100) NOT NULL,
+    Cantidad DECIMAL(10,2) NOT NULL,
+    Unidad VARCHAR(50) NOT NULL
+);
+GO
+
+-- Recetas
+CREATE TABLE Recetas (
+    IdReceta INT PRIMARY KEY IDENTITY(1,1),
+    IdPlato INT NOT NULL,
+    IdInsumo INT NOT NULL,
+    CantidadNecesaria DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (IdPlato) REFERENCES Platos(IdPlato),
+    FOREIGN KEY (IdInsumo) REFERENCES Insumos(IdInsumo)
+);
+GO
+
+-- Estados de Mesas
+CREATE TABLE EstadoMesa (
+    IdEstadoMesa INT PRIMARY KEY IDENTITY(1,1),
+    NombreEstado VARCHAR(50) NOT NULL
+);
+GO
+
+-- Mesas
+CREATE TABLE Mesas (
+    IdMesa INT PRIMARY KEY IDENTITY(1,1),
+    NumeroMesa VARCHAR(50) NOT NULL,
+    IdEstadoMesa INT NOT NULL,
+    FOREIGN KEY (IdEstadoMesa) REFERENCES EstadoMesa(IdEstadoMesa)
+);
+GO
+
+-- Estados de Pedidos
+CREATE TABLE EstadoPedido (
+    IdEstadoPedido INT PRIMARY KEY IDENTITY(1,1),
+    NombreEstado VARCHAR(50) NOT NULL
+);
+GO
+
+-- Tipos de Consumo
+CREATE TABLE TiposConsumo (
+    IdTipoConsumo INT PRIMARY KEY IDENTITY(1,1),
+    NombreTipo VARCHAR(50) NOT NULL
+);
+GO
+
+-- Pedidos
+CREATE TABLE Pedidos (
+    IdPedido INT PRIMARY KEY IDENTITY(1,1),
+    Fecha DATETIME DEFAULT GETDATE(),
+    IdMesa INT NOT NULL,
+    IdEstadoPedido INT NOT NULL,
+    IdTipoConsumo INT DEFAULT 1,
+    Justificacion VARCHAR(255),
+    FOREIGN KEY (IdMesa) REFERENCES Mesas(IdMesa),
+    FOREIGN KEY (IdEstadoPedido) REFERENCES EstadoPedido(IdEstadoPedido),
+    FOREIGN KEY (IdTipoConsumo) REFERENCES TiposConsumo(IdTipoConsumo)
+);
+GO
+
+-- Detalle de Pedidos
+CREATE TABLE DetallePedido (
+    IdDetalle INT PRIMARY KEY IDENTITY(1,1),
+    IdPedido INT NOT NULL,
+    IdPlato INT NOT NULL,
+    Cantidad INT NOT NULL,
+    PrecioUnitario DECIMAL(10,2),
+    Subtotal DECIMAL(10,2),
+    Comentarios VARCHAR(255),
+    FOREIGN KEY (IdPedido) REFERENCES Pedidos(IdPedido),
+    FOREIGN KEY (IdPlato) REFERENCES Platos(IdPlato)
+);
+GO
+
+-- Métodos de Pago
+CREATE TABLE MetodosPago (
+    IdMetodoPago INT PRIMARY KEY IDENTITY(1,1),
+    Nombre VARCHAR(100) NOT NULL
+);
+GO
+
+-- Turnos
+CREATE TABLE Turnos (
+    IdTurno INT PRIMARY KEY IDENTITY(1,1),
+    IdUsuario INT NOT NULL,
+    FechaInicio DATETIME DEFAULT GETDATE(),
+    FechaCierre DATETIME,
+    MontoInicial DECIMAL(10,2),
+    MontoFinal DECIMAL(10,2),
+    FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario)
+);
+GO
+
+-- Clientes
+CREATE TABLE Clientes (
+    IdCliente INT PRIMARY KEY IDENTITY(1,1),
+    Nombre VARCHAR(100),
+    NIT VARCHAR(20),
+    NRC VARCHAR(20)
+);
+GO
+
+-- Facturas
+CREATE TABLE Facturas (
+    IdFactura INT PRIMARY KEY IDENTITY(1,1),
+    IdPedido INT NOT NULL,
+    IdCliente INT,
+    Total DECIMAL(10,2) NOT NULL,
+    FechaEmision DATETIME DEFAULT GETDATE(),
+    NumeroControl VARCHAR(100),
+    Serie VARCHAR(50),
+    XML VARCHAR(255),
+    EstadoEnvio VARCHAR(100),
+    IdMetodoPago INT,
+    IdTurno INT,
+    Pagado BIT DEFAULT 0,
+    FOREIGN KEY (IdPedido) REFERENCES Pedidos(IdPedido),
+    FOREIGN KEY (IdCliente) REFERENCES Clientes(IdCliente),
+    FOREIGN KEY (IdMetodoPago) REFERENCES MetodosPago(IdMetodoPago),
+    FOREIGN KEY (IdTurno) REFERENCES Turnos(IdTurno)
+);
+GO
+
+-- Movimiento de Inventario
+CREATE TABLE MovimientoInventario (
+    IdMovimiento INT PRIMARY KEY IDENTITY(1,1),
+    IdInsumo INT NOT NULL,
+    Fecha DATETIME DEFAULT GETDATE(),
+    TipoMovimiento VARCHAR(50) NOT NULL,
+    Cantidad DECIMAL(10,2) NOT NULL,
+    Justificacion VARCHAR(255),
+    FOREIGN KEY (IdInsumo) REFERENCES Insumos(IdInsumo)
+);

@@ -155,28 +155,31 @@ namespace SistemaRestaurante.Forms
             using (SqlConnection conn = DBConnection.GetConnection())
             {
                 conn.Open();
+                //Se inicia una transaccion para que el proceso de (pedido + detalles
+                // + mesa) se guarde o se cancele en conjunto
                 SqlTransaction transaccion = conn.BeginTransaction();
 
                 try
                 {
-                    // 1. Insertar pedido
+                    
                     SqlCommand cmdInsertPedido = new SqlCommand(@"
-                INSERT INTO Pedidos (Fecha, IdMesa, IdEstadoPedido, IdTipoConsumo, Justificacion)
-                VALUES (GETDATE(), @mesa, 1, @tipo, @justif);
-                SELECT SCOPE_IDENTITY();", conn, transaccion);
+                    INSERT INTO Pedidos (Fecha, IdMesa, IdEstadoPedido, IdTipoConsumo, Justificacion)
+                    VALUES (GETDATE(), @mesa, 1, @tipo, @justif);
+                    SELECT SCOPE_IDENTITY();", conn, transaccion);
+                    //SELECT SCOPE_IDENTITY() me sirve para pedir el ID que genero la consulta, el valor de columna con IDENTITY
 
                     cmdInsertPedido.Parameters.AddWithValue("@mesa", idMesa);
                     cmdInsertPedido.Parameters.AddWithValue("@tipo", idTipoConsumo);
                     cmdInsertPedido.Parameters.AddWithValue("@justif", (object)justificacion ?? DBNull.Value);
 
                     int idPedido = Convert.ToInt32(cmdInsertPedido.ExecuteScalar());
+                    //.ExecuteScalar() Esta funcion de vuelve una cosa, la primera columna de la primera fila del resultado es decir el ID
 
-                    // 2. Insertar detalle del pedido
                     foreach (var item in listaDetalle)
                     {
                         SqlCommand cmdDetalle = new SqlCommand(@"
-                    INSERT INTO DetallePedido (IdPedido, IdPlato, Cantidad, PrecioUnitario, Subtotal, Comentarios)
-                    VALUES (@pedido, @plato, @cant, @precio, @sub, @coment)", conn, transaccion);
+                        INSERT INTO DetallePedido (IdPedido, IdPlato, Cantidad, PrecioUnitario, Subtotal, Comentarios)
+                        VALUES (@pedido, @plato, @cant, @precio, @sub, @coment)", conn, transaccion);
 
                         cmdDetalle.Parameters.AddWithValue("@pedido", idPedido);
                         cmdDetalle.Parameters.AddWithValue("@plato", item.IdPlato);
@@ -188,12 +191,10 @@ namespace SistemaRestaurante.Forms
                         cmdDetalle.ExecuteNonQuery();
                     }
 
-                    // 3. Cambiar estado de la mesa a Ocupada (IdEstadoMesa = 2)
                     SqlCommand cmdMesa = new SqlCommand("UPDATE Mesas SET IdEstadoMesa = 2 WHERE IdMesa = @mesa", conn, transaccion);
                     cmdMesa.Parameters.AddWithValue("@mesa", idMesa);
                     cmdMesa.ExecuteNonQuery();
 
-                    // 4. Confirmar todo
                     transaccion.Commit();
 
                     MessageBox.Show("Pedido registrado exitosamente.");
