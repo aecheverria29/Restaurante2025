@@ -34,6 +34,7 @@
             this.dgvDetallePedido = new System.Windows.Forms.DataGridView();
             this.btnCambiarEstado = new System.Windows.Forms.Button();
             this.btnPedidoNuevo = new System.Windows.Forms.Button();
+            this.btnEditarPedido = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPedidos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetallePedido)).BeginInit();
             this.SuspendLayout();
@@ -96,11 +97,22 @@
             this.btnPedidoNuevo.UseVisualStyleBackColor = true;
             this.btnPedidoNuevo.Click += new System.EventHandler(this.btnPedidoNuevo_Click);
             // 
+            // btnEditarPedido
+            // 
+            this.btnEditarPedido.Location = new System.Drawing.Point(430, 23);
+            this.btnEditarPedido.Name = "btnEditarPedido";
+            this.btnEditarPedido.Size = new System.Drawing.Size(102, 23);
+            this.btnEditarPedido.TabIndex = 6;
+            this.btnEditarPedido.Text = "Editar Pedido";
+            this.btnEditarPedido.UseVisualStyleBackColor = true;
+            this.btnEditarPedido.Click += new System.EventHandler(this.btnEditarPedido_Click);
+            // 
             // PedidosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnEditarPedido);
             this.Controls.Add(this.btnPedidoNuevo);
             this.Controls.Add(this.btnCambiarEstado);
             this.Controls.Add(this.dgvDetallePedido);
@@ -124,5 +136,6 @@
         private System.Windows.Forms.DataGridView dgvDetallePedido;
         private System.Windows.Forms.Button btnCambiarEstado;
         private System.Windows.Forms.Button btnPedidoNuevo;
+        private System.Windows.Forms.Button btnEditarPedido;
     }
 }

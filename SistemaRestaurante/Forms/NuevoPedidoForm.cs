@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SistemaRestaurante.Models;
 
 namespace SistemaRestaurante.Forms
 {
@@ -79,7 +80,8 @@ namespace SistemaRestaurante.Forms
             CargarCombos();
             txtJustificacion.Enabled = false;
         }
-        class PlatoPedidoTemp
+
+       /* class PlatoPedidoTemp
         {
             public int IdPlato { get; set; }
             public string NombrePlato { get; set; }
@@ -87,7 +89,7 @@ namespace SistemaRestaurante.Forms
             public int Cantidad { get; set; }
             public decimal Subtotal => PrecioUnitario * Cantidad;
             public string Comentario { get; set; }
-        }
+        }*/
         
         List<PlatoPedidoTemp> listaDetalle = new List<PlatoPedidoTemp>();
 

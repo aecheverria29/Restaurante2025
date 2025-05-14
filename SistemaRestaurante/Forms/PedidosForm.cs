@@ -151,5 +151,12 @@ namespace SistemaRestaurante.Forms
             NuevoPedidoForm nuevo = new NuevoPedidoForm();
             nuevo.Show();
         }
+
+        private void btnEditarPedido_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            EditarPedidoForm editarPedidoForm = new EditarPedidoForm();
+            editarPedidoForm.Show();
+        }
     }
 }
