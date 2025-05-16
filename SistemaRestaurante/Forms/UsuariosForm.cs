@@ -1,4 +1,5 @@
 ﻿using SistemaRestaurante.Services;
+using SistemaRestaurante.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,60 +15,24 @@ namespace SistemaRestaurante.Forms
 {
     public partial class UsuariosForm : Form
     {
-        public UsuariosForm()
+        private MainForm main;
+        public UsuariosForm(MainForm main)
         {
             InitializeComponent();
             this.Load += UsuariosForm_Load;
             dgvUsuarios.CellClick += dgvUsuarios_CellClick;
-
+            this.main=main;
         }
         private void UsuariosForm_Load(object sender, EventArgs e)
         {
-            CargarRoles();
-            CargarUsuarios();
-        }
-        private void CargarRoles()
-        {
-            using(SqlConnection conn = DBConnection.GetConnection())
-            {
-                SqlCommand cmd = new SqlCommand("SELECT IdRol, NombreRol FROM Roles", conn);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                cbRoles.DataSource = dt;
-                cbRoles.DisplayMember = "NombreRol";
-                cbRoles.ValueMember = "IdRol";
-            }
-        }
-        private void CargarUsuarios()
-        {
-            using (SqlConnection conn = DBConnection.GetConnection())
-            {
-                SqlCommand cmd = new SqlCommand(
-                    "SELECT u.IdUsuario, u.Nombre, u.Usuario, r.NombreRol FROM Usuarios u INNER JOIN Roles r ON u.IdRol = r.IdRol", conn);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                dgvUsuarios.DataSource = dt;
-            }
+            UtilidadesUI.CargarRoles(cbRoles);
+            UtilidadesUI.CargarUsuarios(dgvUsuarios);
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = DBConnection.GetConnection())
-            {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("INSERT INTO Usuarios (Nombre, Usuario, Contrasena, IdRol) VALUES (@nombre, @usuario, @contrasena, @idrol)", conn);
-                cmd.Parameters.AddWithValue("@nombre", txtNombre.Text);
-                cmd.Parameters.AddWithValue("@usuario", txtUsuario.Text);
-                cmd.Parameters.AddWithValue("@contrasena", txtContrasena.Text);
-                cmd.Parameters.AddWithValue("@idrol", cbRoles.SelectedValue);
-                cmd.ExecuteNonQuery();
-
-                MessageBox.Show("Usuario agregado");
-                CargarUsuarios();
-            }
+            AgregarUsuarioForm agregarForm = new AgregarUsuarioForm(main);
+            main.CargarFormulario(agregarForm);
         }
 
         private void dgvUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -100,7 +65,7 @@ namespace SistemaRestaurante.Forms
 
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Usuario Actualizado correctamente");
-                    CargarUsuarios();
+                    UtilidadesUI.CargarUsuarios(dgvUsuarios);
 
                 }
             }
@@ -130,7 +95,7 @@ namespace SistemaRestaurante.Forms
                         cmd.Parameters.AddWithValue("@id", idUsuario);
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Usuario eliminado correctamente");
-                        CargarUsuarios();
+                        UtilidadesUI.CargarUsuarios(dgvUsuarios);
                     }
                 }
             }

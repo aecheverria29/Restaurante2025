@@ -1,4 +1,5 @@
 ﻿using SistemaRestaurante.Services;
+using SistemaRestaurante.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,37 +21,20 @@ namespace SistemaRestaurante.Forms
             this.Load += MenuForm_Load;
 
         }
-        private void CargarCategorias()
-        {
-            using(SqlConnection conn = DBConnection.GetConnection())
-            {
-                SqlCommand  cmd = new SqlCommand("SELECT IdCategoria, Nombre FROM Categorias", conn);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                cbCategoriaPadre.DataSource = dt;
-                cbCategoriaPadre.DisplayMember = "Nombre";
-                cbCategoriaPadre.ValueMember = "IdCategoria";
-
-                dgvCategorias.DataSource = dt;
-            }
-        }
-        private void CargarSubcategorias()
-        {
-            using(SqlConnection conn = DBConnection.GetConnection())
-            {
-                SqlCommand cmd = new SqlCommand(
-                    "SELECT s.IdSubcategoria, s.Nombre, c.Nombre AS Categoria FROM Subcategorias s INNER JOIN Categorias c ON s.IdCategoria = c.IdCategoria", conn);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                dgvSubCategorias.DataSource = dt;
-            }
-        }
-
         private void btnAgregarCategoria_Click(object sender, EventArgs e)
         {
+            string nombre = txtCategoria.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(nombre))
+            {
+                MessageBox.Show("Por favor, escribe el nombre de la categoría.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult confirm = MessageBox.Show("¿Deseas agregar esta categoría?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (confirm != DialogResult.Yes) return;
+
+
             using (SqlConnection conn = DBConnection.GetConnection())
             {
                 conn.Open();
@@ -60,19 +44,36 @@ namespace SistemaRestaurante.Forms
 
                 MessageBox.Show("Categoria agregada");
                 txtCategoria.Clear();
-                CargarCategorias();
+                UtilidadesUI.CargarCategorias(cbCategoriaPadre, dgvCategorias);
             }
 
         }
 
         private void MenuForm_Load(object sender, EventArgs e)
         {
-            CargarCategorias();
-            CargarSubcategorias();
+            UtilidadesUI.CargarCategorias(cbCategoriaPadre, dgvCategorias);
+            UtilidadesUI.CargarSubcategorias(dgvSubCategorias);
         }
 
         private void btnAgregarSubcategoria_Click(object sender, EventArgs e)
         {
+            string nombre = txtSubcategoria.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(nombre))
+            {
+                MessageBox.Show("Por favor, escribe el nombre de la subcategoría.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (cbCategoriaPadre.SelectedValue == null)
+            {
+                MessageBox.Show("Por favor, selecciona una categoría padre.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult confirm = MessageBox.Show("¿Deseas agregar esta subcategoría?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (confirm != DialogResult.Yes) return;
+
             using (SqlConnection conn = DBConnection.GetConnection())
             {
                 conn.Open();
@@ -83,7 +84,7 @@ namespace SistemaRestaurante.Forms
 
                 MessageBox.Show("Subcategoría agregada");
                 txtSubcategoria.Clear();
-                CargarSubcategorias();
+                UtilidadesUI.CargarSubcategorias(dgvSubCategorias);
             }
         }
     }

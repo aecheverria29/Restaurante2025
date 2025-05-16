@@ -174,6 +174,7 @@
             this.panelContenido.Name = "panelContenido";
             this.panelContenido.Size = new System.Drawing.Size(792, 677);
             this.panelContenido.TabIndex = 1;
+            this.panelContenido.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContenido_Paint);
             // 
             // MainForm
             // 

@@ -15,12 +15,14 @@ namespace SistemaRestaurante.Forms
 {
     public partial class NuevoPedidoForm : Form
     {
-        public NuevoPedidoForm()
+        private MainForm main;
+        List<PlatoPedidoTemp> listaDetalle = new List<PlatoPedidoTemp>();
+        public NuevoPedidoForm(MainForm mainForm)
         {
             InitializeComponent();
             cbTipoConsumo.SelectedIndexChanged += cbTipoConsumo_SelectedIndexChanged;
             this.Load += NuevoPedidoForm_Load;
-
+            main=mainForm;
         }
         private void CargarCombos()
         {
@@ -64,7 +66,7 @@ namespace SistemaRestaurante.Forms
         {
             string tipo = cbTipoConsumo.Text;
 
-            if (tipo == "Cliente")
+            if (tipo == "Cliente" || tipo == "Para llevar")
             {
                 txtJustificacion.Text = "";
                 txtJustificacion.Enabled = false;
@@ -73,26 +75,26 @@ namespace SistemaRestaurante.Forms
             {
                 txtJustificacion.Enabled = true;
             }
-        }
+            if (cbTipoConsumo.SelectedItem is DataRowView tipoRow)
+            {
+                int idTipoConsumo = Convert.ToInt32(tipoRow["IdTipoConsumo"]);
 
+                if (idTipoConsumo != 1)
+                {
+                    cbMesa.Enabled = false;
+                    cbMesa.SelectedIndex = -1;
+                }
+                else
+                {
+                    cbMesa.Enabled = true;
+                }
+            }
+        }
         private void NuevoPedidoForm_Load(object sender, EventArgs e)
         {
             CargarCombos();
             txtJustificacion.Enabled = false;
         }
-
-       /* class PlatoPedidoTemp
-        {
-            public int IdPlato { get; set; }
-            public string NombrePlato { get; set; }
-            public decimal PrecioUnitario { get; set; }
-            public int Cantidad { get; set; }
-            public decimal Subtotal => PrecioUnitario * Cantidad;
-            public string Comentario { get; set; }
-        }*/
-        
-        List<PlatoPedidoTemp> listaDetalle = new List<PlatoPedidoTemp>();
-
         private void btnAgregarPlato_Click(object sender, EventArgs e)
         {
             if (cbPlato.SelectedValue == null || string.IsNullOrWhiteSpace(txtCantidad.Text))
@@ -109,7 +111,6 @@ namespace SistemaRestaurante.Forms
                 return;
             }
 
-            // Obtener precio del plato desde DataSource
             DataRowView selectedRow = (DataRowView)cbPlato.SelectedItem;
             decimal precio = Convert.ToDecimal(selectedRow["Precio"]);
 
@@ -144,14 +145,25 @@ namespace SistemaRestaurante.Forms
 
         private void btnGuardarPedido_Click(object sender, EventArgs e)
         {
-            if (cbMesa.SelectedValue == null || cbTipoConsumo.SelectedValue == null || listaDetalle.Count == 0)
+            if (cbTipoConsumo.SelectedValue == null || listaDetalle.Count == 0)
             {
                 MessageBox.Show("Completa todos los datos y agrega al menos un plato.");
                 return;
             }
 
-            int idMesa = (int)cbMesa.SelectedValue;
             int idTipoConsumo = (int)cbTipoConsumo.SelectedValue;
+            int? idMesa = null;
+
+            if (idTipoConsumo != 6) 
+            {
+                if (cbMesa.SelectedValue == null)
+                {
+                    MessageBox.Show("Debes seleccionar una mesa.");
+                    return;
+                }
+                idMesa = (int)cbMesa.SelectedValue;
+            }
+
             string justificacion = txtJustificacion.Enabled ? txtJustificacion.Text : null;
 
             using (SqlConnection conn = DBConnection.GetConnection())
@@ -170,7 +182,10 @@ namespace SistemaRestaurante.Forms
                     SELECT SCOPE_IDENTITY();", conn, transaccion);
                     //SELECT SCOPE_IDENTITY() me sirve para pedir el ID que genero la consulta, el valor de columna con IDENTITY
 
-                    cmdInsertPedido.Parameters.AddWithValue("@mesa", idMesa);
+                    if (idMesa.HasValue)
+                        cmdInsertPedido.Parameters.AddWithValue("@mesa", idMesa.Value);
+                    else
+                        cmdInsertPedido.Parameters.AddWithValue("@mesa", DBNull.Value);
                     cmdInsertPedido.Parameters.AddWithValue("@tipo", idTipoConsumo);
                     cmdInsertPedido.Parameters.AddWithValue("@justif", (object)justificacion ?? DBNull.Value);
 
@@ -193,14 +208,17 @@ namespace SistemaRestaurante.Forms
                         cmdDetalle.ExecuteNonQuery();
                     }
 
-                    SqlCommand cmdMesa = new SqlCommand("UPDATE Mesas SET IdEstadoMesa = 2 WHERE IdMesa = @mesa", conn, transaccion);
-                    cmdMesa.Parameters.AddWithValue("@mesa", idMesa);
-                    cmdMesa.ExecuteNonQuery();
+                    if (idMesa.HasValue)
+                    {
+                        SqlCommand cmdMesa = new SqlCommand("UPDATE Mesas SET IdEstadoMesa = 2 WHERE IdMesa = @mesa", conn, transaccion);
+                        cmdMesa.Parameters.AddWithValue("@mesa", idMesa.Value);
+                        cmdMesa.ExecuteNonQuery();
+                    }
 
                     transaccion.Commit();
 
                     MessageBox.Show("Pedido registrado exitosamente.");
-                    this.Close();
+                    main.CargarFormulario(new PedidosForm(main));
                 }
                 catch (Exception ex)
                 {
@@ -212,7 +230,15 @@ namespace SistemaRestaurante.Forms
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            DialogResult resultado = MessageBox.Show("¿Estás seguro de que quieres cancelar?", "Confirmación", MessageBoxButtons.YesNo);
+            if (resultado == DialogResult.Yes)
+            {
+                main.CargarFormulario(new PedidosForm(main));
+            }
+            else
+            {
+                this.Close();
+            }
         }
     }
 }

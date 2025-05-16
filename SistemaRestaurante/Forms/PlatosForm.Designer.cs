@@ -180,6 +180,7 @@
             this.dgvPlatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPlatos.Location = new System.Drawing.Point(28, 214);
             this.dgvPlatos.Name = "dgvPlatos";
+            this.dgvPlatos.ReadOnly = true;
             this.dgvPlatos.Size = new System.Drawing.Size(765, 232);
             this.dgvPlatos.TabIndex = 14;
             this.dgvPlatos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlatos_CellClick);

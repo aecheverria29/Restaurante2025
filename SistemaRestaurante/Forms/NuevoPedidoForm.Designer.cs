@@ -60,7 +60,7 @@
             // cbMesa
             // 
             this.cbMesa.FormattingEnabled = true;
-            this.cbMesa.Location = new System.Drawing.Point(117, 31);
+            this.cbMesa.Location = new System.Drawing.Point(117, 61);
             this.cbMesa.Name = "cbMesa";
             this.cbMesa.Size = new System.Drawing.Size(121, 21);
             this.cbMesa.TabIndex = 1;
@@ -68,7 +68,7 @@
             // cbTipoConsumo
             // 
             this.cbTipoConsumo.FormattingEnabled = true;
-            this.cbTipoConsumo.Location = new System.Drawing.Point(117, 58);
+            this.cbTipoConsumo.Location = new System.Drawing.Point(117, 34);
             this.cbTipoConsumo.Name = "cbTipoConsumo";
             this.cbTipoConsumo.Size = new System.Drawing.Size(121, 21);
             this.cbTipoConsumo.TabIndex = 2;
@@ -77,7 +77,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 34);
+            this.label2.Location = new System.Drawing.Point(23, 64);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(91, 13);
             this.label2.TabIndex = 3;
@@ -86,7 +86,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 61);
+            this.label3.Location = new System.Drawing.Point(18, 37);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(93, 13);
             this.label3.TabIndex = 4;

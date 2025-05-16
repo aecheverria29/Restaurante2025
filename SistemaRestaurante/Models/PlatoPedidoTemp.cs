@@ -15,7 +15,7 @@ namespace SistemaRestaurante.Models
         public decimal Subtotal => PrecioUnitario * Cantidad;
         public string Comentario { get; set; }
 
-        List<PlatoPedidoTemp> listaDetalle = new List<PlatoPedidoTemp>();
+        //List<PlatoPedidoTemp> listaDetalle = new List<PlatoPedidoTemp>();
 
     }
 

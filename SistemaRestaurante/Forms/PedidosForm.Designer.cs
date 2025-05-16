@@ -62,6 +62,7 @@
             this.dgvPedidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPedidos.Location = new System.Drawing.Point(27, 80);
             this.dgvPedidos.Name = "dgvPedidos";
+            this.dgvPedidos.ReadOnly = true;
             this.dgvPedidos.Size = new System.Drawing.Size(537, 150);
             this.dgvPedidos.TabIndex = 2;
             this.dgvPedidos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPedidos_CellClick);
@@ -93,7 +94,7 @@
             this.btnPedidoNuevo.Name = "btnPedidoNuevo";
             this.btnPedidoNuevo.Size = new System.Drawing.Size(117, 23);
             this.btnPedidoNuevo.TabIndex = 5;
-            this.btnPedidoNuevo.Text = "NUEVO PEDIDO";
+            this.btnPedidoNuevo.Text = "Pedido Nuevo";
             this.btnPedidoNuevo.UseVisualStyleBackColor = true;
             this.btnPedidoNuevo.Click += new System.EventHandler(this.btnPedidoNuevo_Click);
             // 

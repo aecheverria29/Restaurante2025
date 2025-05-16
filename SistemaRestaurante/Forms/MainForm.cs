@@ -35,7 +35,8 @@ namespace SistemaRestaurante.Forms
 
         private void btnUsuarios_Click(object sender, EventArgs e)
         {
-            AbrirFormularioEnPanel(new UsuariosForm());
+           
+            AbrirFormularioEnPanel(new UsuariosForm(this));
         }
 
         private void btnMenu_Click(object sender, EventArgs e)
@@ -55,7 +56,23 @@ namespace SistemaRestaurante.Forms
 
         private void btnPedidos_Click(object sender, EventArgs e)
         {
-            AbrirFormularioEnPanel(new PedidosForm());
+            AbrirFormularioEnPanel(new PedidosForm(this));
+        }
+
+        public void CargarFormulario(Form formulario)
+        {
+            formulario.TopLevel = false;
+            formulario.FormBorderStyle = FormBorderStyle.None;
+            formulario.Dock = DockStyle.Fill;
+
+            panelContenido.Controls.Clear();
+            panelContenido.Controls.Add(formulario);
+            formulario.Show();
+        }
+
+        private void panelContenido_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

@@ -15,23 +15,32 @@ namespace SistemaRestaurante.Forms
 {
     public partial class PedidosForm : Form
     {
-        public PedidosForm()
+        private MainForm main;
+        public PedidosForm(MainForm mainForm)
         {
             InitializeComponent();
             this.Load += PedidosForm_Load;
             dgvPedidos.CellClick += dgvPedidos_CellClick;
+            main = mainForm;
         }
         private void CargarPedidos(string estadoFiltro = "Todos")
         {
             using (SqlConnection conn = DBConnection.GetConnection())
             {
                 StringBuilder query = new StringBuilder(@"
-                    SELECT p.IdPedido, p.Fecha, m.NumeroMesa, ep.NombreEstado, tc.NombreTipo
+                    SELECT 
+                        p.IdPedido, 
+                        p.Fecha, 
+                        ISNULL(m.NumeroMesa, 'Sin mesa') AS NumeroMesa, 
+                        ep.NombreEstado, 
+                        tc.NombreTipo
                     FROM Pedidos p
-                    INNER JOIN Mesas m ON p.IdMesa = m.IdMesa
+                    LEFT JOIN Mesas m ON p.IdMesa = m.IdMesa
                     INNER JOIN EstadoPedido ep ON p.IdEstadoPedido = ep.IdEstadoPedido
                     INNER JOIN TiposConsumo tc ON p.IdTipoConsumo = tc.IdTipoConsumo
-                    WHERE 1 = 1");
+                    WHERE 1 = 1
+                ");
+
                 if (estadoFiltro != "Todos")
                     query.Append(" AND ep.NombreEstado = @estado ");
                 SqlCommand cmd = new SqlCommand(query.ToString(), conn);
@@ -147,16 +156,21 @@ namespace SistemaRestaurante.Forms
 
         private void btnPedidoNuevo_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            NuevoPedidoForm nuevo = new NuevoPedidoForm();
-            nuevo.Show();
+            main.CargarFormulario(new NuevoPedidoForm(main));
         }
 
         private void btnEditarPedido_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            EditarPedidoForm editarPedidoForm = new EditarPedidoForm();
-            editarPedidoForm.Show();
+            if (dgvPedidos.CurrentRow != null)
+            {
+                int idPedido = Convert.ToInt32(dgvPedidos.CurrentRow.Cells["IdPedido"].Value);
+                EditarPedidoForm editarPedidoForm = new EditarPedidoForm(idPedido,main);
+                main.CargarFormulario(new EditarPedidoForm(idPedido,main));
+            }
+            else
+            {
+                MessageBox.Show("Selecciona un pedido para editar.");
+            }
         }
     }
 }

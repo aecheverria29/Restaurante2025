@@ -1,0 +1,5 @@
+INSERT INTO TiposConsumo (NombreTipo)
+VALUES ('Para llevar');
+
+ALTER TABLE Pedidos
+ALTER COLUMN IdMesa INT NULL;
