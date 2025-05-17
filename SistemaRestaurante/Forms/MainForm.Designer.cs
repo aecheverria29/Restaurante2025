@@ -123,6 +123,7 @@
             this.btnFacturacion.TabIndex = 4;
             this.btnFacturacion.Text = "Facturacion";
             this.btnFacturacion.UseVisualStyleBackColor = true;
+            this.btnFacturacion.Click += new System.EventHandler(this.btnFacturacion_Click);
             // 
             // btnInventario
             // 

@@ -226,7 +226,7 @@ namespace SistemaRestaurante.Forms
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            if (estadoPedido == "Entregado")
+            if (estadoPedido == "Entregado" || estadoPedido =="Cancelado")
             {
                 MessageBox.Show("No se puede editar un pedido que ya fue entregado.");
                 return;
@@ -237,7 +237,10 @@ namespace SistemaRestaurante.Forms
                 MessageBox.Show("Completa todos los datos y agrega al menos un plato.");
                 return;
             }
-
+            DialogResult resultado = MessageBox.Show("¿Estás seguro de que quieres actualizar el pedido?", "Confirmación", MessageBoxButtons.YesNo);
+            if (resultado == DialogResult.Yes)
+            {
+               
             string justificacion = txtJustificacion.Enabled ? txtJustificacion.Text : null;
 
             using (SqlConnection conn = DBConnection.GetConnection())
@@ -283,6 +286,11 @@ namespace SistemaRestaurante.Forms
                     trans.Rollback();
                     MessageBox.Show("Error al guardar los cambios: " + ex.Message);
                 }
+            }
+            }
+            else
+            {
+                this.Close();
             }
         }
 

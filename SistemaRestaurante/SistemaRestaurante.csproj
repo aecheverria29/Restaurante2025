@@ -59,6 +59,18 @@
     <Compile Include="Forms\EditarPedidoForm.Designer.cs">
       <DependentUpon>EditarPedidoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\EmitirFacturaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EmitirFacturaForm.Designer.cs">
+      <DependentUpon>EmitirFacturaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EmitirTicketForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EmitirTicketForm.Designer.cs">
+      <DependentUpon>EmitirTicketForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FacturacionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +131,12 @@
     <Compile Include="Forms\ReportesForm.Designer.cs">
       <DependentUpon>ReportesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SeleccionarTipoDocumentoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SeleccionarTipoDocumentoForm.Designer.cs">
+      <DependentUpon>SeleccionarTipoDocumentoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UsuariosForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,6 +153,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditarPedidoForm.resx">
       <DependentUpon>EditarPedidoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EmitirFacturaForm.resx">
+      <DependentUpon>EmitirFacturaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EmitirTicketForm.resx">
+      <DependentUpon>EmitirTicketForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FacturacionForm.resx">
+      <DependentUpon>FacturacionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -153,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PlatosForm.resx">
       <DependentUpon>PlatosForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SeleccionarTipoDocumentoForm.resx">
+      <DependentUpon>SeleccionarTipoDocumentoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UsuariosForm.resx">
       <DependentUpon>UsuariosForm.cs</DependentUpon>

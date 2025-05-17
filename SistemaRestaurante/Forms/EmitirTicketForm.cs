@@ -10,18 +10,13 @@ using System.Windows.Forms;
 
 namespace SistemaRestaurante.Forms
 {
-    public partial class FacturacionForm : Form
+    public partial class EmitirTicketForm : Form
     {
         private MainForm main;
-        public FacturacionForm(MainForm mainForm)
+        public EmitirTicketForm(MainForm mainForm)
         {
             InitializeComponent();
-            main = mainForm;
-        }
-
-        private void btnCobrar_Click(object sender, EventArgs e)
-        {
-            main.CargarFormulario(new SeleccionarTipoDocumentoForm(main));
+            main=mainForm;
         }
     }
 }

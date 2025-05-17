@@ -74,5 +74,10 @@ namespace SistemaRestaurante.Forms
         {
 
         }
+
+        private void btnFacturacion_Click(object sender, EventArgs e)
+        {
+            AbrirFormularioEnPanel(new FacturacionForm(this));
+        }
     }
 }

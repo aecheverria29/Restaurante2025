@@ -3,3 +3,5 @@ VALUES ('Para llevar');
 
 ALTER TABLE Pedidos
 ALTER COLUMN IdMesa INT NULL;
+
+INSERT INTO Clientes (Nombre, NIT, NRC) VALUES ('Consumidor Final', 'CF', NULL);
