@@ -87,6 +87,7 @@
             this.Controls.Add(this.label1);
             this.Name = "SeleccionarTipoDocumentoForm";
             this.Text = "SeleccionarTipoDocumentoForm";
+            this.Load += new System.EventHandler(this.SeleccionarTipoDocumentoForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

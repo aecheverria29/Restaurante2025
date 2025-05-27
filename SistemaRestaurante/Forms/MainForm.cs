@@ -1,12 +1,18 @@
-﻿using System;
+﻿using iText.Kernel.Pdf;
+using iText.Layout.Element;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using iText.Layout;
+using SistemaRestaurante.Forms.Modulo_Turnos;              // <- para Document
 
 namespace SistemaRestaurante.Forms
 {
@@ -78,6 +84,11 @@ namespace SistemaRestaurante.Forms
         private void btnFacturacion_Click(object sender, EventArgs e)
         {
             AbrirFormularioEnPanel(new FacturacionForm(this));
+        }
+
+        private void btnTurnos_Click(object sender, EventArgs e)
+        {
+            AbrirFormularioEnPanel(new FrmTurnosMain(this));
         }
     }
 }

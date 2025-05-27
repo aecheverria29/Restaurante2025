@@ -54,7 +54,7 @@
             // 
             // btnCobrar
             // 
-            this.btnCobrar.Location = new System.Drawing.Point(641, 62);
+            this.btnCobrar.Location = new System.Drawing.Point(624, 60);
             this.btnCobrar.Name = "btnCobrar";
             this.btnCobrar.Size = new System.Drawing.Size(75, 23);
             this.btnCobrar.TabIndex = 2;
@@ -72,6 +72,7 @@
             this.Controls.Add(this.dgvPedidos);
             this.Name = "FacturacionForm";
             this.Text = "FacturacionForm";
+            this.Load += new System.EventHandler(this.FacturacionForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPedidos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using System.Windows.Forms;
 using SistemaRestaurante.Services;
 using SistemaRestaurante.Forms;
+using SistemaRestaurante.Models;
 
 namespace SistemaRestaurante
 {
@@ -35,6 +35,11 @@ namespace SistemaRestaurante
                     SqlDataReader reader = cmd.ExecuteReader();
                     if (reader.HasRows)
                     {
+                        /*SesionActual.IdUsuario = Convert.ToInt32(reader["IdUsuario"]);
+                        SesionActual.Nombre = reader["Nombre"].ToString();
+                        SesionActual.Usuario = reader["Usuario"].ToString();
+                        SesionActual.IdRol = Convert.ToInt32(reader["IdRol"]);*/
+
                         MessageBox.Show("Bienvenido");
                         this.Hide();
                         MainForm main = new MainForm();
@@ -45,7 +50,7 @@ namespace SistemaRestaurante
                     else
                     {
                         MessageBox.Show("Credenciales Incorrectas");
-                    }
+                    }  
                 }
                 catch (Exception ex)
                 {
@@ -58,6 +63,11 @@ namespace SistemaRestaurante
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

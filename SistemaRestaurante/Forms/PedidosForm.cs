@@ -28,25 +28,33 @@ namespace SistemaRestaurante.Forms
             using (SqlConnection conn = DBConnection.GetConnection())
             {
                 StringBuilder query = new StringBuilder(@"
-                    SELECT 
-                        p.IdPedido, 
-                        p.Fecha, 
-                        ISNULL(m.NumeroMesa, 'Sin mesa') AS NumeroMesa, 
-                        ep.NombreEstado, 
-                        tc.NombreTipo
-                    FROM Pedidos p
-                    LEFT JOIN Mesas m ON p.IdMesa = m.IdMesa
-                    INNER JOIN EstadoPedido ep ON p.IdEstadoPedido = ep.IdEstadoPedido
-                    INNER JOIN TiposConsumo tc ON p.IdTipoConsumo = tc.IdTipoConsumo
-                    WHERE 1 = 1
+            SELECT 
+                p.IdPedido, 
+                p.Fecha, 
+                ISNULL(m.NumeroMesa, 'Sin mesa') AS NumeroMesa, 
+                ep.NombreEstado, 
+                tc.NombreTipo
+            FROM Pedidos p
+            LEFT JOIN Mesas m ON p.IdMesa = m.IdMesa
+            INNER JOIN EstadoPedido ep ON p.IdEstadoPedido = ep.IdEstadoPedido
+            INNER JOIN TiposConsumo tc ON p.IdTipoConsumo = tc.IdTipoConsumo
+            WHERE 1 = 1
                 ");
 
                 if (estadoFiltro != "Todos")
+                {
                     query.Append(" AND ep.NombreEstado = @estado ");
+
+                    if (estadoFiltro == "Entregado")
+                    {
+                        query.Append(" AND CAST(p.Fecha AS DATE) = CAST(GETDATE() AS DATE) ");
+                    }
+                }
+
                 SqlCommand cmd = new SqlCommand(query.ToString(), conn);
 
                 if (estadoFiltro != "Todos")
-                    cmd.Parameters.AddWithValue("@estado",estadoFiltro);
+                    cmd.Parameters.AddWithValue("@estado", estadoFiltro);
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -54,9 +62,10 @@ namespace SistemaRestaurante.Forms
                 dgvPedidos.DataSource = dt;
 
                 if (dgvPedidos.Columns.Contains("IdPedido"))
-                    dgvPedidos.Columns["IdPedido"].Visible = false; 
+                    dgvPedidos.Columns["IdPedido"].Visible = false;
             }
         }
+
         private void CargarEstados()
         {
             cbEstadoFiltro.Items.Clear();
@@ -111,12 +120,16 @@ namespace SistemaRestaurante.Forms
 
         private void dgvPedidos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >=0)
+            try
             {
-                DataGridViewRow row = dgvPedidos.Rows[e.RowIndex];
-                int idPedido = Convert.ToInt32(row.Cells["IdPedido"].Value);
-                CargarDetallePedido(idPedido);
+                if (e.RowIndex >=0)
+                {
+                    DataGridViewRow row = dgvPedidos.Rows[e.RowIndex];
+                    int idPedido = Convert.ToInt32(row.Cells["IdPedido"].Value);
+                    CargarDetallePedido(idPedido);
+                }
             }
+            catch { }
         }
 
         private void btnCambiarEstado_Click(object sender, EventArgs e)

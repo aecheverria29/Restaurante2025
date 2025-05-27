@@ -154,7 +154,7 @@ namespace SistemaRestaurante.Forms
             int idTipoConsumo = (int)cbTipoConsumo.SelectedValue;
             int? idMesa = null;
 
-            if (idTipoConsumo != 6) 
+            if (idTipoConsumo == 1) 
             {
                 if (cbMesa.SelectedValue == null)
                 {

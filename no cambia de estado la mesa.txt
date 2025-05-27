@@ -1,0 +1,17 @@
+
+
+¿Querés que también agreguemos un filtro por tipo de consumo o por fecha más adelante?
+
+
+
+BOTONES PARA PONER DESCUENTO
+
+EL 10% DE PROPINA
+
+
+Ordenar pedidos por fecha que se muestren solo los de hoy, y los viejos solo si yo quiero
+
+Como hacer con el Id Turno con la facturacion
+
+
+a la hora de ingresar los datos del pedido que me permita eliminar los que agregue por error
