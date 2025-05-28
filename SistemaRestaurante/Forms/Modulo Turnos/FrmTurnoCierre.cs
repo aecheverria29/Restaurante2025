@@ -20,10 +20,12 @@ namespace SistemaRestaurante.Forms.Modulo_Turnos
 {
     public partial class FrmTurnoCierre : Form
     {
-        public FrmTurnoCierre()
+        private MainForm main;
+        public FrmTurnoCierre(MainForm main)
         {
             InitializeComponent();
             this.Load += FrmTurnoCierre_Load;
+            this.main=main;
         }
         private DataRow turnoAbierto;
         private void FrmTurnoCierre_Load(object sender, EventArgs e)
@@ -52,8 +54,8 @@ namespace SistemaRestaurante.Forms.Modulo_Turnos
 
         private void btnGuardarCierre_Click(object sender, EventArgs e)
         {
-            
             decimal montoFinal = Convert.ToDecimal(lblMontoFinal.Text.Replace("Monto Final en Caja: ", "").Trim().Replace("$", ""));
+
             using (var conn = DBConnection.GetConnection())
             using (var cmd = new SqlCommand(
                  "UPDATE Turnos SET FechaCierre=GETDATE(), MontoFinal=@mf, Estado='Cerrado' WHERE IdTurno=@id", conn))
@@ -63,7 +65,9 @@ namespace SistemaRestaurante.Forms.Modulo_Turnos
                 conn.Open();
                 cmd.ExecuteNonQuery();
             }
-            this.DialogResult = DialogResult.OK;
+
+            MessageBox.Show("Turno cerrado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Close();
         }
 
         private void CalcularVentasPorMetodoPago()
@@ -203,11 +207,13 @@ namespace SistemaRestaurante.Forms.Modulo_Turnos
         FROM Pedidos p
         INNER JOIN TiposConsumo tc ON p.IdTipoConsumo = tc.IdTipoConsumo
         INNER JOIN DetallePedido dp ON p.IdPedido = dp.IdPedido
-        WHERE p.IdTurno = @idTurno AND p.IdEstadoPedido = 3 -- Estado entregado
+        WHERE p.IdEstadoPedido = 3 AND CAST(p.Fecha AS DATE) = @fechaTurno AND p.IdEstadoPedido = 3 -- Estado entregado
         AND tc.NombreTipo IN ('Empleado', 'Desperdicio', 'Cortesia', 'Reposicion')
         GROUP BY tc.NombreTipo", conn))
             {
                 cmd.Parameters.AddWithValue("@idTurno", turnoAbierto["IdTurno"]);
+                cmd.Parameters.AddWithValue("@fechaTurno", ((DateTime)turnoAbierto["FechaInicio"]).Date);
+
                 conn.Open();
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -223,6 +229,10 @@ namespace SistemaRestaurante.Forms.Modulo_Turnos
             return resultados;
         }
 
+        private void btnCancelarCierre_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
 

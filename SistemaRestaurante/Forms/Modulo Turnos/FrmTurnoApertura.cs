@@ -15,10 +15,13 @@ namespace SistemaRestaurante.Forms.Modulo_Turnos
     public partial class FrmTurnoApertura : Form
     {
         public int NuevoIdTurno {  get; private set; }
-        public FrmTurnoApertura()
+        private MainForm main;
+
+        public FrmTurnoApertura(MainForm main)
         {
             InitializeComponent();
             this.Load += FrmTurnoApertura_Load;
+            this.main=main;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -41,7 +44,15 @@ namespace SistemaRestaurante.Forms.Modulo_Turnos
                 conn.Open();
                 NuevoIdTurno = Convert.ToInt32(cmd.ExecuteScalar());
             }
-            this.DialogResult = DialogResult.OK;
+
+            MessageBox.Show("Turno abierto correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Cargar el formulario principal de turnos otra vez en el panel principal
+            main.CargarFormulario(new FrmTurnosMain(main));
+            this.Close();
+
+
+            this.Close();
         }
         
 

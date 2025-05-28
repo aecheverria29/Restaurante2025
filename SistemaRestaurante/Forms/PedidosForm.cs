@@ -166,9 +166,23 @@ namespace SistemaRestaurante.Forms
 
            
         }
-
+        private bool HayTurnoAbierto()
+        {
+            using(var conn = DBConnection.GetConnection())
+            using (var cmd = new SqlCommand("SELECT COUNT(*) FROM Turnos WHERE Estado = 'Abierto'", conn))
+            {
+                conn.Open();
+                int count = (int)cmd.ExecuteScalar();
+                return count > 0;
+            }
+        }
         private void btnPedidoNuevo_Click(object sender, EventArgs e)
         {
+            if (!HayTurnoAbierto())
+            {
+                MessageBox.Show("No se puede realizar pedidos sin un turno abierto.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             main.CargarFormulario(new NuevoPedidoForm(main));
         }
 

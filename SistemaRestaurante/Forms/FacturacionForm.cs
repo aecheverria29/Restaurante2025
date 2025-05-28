@@ -22,6 +22,26 @@ namespace SistemaRestaurante.Forms
             main = mainForm;
         }
 
+        private void CargarDetallePedido(int idPedido)
+        {
+            using (SqlConnection conn = DBConnection.GetConnection())
+            {
+                conn.Open();
+                string query = @"
+                    SELECT dp.Cantidad, p.Nombre, dp.PrecioUnitario, dp.SubTotal, dp.Comentarios
+                    FROM DetallePedido dp
+                    INNER JOIN Platos p ON dp.IdPlato = p.IdPlato
+                    WHERE dp.IdPedido = @idPedido";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@idPedido", idPedido);
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                dgvDetallePedido.DataSource = dt;
+            }
+        }
         private void btnCobrar_Click(object sender, EventArgs e)
         {
             if (dgvPedidos.CurrentRow != null)
@@ -67,6 +87,19 @@ namespace SistemaRestaurante.Forms
                 dgvPedidos.DataSource = dt;
             }
         }
-        
+
+        private void dgvPedidos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >=0)
+                {
+                    DataGridViewRow row = dgvPedidos.Rows[e.RowIndex];
+                    int idPedido = Convert.ToInt32(row.Cells["IdPedido"].Value);
+                    CargarDetallePedido(idPedido);
+                }
+            }
+            catch { }
+        }
     }
 }
