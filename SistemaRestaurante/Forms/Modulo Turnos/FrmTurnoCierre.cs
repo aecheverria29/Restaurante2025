@@ -200,34 +200,43 @@ namespace SistemaRestaurante.Forms.Modulo_Turnos
         private Dictionary<string, decimal> ObtenerTotalesPorTipoConsumo()
         {
             var resultados = new Dictionary<string, decimal>();
+            DateTime fechaInicio = (DateTime)turnoAbierto["FechaInicio"];
+            DateTime fechaCierre = DateTime.Now;
 
             using (var conn = DBConnection.GetConnection())
             using (var cmd = new SqlCommand(@"
-        SELECT tc.NombreTipo, SUM(dp.SubTotal) AS Total
-        FROM Pedidos p
-        INNER JOIN TiposConsumo tc ON p.IdTipoConsumo = tc.IdTipoConsumo
-        INNER JOIN DetallePedido dp ON p.IdPedido = dp.IdPedido
-        WHERE p.IdEstadoPedido = 3 AND CAST(p.Fecha AS DATE) = @fechaTurno AND p.IdEstadoPedido = 3 -- Estado entregado
-        AND tc.NombreTipo IN ('Empleado', 'Desperdicio', 'Cortesia', 'Reposicion')
-        GROUP BY tc.NombreTipo", conn))
+                SELECT tc.NombreTipo, SUM(dp.SubTotal) AS Total
+                FROM Pedidos p
+                INNER JOIN TiposConsumo tc ON p.IdTipoConsumo = tc.IdTipoConsumo
+                INNER JOIN DetallePedido dp ON p.IdPedido = dp.IdPedido
+                WHERE p.IdEstadoPedido = 3
+                AND tc.NombreTipo IN ('Empleado','Desperdicio','Cortesia','Reposicion')
+                AND p.Fecha BETWEEN @fechaInicio AND @fechaCierre
+                GROUP BY tc.NombreTipo", conn))
             {
-                cmd.Parameters.AddWithValue("@idTurno", turnoAbierto["IdTurno"]);
-                cmd.Parameters.AddWithValue("@fechaTurno", ((DateTime)turnoAbierto["FechaInicio"]).Date);
+                cmd.Parameters.AddWithValue("@fechaInicio", fechaInicio);
+                cmd.Parameters.AddWithValue("@fechaCierre", fechaCierre);
 
                 conn.Open();
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        string tipo = reader["NombreTipo"].ToString();
-                        decimal total = Convert.ToDecimal(reader["Total"]);
+                        string tipo = reader.GetString(0);
+                        decimal total = reader.IsDBNull(1) ? 0 : reader.GetDecimal(1);
                         resultados[tipo] = total;
                     }
                 }
             }
 
+           
+            foreach (var cat in new[] { "Empleado", "Desperdicio", "Cortesia", "Reposicion" })
+                if (!resultados.ContainsKey(cat))
+                    resultados[cat] = 0m;
+
             return resultados;
         }
+
 
         private void btnCancelarCierre_Click(object sender, EventArgs e)
         {

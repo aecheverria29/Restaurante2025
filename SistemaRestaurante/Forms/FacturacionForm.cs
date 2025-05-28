@@ -57,6 +57,7 @@ namespace SistemaRestaurante.Forms
 
         private void FacturacionForm_Load(object sender, EventArgs e)
         {
+            dgvPedidos.CellContentClick += dgvPedidos_CellContentClick;
             CargarPedidosEntregadosNoFacturados();
         }
 
@@ -89,6 +90,20 @@ namespace SistemaRestaurante.Forms
         }
 
         private void dgvPedidos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >=0)
+                {
+                    DataGridViewRow row = dgvPedidos.Rows[e.RowIndex];
+                    int idPedido = Convert.ToInt32(row.Cells["IdPedido"].Value);
+                    CargarDetallePedido(idPedido);
+                }
+            }
+            catch { }
+        }
+
+        private void dgvPedidos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {

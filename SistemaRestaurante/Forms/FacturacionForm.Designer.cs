@@ -41,12 +41,13 @@
             // 
             this.dgvPedidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPedidos.Location = new System.Drawing.Point(16, 63);
-            this.dgvPedidos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvPedidos.Margin = new System.Windows.Forms.Padding(4);
             this.dgvPedidos.Name = "dgvPedidos";
             this.dgvPedidos.ReadOnly = true;
             this.dgvPedidos.RowHeadersWidth = 51;
             this.dgvPedidos.Size = new System.Drawing.Size(792, 247);
             this.dgvPedidos.TabIndex = 0;
+            this.dgvPedidos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPedidos_CellClick);
             this.dgvPedidos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPedidos_CellContentClick);
             // 
             // v
@@ -62,7 +63,7 @@
             // btnCobrar
             // 
             this.btnCobrar.Location = new System.Drawing.Point(832, 74);
-            this.btnCobrar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCobrar.Margin = new System.Windows.Forms.Padding(4);
             this.btnCobrar.Name = "btnCobrar";
             this.btnCobrar.Size = new System.Drawing.Size(100, 28);
             this.btnCobrar.TabIndex = 2;
@@ -100,7 +101,7 @@
             this.Controls.Add(this.btnCobrar);
             this.Controls.Add(this.v);
             this.Controls.Add(this.dgvPedidos);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FacturacionForm";
             this.Text = "FacturacionForm";
             this.Load += new System.EventHandler(this.FacturacionForm_Load);

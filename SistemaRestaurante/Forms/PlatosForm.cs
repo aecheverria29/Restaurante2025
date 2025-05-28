@@ -27,7 +27,7 @@ namespace SistemaRestaurante.Forms
         {
             using (SqlConnection conn = DBConnection.GetConnection())
             {
-                SqlCommand cmd = new SqlCommand("SELECT IdSubcategoria, Nombre FROM Subcategorias",conn);
+                SqlCommand cmd = new SqlCommand("SELECT IdSubcategoria, Nombre FROM Subcategorias", conn);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -81,7 +81,7 @@ namespace SistemaRestaurante.Forms
                 cbFiltroDisponibilidad.Items.Add("Solo disponibles");
                 cbFiltroDisponibilidad.Items.Add("Solo no disponibles");
             }
-            cbFiltroDisponibilidad.SelectedIndex = 1; 
+            cbFiltroDisponibilidad.SelectedIndex = 1;
             CargarPlatos("Solo disponibles", "");
 
             CargarSubcategorias();
@@ -135,14 +135,14 @@ namespace SistemaRestaurante.Forms
                 string nombreArchivo = Path.GetFileName(origen);
                 string destino = Path.Combine(Application.StartupPath, "Images", nombreArchivo);
 
-               
+
                 if (!File.Exists(destino))
                 {
                     File.Copy(origen, destino);
                 }
 
                 pbImagen.ImageLocation = destino;
-                pbImagen.Tag = "Images\\" + nombreArchivo; 
+                pbImagen.Tag = "Images\\" + nombreArchivo;
             }
         }
 
@@ -171,7 +171,7 @@ namespace SistemaRestaurante.Forms
                 {
                     pbImagen.Image = null;
                 }
-                pbImagen.Tag = ruta; 
+                pbImagen.Tag = ruta;
 
             }
 
@@ -262,6 +262,19 @@ namespace SistemaRestaurante.Forms
             cbFiltroDisponibilidad.SelectedIndex = 1;
             CargarPlatos("Solo disponibles", "");
             LimpiarCampos();
+        }
+
+        private void txtPrecio_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }
