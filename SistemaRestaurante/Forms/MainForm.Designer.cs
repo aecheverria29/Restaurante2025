@@ -28,173 +28,268 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panelMenu = new System.Windows.Forms.Panel();
-            this.btnPlatos = new System.Windows.Forms.Button();
-            this.btnCerrarSesion = new System.Windows.Forms.Button();
-            this.btnReportes = new System.Windows.Forms.Button();
-            this.btnMesas = new System.Windows.Forms.Button();
-            this.btnTurnos = new System.Windows.Forms.Button();
-            this.btnFacturacion = new System.Windows.Forms.Button();
-            this.btnInventario = new System.Windows.Forms.Button();
-            this.btnPedidos = new System.Windows.Forms.Button();
-            this.btnMenu = new System.Windows.Forms.Button();
-            this.btnUsuarios = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.panelContenido = new System.Windows.Forms.Panel();
+            this.btnUsuarios = new MaterialSkin.Controls.MaterialButton();
+            this.btnMenu = new MaterialSkin.Controls.MaterialButton();
+            this.btnPlatos = new MaterialSkin.Controls.MaterialButton();
+            this.btnPedidos = new MaterialSkin.Controls.MaterialButton();
+            this.btnInventario = new MaterialSkin.Controls.MaterialButton();
+            this.btnFacturacion = new MaterialSkin.Controls.MaterialButton();
+            this.btnTurnos = new MaterialSkin.Controls.MaterialButton();
+            this.btnCerrarSesion = new MaterialSkin.Controls.MaterialButton();
+            this.panelMenu = new System.Windows.Forms.Panel();
+            this.btnReportes = new MaterialSkin.Controls.MaterialButton();
+            this.btnMesas = new MaterialSkin.Controls.MaterialButton();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // panelMenu
-            // 
-            this.panelMenu.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.panelMenu.Controls.Add(this.btnPlatos);
-            this.panelMenu.Controls.Add(this.btnCerrarSesion);
-            this.panelMenu.Controls.Add(this.btnReportes);
-            this.panelMenu.Controls.Add(this.btnMesas);
-            this.panelMenu.Controls.Add(this.btnTurnos);
-            this.panelMenu.Controls.Add(this.btnFacturacion);
-            this.panelMenu.Controls.Add(this.btnInventario);
-            this.panelMenu.Controls.Add(this.btnPedidos);
-            this.panelMenu.Controls.Add(this.btnMenu);
-            this.panelMenu.Controls.Add(this.btnUsuarios);
-            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelMenu.Location = new System.Drawing.Point(0, 0);
-            this.panelMenu.Margin = new System.Windows.Forms.Padding(4);
-            this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(293, 833);
-            this.panelMenu.TabIndex = 0;
-            // 
-            // btnPlatos
-            // 
-            this.btnPlatos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPlatos.Location = new System.Drawing.Point(49, 187);
-            this.btnPlatos.Margin = new System.Windows.Forms.Padding(4);
-            this.btnPlatos.Name = "btnPlatos";
-            this.btnPlatos.Size = new System.Drawing.Size(124, 28);
-            this.btnPlatos.TabIndex = 9;
-            this.btnPlatos.Text = "Platos";
-            this.btnPlatos.UseVisualStyleBackColor = true;
-            this.btnPlatos.Click += new System.EventHandler(this.btnPlatos_Click);
-            // 
-            // btnCerrarSesion
-            // 
-            this.btnCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCerrarSesion.Location = new System.Drawing.Point(49, 436);
-            this.btnCerrarSesion.Margin = new System.Windows.Forms.Padding(4);
-            this.btnCerrarSesion.Name = "btnCerrarSesion";
-            this.btnCerrarSesion.Size = new System.Drawing.Size(124, 28);
-            this.btnCerrarSesion.TabIndex = 8;
-            this.btnCerrarSesion.Text = "Cerrar Sesion";
-            this.btnCerrarSesion.UseVisualStyleBackColor = true;
-            this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click);
-            // 
-            // btnReportes
-            // 
-            this.btnReportes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReportes.Location = new System.Drawing.Point(49, 400);
-            this.btnReportes.Margin = new System.Windows.Forms.Padding(4);
-            this.btnReportes.Name = "btnReportes";
-            this.btnReportes.Size = new System.Drawing.Size(124, 28);
-            this.btnReportes.TabIndex = 7;
-            this.btnReportes.Text = "Reportes";
-            this.btnReportes.UseVisualStyleBackColor = true;
-            // 
-            // btnMesas
-            // 
-            this.btnMesas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMesas.Location = new System.Drawing.Point(49, 364);
-            this.btnMesas.Margin = new System.Windows.Forms.Padding(4);
-            this.btnMesas.Name = "btnMesas";
-            this.btnMesas.Size = new System.Drawing.Size(124, 28);
-            this.btnMesas.TabIndex = 6;
-            this.btnMesas.Text = "Mesas";
-            this.btnMesas.UseVisualStyleBackColor = true;
-            // 
-            // btnTurnos
-            // 
-            this.btnTurnos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTurnos.Location = new System.Drawing.Point(49, 329);
-            this.btnTurnos.Margin = new System.Windows.Forms.Padding(4);
-            this.btnTurnos.Name = "btnTurnos";
-            this.btnTurnos.Size = new System.Drawing.Size(124, 28);
-            this.btnTurnos.TabIndex = 5;
-            this.btnTurnos.Text = "Turnos";
-            this.btnTurnos.UseVisualStyleBackColor = true;
-            this.btnTurnos.Click += new System.EventHandler(this.btnTurnos_Click);
-            // 
-            // btnFacturacion
-            // 
-            this.btnFacturacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFacturacion.Location = new System.Drawing.Point(49, 293);
-            this.btnFacturacion.Margin = new System.Windows.Forms.Padding(4);
-            this.btnFacturacion.Name = "btnFacturacion";
-            this.btnFacturacion.Size = new System.Drawing.Size(124, 28);
-            this.btnFacturacion.TabIndex = 4;
-            this.btnFacturacion.Text = "Facturacion";
-            this.btnFacturacion.UseVisualStyleBackColor = true;
-            this.btnFacturacion.Click += new System.EventHandler(this.btnFacturacion_Click);
-            // 
-            // btnInventario
-            // 
-            this.btnInventario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInventario.Location = new System.Drawing.Point(49, 257);
-            this.btnInventario.Margin = new System.Windows.Forms.Padding(4);
-            this.btnInventario.Name = "btnInventario";
-            this.btnInventario.Size = new System.Drawing.Size(124, 28);
-            this.btnInventario.TabIndex = 3;
-            this.btnInventario.Text = "Inventario";
-            this.btnInventario.UseVisualStyleBackColor = true;
-            // 
-            // btnPedidos
-            // 
-            this.btnPedidos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPedidos.Location = new System.Drawing.Point(49, 222);
-            this.btnPedidos.Margin = new System.Windows.Forms.Padding(4);
-            this.btnPedidos.Name = "btnPedidos";
-            this.btnPedidos.Size = new System.Drawing.Size(124, 28);
-            this.btnPedidos.TabIndex = 2;
-            this.btnPedidos.Text = "Pedidos";
-            this.btnPedidos.UseVisualStyleBackColor = true;
-            this.btnPedidos.Click += new System.EventHandler(this.btnPedidos_Click);
-            // 
-            // btnMenu
-            // 
-            this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMenu.Location = new System.Drawing.Point(49, 151);
-            this.btnMenu.Margin = new System.Windows.Forms.Padding(4);
-            this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(124, 28);
-            this.btnMenu.TabIndex = 1;
-            this.btnMenu.Text = "Categorias";
-            this.btnMenu.UseVisualStyleBackColor = true;
-            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
-            // 
-            // btnUsuarios
-            // 
-            this.btnUsuarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUsuarios.Location = new System.Drawing.Point(49, 116);
-            this.btnUsuarios.Margin = new System.Windows.Forms.Padding(4);
-            this.btnUsuarios.Name = "btnUsuarios";
-            this.btnUsuarios.Size = new System.Drawing.Size(124, 28);
-            this.btnUsuarios.TabIndex = 0;
-            this.btnUsuarios.Text = "Usuario";
-            this.btnUsuarios.UseVisualStyleBackColor = true;
-            this.btnUsuarios.Click += new System.EventHandler(this.btnUsuarios_Click);
             // 
             // panelContenido
             // 
             this.panelContenido.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContenido.Location = new System.Drawing.Point(293, 0);
+            this.panelContenido.Location = new System.Drawing.Point(454, 64);
             this.panelContenido.Margin = new System.Windows.Forms.Padding(4);
             this.panelContenido.Name = "panelContenido";
-            this.panelContenido.Size = new System.Drawing.Size(1056, 833);
+            this.panelContenido.Size = new System.Drawing.Size(622, 599);
             this.panelContenido.TabIndex = 1;
             this.panelContenido.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContenido_Paint);
+            // 
+            // btnUsuarios
+            // 
+            this.btnUsuarios.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnUsuarios.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnUsuarios.Depth = 0;
+            this.btnUsuarios.HighEmphasis = true;
+            this.btnUsuarios.Icon = null;
+            this.btnUsuarios.Location = new System.Drawing.Point(44, 111);
+            this.btnUsuarios.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnUsuarios.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnUsuarios.Name = "btnUsuarios";
+            this.btnUsuarios.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnUsuarios.Size = new System.Drawing.Size(91, 36);
+            this.btnUsuarios.TabIndex = 10;
+            this.btnUsuarios.Text = "Usuarios";
+            this.btnUsuarios.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnUsuarios.UseAccentColor = false;
+            this.btnUsuarios.UseVisualStyleBackColor = true;
+            this.btnUsuarios.Click += new System.EventHandler(this.btnUsuarios_Click_1);
+            // 
+            // btnMenu
+            // 
+            this.btnMenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMenu.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnMenu.Depth = 0;
+            this.btnMenu.HighEmphasis = true;
+            this.btnMenu.Icon = null;
+            this.btnMenu.Location = new System.Drawing.Point(44, 159);
+            this.btnMenu.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnMenu.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnMenu.Size = new System.Drawing.Size(101, 36);
+            this.btnMenu.TabIndex = 11;
+            this.btnMenu.Text = "Categoria";
+            this.btnMenu.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnMenu.UseAccentColor = false;
+            this.btnMenu.UseVisualStyleBackColor = true;
+            this.btnMenu.Click += new System.EventHandler(this.btnMenu1_Click);
+            // 
+            // btnPlatos
+            // 
+            this.btnPlatos.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnPlatos.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnPlatos.Depth = 0;
+            this.btnPlatos.HighEmphasis = true;
+            this.btnPlatos.Icon = null;
+            this.btnPlatos.Location = new System.Drawing.Point(48, 220);
+            this.btnPlatos.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnPlatos.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnPlatos.Name = "btnPlatos";
+            this.btnPlatos.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnPlatos.Size = new System.Drawing.Size(75, 36);
+            this.btnPlatos.TabIndex = 12;
+            this.btnPlatos.Text = "Platos";
+            this.btnPlatos.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnPlatos.UseAccentColor = false;
+            this.btnPlatos.UseVisualStyleBackColor = true;
+            this.btnPlatos.Click += new System.EventHandler(this.btnPlatos_Click_1);
+            // 
+            // btnPedidos
+            // 
+            this.btnPedidos.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnPedidos.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnPedidos.Depth = 0;
+            this.btnPedidos.HighEmphasis = true;
+            this.btnPedidos.Icon = null;
+            this.btnPedidos.Location = new System.Drawing.Point(44, 268);
+            this.btnPedidos.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnPedidos.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnPedidos.Name = "btnPedidos";
+            this.btnPedidos.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnPedidos.Size = new System.Drawing.Size(81, 36);
+            this.btnPedidos.TabIndex = 13;
+            this.btnPedidos.Text = "Pedidos";
+            this.btnPedidos.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnPedidos.UseAccentColor = false;
+            this.btnPedidos.UseVisualStyleBackColor = true;
+            this.btnPedidos.Click += new System.EventHandler(this.btnPedidos_Click_1);
+            // 
+            // btnInventario
+            // 
+            this.btnInventario.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnInventario.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnInventario.Depth = 0;
+            this.btnInventario.HighEmphasis = true;
+            this.btnInventario.Icon = null;
+            this.btnInventario.Location = new System.Drawing.Point(44, 316);
+            this.btnInventario.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnInventario.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnInventario.Name = "btnInventario";
+            this.btnInventario.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnInventario.Size = new System.Drawing.Size(106, 36);
+            this.btnInventario.TabIndex = 14;
+            this.btnInventario.Text = "Inventario";
+            this.btnInventario.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnInventario.UseAccentColor = false;
+            this.btnInventario.UseVisualStyleBackColor = true;
+            this.btnInventario.Click += new System.EventHandler(this.btnInventario_Click);
+            // 
+            // btnFacturacion
+            // 
+            this.btnFacturacion.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnFacturacion.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnFacturacion.Depth = 0;
+            this.btnFacturacion.HighEmphasis = true;
+            this.btnFacturacion.Icon = null;
+            this.btnFacturacion.Location = new System.Drawing.Point(44, 364);
+            this.btnFacturacion.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnFacturacion.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnFacturacion.Name = "btnFacturacion";
+            this.btnFacturacion.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnFacturacion.Size = new System.Drawing.Size(120, 36);
+            this.btnFacturacion.TabIndex = 15;
+            this.btnFacturacion.Text = "Facturacion";
+            this.btnFacturacion.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnFacturacion.UseAccentColor = false;
+            this.btnFacturacion.UseVisualStyleBackColor = true;
+            this.btnFacturacion.Click += new System.EventHandler(this.btnFacturacion_Click_1);
+            // 
+            // btnTurnos
+            // 
+            this.btnTurnos.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnTurnos.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnTurnos.Depth = 0;
+            this.btnTurnos.HighEmphasis = true;
+            this.btnTurnos.Icon = null;
+            this.btnTurnos.Location = new System.Drawing.Point(44, 412);
+            this.btnTurnos.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnTurnos.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnTurnos.Name = "btnTurnos";
+            this.btnTurnos.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnTurnos.Size = new System.Drawing.Size(79, 36);
+            this.btnTurnos.TabIndex = 16;
+            this.btnTurnos.Text = "Turnos";
+            this.btnTurnos.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnTurnos.UseAccentColor = false;
+            this.btnTurnos.UseVisualStyleBackColor = true;
+            this.btnTurnos.Click += new System.EventHandler(this.btnTurnos_Click_1);
+            // 
+            // btnCerrarSesion
+            // 
+            this.btnCerrarSesion.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCerrarSesion.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnCerrarSesion.Depth = 0;
+            this.btnCerrarSesion.HighEmphasis = true;
+            this.btnCerrarSesion.Icon = null;
+            this.btnCerrarSesion.Location = new System.Drawing.Point(44, 556);
+            this.btnCerrarSesion.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCerrarSesion.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnCerrarSesion.Name = "btnCerrarSesion";
+            this.btnCerrarSesion.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnCerrarSesion.Size = new System.Drawing.Size(122, 36);
+            this.btnCerrarSesion.TabIndex = 17;
+            this.btnCerrarSesion.Text = "Cerra Sesion ";
+            this.btnCerrarSesion.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnCerrarSesion.UseAccentColor = false;
+            this.btnCerrarSesion.UseVisualStyleBackColor = true;
+            this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click_1);
+            // 
+            // panelMenu
+            // 
+            this.panelMenu.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.panelMenu.Controls.Add(this.pictureBox1);
+            this.panelMenu.Controls.Add(this.btnMesas);
+            this.panelMenu.Controls.Add(this.btnReportes);
+            this.panelMenu.Controls.Add(this.btnCerrarSesion);
+            this.panelMenu.Controls.Add(this.btnTurnos);
+            this.panelMenu.Controls.Add(this.btnFacturacion);
+            this.panelMenu.Controls.Add(this.btnInventario);
+            this.panelMenu.Controls.Add(this.btnPedidos);
+            this.panelMenu.Controls.Add(this.btnPlatos);
+            this.panelMenu.Controls.Add(this.btnMenu);
+            this.panelMenu.Controls.Add(this.btnUsuarios);
+            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelMenu.Location = new System.Drawing.Point(3, 65);
+            this.panelMenu.Margin = new System.Windows.Forms.Padding(4);
+            this.panelMenu.Name = "panelMenu";
+            this.panelMenu.Size = new System.Drawing.Size(451, 599);
+            this.panelMenu.TabIndex = 0;
+            this.panelMenu.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMenu_Paint);
+            // 
+            // btnReportes
+            // 
+            this.btnReportes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnReportes.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnReportes.Depth = 0;
+            this.btnReportes.HighEmphasis = true;
+            this.btnReportes.Icon = null;
+            this.btnReportes.Location = new System.Drawing.Point(44, 508);
+            this.btnReportes.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnReportes.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnReportes.Name = "btnReportes";
+            this.btnReportes.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnReportes.Size = new System.Drawing.Size(94, 36);
+            this.btnReportes.TabIndex = 18;
+            this.btnReportes.Text = "Reportes";
+            this.btnReportes.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnReportes.UseAccentColor = false;
+            this.btnReportes.UseVisualStyleBackColor = true;
+            // 
+            // btnMesas
+            // 
+            this.btnMesas.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMesas.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnMesas.Depth = 0;
+            this.btnMesas.HighEmphasis = true;
+            this.btnMesas.Icon = null;
+            this.btnMesas.Location = new System.Drawing.Point(44, 460);
+            this.btnMesas.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnMesas.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnMesas.Name = "btnMesas";
+            this.btnMesas.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnMesas.Size = new System.Drawing.Size(69, 36);
+            this.btnMesas.TabIndex = 19;
+            this.btnMesas.Text = "Mesas";
+            this.btnMesas.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnMesas.UseAccentColor = false;
+            this.btnMesas.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
+            this.pictureBox1.Location = new System.Drawing.Point(187, 27);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(109, 75);
+            this.pictureBox1.TabIndex = 20;
+            this.pictureBox1.TabStop = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1349, 833);
+            this.ClientSize = new System.Drawing.Size(1079, 666);
             this.Controls.Add(this.panelContenido);
             this.Controls.Add(this.panelMenu);
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -202,23 +297,25 @@
             this.Text = "MainForm";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.panelMenu.ResumeLayout(false);
+            this.panelMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panelMenu;
         private System.Windows.Forms.Panel panelContenido;
-        private System.Windows.Forms.Button btnCerrarSesion;
-        private System.Windows.Forms.Button btnReportes;
-        private System.Windows.Forms.Button btnMesas;
-        private System.Windows.Forms.Button btnTurnos;
-        private System.Windows.Forms.Button btnFacturacion;
-        private System.Windows.Forms.Button btnInventario;
-        private System.Windows.Forms.Button btnPedidos;
-        private System.Windows.Forms.Button btnMenu;
-        private System.Windows.Forms.Button btnUsuarios;
-        private System.Windows.Forms.Button btnPlatos;
+        private MaterialSkin.Controls.MaterialButton btnUsuarios;
+        private MaterialSkin.Controls.MaterialButton btnMenu;
+        private MaterialSkin.Controls.MaterialButton btnPlatos;
+        private MaterialSkin.Controls.MaterialButton btnPedidos;
+        private MaterialSkin.Controls.MaterialButton btnInventario;
+        private MaterialSkin.Controls.MaterialButton btnFacturacion;
+        private MaterialSkin.Controls.MaterialButton btnTurnos;
+        private MaterialSkin.Controls.MaterialButton btnCerrarSesion;
+        private System.Windows.Forms.Panel panelMenu;
+        private MaterialSkin.Controls.MaterialButton btnReportes;
+        private MaterialSkin.Controls.MaterialButton btnMesas;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
