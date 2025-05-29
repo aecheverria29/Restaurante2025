@@ -21,7 +21,7 @@ namespace SistemaRestaurante.Forms
 {
     public partial class MainForm : MaterialForm
     {
-        public MainForm() : this(null) { }
+        
 
         public MainForm()
         {
