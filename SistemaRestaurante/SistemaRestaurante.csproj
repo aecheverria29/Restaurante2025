@@ -182,12 +182,6 @@
     <Compile Include="Forms\FacturacionForm.Designer.cs">
       <DependentUpon>FacturacionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\InventarioForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\InventarioForm.Designer.cs">
-      <DependentUpon>InventarioForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,6 +205,24 @@
     </Compile>
     <Compile Include="Forms\MesasForm.Designer.cs">
       <DependentUpon>MesasForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Modulo Inventario\InsumosForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Modulo Inventario\InsumosForm.Designer.cs">
+      <DependentUpon>InsumosForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Modulo Inventario\MovimientoInventarioForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Modulo Inventario\MovimientoInventarioForm.Designer.cs">
+      <DependentUpon>MovimientoInventarioForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Modulo Inventario\StockActualForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Modulo Inventario\StockActualForm.Designer.cs">
+      <DependentUpon>StockActualForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Modulo Turnos\FrmTurnoApertura.cs">
       <SubType>Form</SubType>
@@ -294,6 +306,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MenuForm.resx">
       <DependentUpon>MenuForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Modulo Inventario\InsumosForm.resx">
+      <DependentUpon>InsumosForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Modulo Inventario\MovimientoInventarioForm.resx">
+      <DependentUpon>MovimientoInventarioForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Modulo Inventario\StockActualForm.resx">
+      <DependentUpon>StockActualForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Modulo Turnos\FrmTurnoApertura.resx">
       <DependentUpon>FrmTurnoApertura.cs</DependentUpon>

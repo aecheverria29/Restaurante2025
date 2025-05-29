@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SistemaRestaurante.Forms
+namespace SistemaRestaurante.Forms.Modulo_Inventario
 {
-    public partial class InventarioForm : Form
+    public partial class StockActualForm : Form
     {
-        public InventarioForm()
+        public StockActualForm()
         {
             InitializeComponent();
         }
