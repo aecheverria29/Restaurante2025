@@ -15,6 +15,7 @@ namespace SistemaRestaurante.Forms
     public partial class FacturacionForm : Form
     {
         private MainForm main;
+        public FacturacionForm() : this(null) { }
 
         public FacturacionForm(MainForm mainForm)
         {
