@@ -15,7 +15,7 @@ using iText.Layout;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System.Drawing.Drawing2D;
-using SistemaRestaurante.Forms.Modulo_Turnos; // <- para Document
+using SistemaRestaurante.Forms.Modulo_Turnos; // <- para Docum
 
 namespace SistemaRestaurante.Forms
 {
