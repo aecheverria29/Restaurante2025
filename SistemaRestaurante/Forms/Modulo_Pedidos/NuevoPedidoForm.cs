@@ -206,6 +206,36 @@ namespace SistemaRestaurante.Forms
                         cmdDetalle.Parameters.AddWithValue("@coment", (object)item.Comentario ?? DBNull.Value);
 
                         cmdDetalle.ExecuteNonQuery();
+
+                        // DESCONTAR INSUMOS SEGÚN RECETA
+                        SqlCommand cmdReceta = new SqlCommand(@"
+    SELECT IdInsumo, CantidadNecesaria
+    FROM Recetas
+    WHERE IdPlato = @plato", conn, transaccion);
+                        cmdReceta.Parameters.AddWithValue("@plato", item.IdPlato);
+
+                        SqlDataAdapter da = new SqlDataAdapter(cmdReceta);
+                        DataTable dtReceta = new DataTable();
+                        da.Fill(dtReceta);
+
+                        foreach (DataRow row in dtReceta.Rows)
+                        {
+                            int idInsumo = Convert.ToInt32(row["IdInsumo"]);
+                            decimal cantidadPorPlato = Convert.ToDecimal(row["CantidadNecesaria"]);
+                            decimal totalUsado = cantidadPorPlato * item.Cantidad;
+
+                            SqlCommand cmdDescontar = new SqlCommand(@"
+        INSERT INTO MovimientoInventario (IdInsumo, Fecha, TipoMovimiento, Cantidad, Justificacion)
+        VALUES (@idInsumo, GETDATE(), 'Salida', @cantidad, @justif)", conn, transaccion);
+
+                            cmdDescontar.Parameters.AddWithValue("@idInsumo", idInsumo);
+                            cmdDescontar.Parameters.AddWithValue("@cantidad", totalUsado);
+                            cmdDescontar.Parameters.AddWithValue("@justif", $"Uso en pedido #{idPedido} - {item.NombrePlato}");
+
+                            cmdDescontar.ExecuteNonQuery();
+                        }
+
+
                     }
 
                     if (idMesa.HasValue)

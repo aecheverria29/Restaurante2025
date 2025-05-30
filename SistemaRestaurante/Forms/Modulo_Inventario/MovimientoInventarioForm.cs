@@ -14,17 +14,20 @@ namespace SistemaRestaurante.Forms.Modulo_Inventario
 {
     public partial class MovimientoInventarioForm : Form
     {
-        public MovimientoInventarioForm()
+        private MainForm main;
+        public MovimientoInventarioForm(MainForm main)
         {
             InitializeComponent();
             this.Load += MovimientoInventarioForm_Load;
             btnRegistrar.Click += btnRegistrar_Click;
+            this.main=main;
         }
 
         private void MovimientoInventarioForm_Load(object sender, EventArgs e)
         {
             CargarInsumos();
             CargarMovimientos();
+            CargarFiltroInsumos();
 
             rbEntrada.Checked = true;
             dgvMovimientos.AllowUserToAddRows = false;
@@ -48,16 +51,24 @@ namespace SistemaRestaurante.Forms.Modulo_Inventario
             using (SqlConnection conn = DBConnection.GetConnection())
             {
                 SqlCommand cmd = new SqlCommand(@"
-                    SELECT m.Fecha, i.Nombre AS Insumo, m.TipoMovimiento, m.Cantidad, m.Justificacion
-                    FROM MovimientoInventariio m
-                    INNER JOIN Insumos i ON m.IdInsumo = i.IdInsumo
-                    ORDER BY m.Fecha DESC", conn);
-                SqlDataAdapter da = new SqlDataAdapter( cmd);
+                SELECT 
+                    m.Fecha, 
+                    i.Nombre AS Insumo, 
+                    m.TipoMovimiento, 
+                    m.Cantidad, 
+                    m.Justificacion
+                FROM MovimientoInventario m
+                INNER JOIN Insumos i ON m.IdInsumo = i.IdInsumo
+                WHERE CAST(m.Fecha AS DATE) = CAST(GETDATE() AS DATE)
+                ORDER BY m.Fecha DESC", conn);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 dgvMovimientos.DataSource = dt;
             }
         }
+
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
@@ -102,6 +113,56 @@ namespace SistemaRestaurante.Forms.Modulo_Inventario
             txtCantidad.Clear();
             txtJustificacion.Clear();
             rbEntrada.Checked = true;
+        }
+
+        private void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            if (cbFiltroInsumo.SelectedIndex == -1 || cbFiltroInsumo.SelectedValue == null)
+            {
+                MessageBox.Show("Selecciona un insumo para filtrar.");
+                return;
+            }
+
+            int idInsumo = Convert.ToInt32(cbFiltroInsumo.SelectedValue);
+
+            using (SqlConnection conn = DBConnection.GetConnection())
+            {
+                SqlCommand cmd = new SqlCommand(@"
+            SELECT 
+                m.Fecha, 
+                i.Nombre AS Insumo, 
+                m.TipoMovimiento, 
+                m.Cantidad, 
+                m.Justificacion
+            FROM MovimientoInventario m
+            INNER JOIN Insumos i ON m.IdInsumo = i.IdInsumo
+            WHERE m.IdInsumo = @id AND CAST(m.Fecha AS DATE) = CAST(GETDATE() AS DATE)
+            ORDER BY m.Fecha DESC", conn);
+
+                cmd.Parameters.AddWithValue("@id", idInsumo);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvMovimientos.DataSource = dt;
+            }
+        }
+        private void CargarFiltroInsumos()
+        {
+            using (SqlConnection conn = DBConnection.GetConnection())
+            {
+                SqlCommand cmd = new SqlCommand("SELECT IdInsumo, Nombre FROM Insumos", conn);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                cbFiltroInsumo.DataSource = dt;
+                cbFiltroInsumo.DisplayMember = "Nombre";
+                cbFiltroInsumo.ValueMember = "IdInsumo";
+            }
+        }
+
+        private void btnRegresar_Click(object sender, EventArgs e)
+        {
+            main.CargarFormulario(new InventarioForm(main));
         }
     }
 }

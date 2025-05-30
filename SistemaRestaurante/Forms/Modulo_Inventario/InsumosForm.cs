@@ -14,11 +14,13 @@ namespace SistemaRestaurante.Forms.Modulo_Inventario
 {
     public partial class InsumosForm : Form
     {
-        public InsumosForm()
+        private MainForm main;
+        public InsumosForm(MainForm main)
         {
             InitializeComponent();
             this.Load += InsumosForm_Load;
             dgvInsumos.CellClick += dgvInsumos_CellClick;
+            this.main=main;
         }
 
         private void InsumosForm_Load(object sender, EventArgs e)
@@ -58,16 +60,35 @@ namespace SistemaRestaurante.Forms.Modulo_Inventario
             using (SqlConnection conn = DBConnection.GetConnection())
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("INSERT INTO Insumos (Nombre, Cantidad, Unidad, MinimoStock) VALUES (@nombre, @cant, @unidad, @minimo)",conn);
+
+                SqlCommand cmd = new SqlCommand(@"
+                INSERT INTO Insumos (Nombre, Cantidad, Unidad, MinimoStock)
+                VALUES (@nombre, @cant, @unidad, @minimo);
+                SELECT SCOPE_IDENTITY();", conn); // ← Devuelve el ID generado
+
                 cmd.Parameters.AddWithValue("@nombre", txtNombre.Text);
                 cmd.Parameters.AddWithValue("@cant", cantidad);
                 cmd.Parameters.AddWithValue("@unidad", txtUnidad.Text);
                 cmd.Parameters.AddWithValue("@minimo", minimo);
-                cmd.ExecuteNonQuery();
+
+                // Ahora obtenemos el ID generado correctamente
+                int idInsumo = Convert.ToInt32(cmd.ExecuteScalar());
+
+                // Registrar movimiento de entrada
+                SqlCommand movimientoCmd = new SqlCommand(@"
+                INSERT INTO MovimientoInventario (IdInsumo, Fecha, TipoMovimiento, Cantidad, Justificacion)
+                VALUES (@idInsumo, GETDATE(), 'Entrada', @cantidad, 'Stock inicial')", conn);
+
+                movimientoCmd.Parameters.AddWithValue("@idInsumo", idInsumo);
+                movimientoCmd.Parameters.AddWithValue("@cantidad", cantidad);
+                movimientoCmd.ExecuteNonQuery();
+
                 MessageBox.Show("Insumo agregado.");
                 LimpiarCampos();
                 CargarInsumos();
             }
+
+
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
@@ -150,6 +171,11 @@ namespace SistemaRestaurante.Forms.Modulo_Inventario
             txtUnidad.Clear();
             txtMinimo.Clear();
             dgvInsumos.ClearSelection();
+        }
+
+        private void btnRegresar_Click(object sender, EventArgs e)
+        {
+            main.CargarFormulario(new InventarioForm(main));
         }
     }
 }

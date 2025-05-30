@@ -166,34 +166,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\AgregarUsuarioForm.cs">
+    <Compile Include="Forms\Modulo_CatePlatos\RecetasForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AgregarUsuarioForm.Designer.cs">
+    <Compile Include="Forms\Modulo_CatePlatos\RecetasForm.Designer.cs">
+      <DependentUpon>RecetasForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Modulo_Usuario\AgregarUsuarioForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Modulo_Usuario\AgregarUsuarioForm.Designer.cs">
       <DependentUpon>AgregarUsuarioForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EditarPedidoForm.cs">
+    <Compile Include="Forms\Modulo_Pedidos\EditarPedidoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\EditarPedidoForm.Designer.cs">
+    <Compile Include="Forms\Modulo_Pedidos\EditarPedidoForm.Designer.cs">
       <DependentUpon>EditarPedidoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EmitirFacturaForm.cs">
+    <Compile Include="Forms\Modulo_Facturacion\EmitirFacturaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\EmitirFacturaForm.Designer.cs">
+    <Compile Include="Forms\Modulo_Facturacion\EmitirFacturaForm.Designer.cs">
       <DependentUpon>EmitirFacturaForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EmitirTicketForm.cs">
+    <Compile Include="Forms\Modulo_Facturacion\EmitirTicketForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\EmitirTicketForm.Designer.cs">
+    <Compile Include="Forms\Modulo_Facturacion\EmitirTicketForm.Designer.cs">
       <DependentUpon>EmitirTicketForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FacturacionForm.cs">
+    <Compile Include="Forms\Modulo_Facturacion\FacturacionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FacturacionForm.Designer.cs">
+    <Compile Include="Forms\Modulo_Facturacion\FacturacionForm.Designer.cs">
       <DependentUpon>FacturacionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\LoginForm.cs">
@@ -208,10 +214,10 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MenuForm.cs">
+    <Compile Include="Forms\Modulo_CatePlatos\MenuForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MenuForm.Designer.cs">
+    <Compile Include="Forms\Modulo_CatePlatos\MenuForm.Designer.cs">
       <DependentUpon>MenuForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MesasForm.cs">
@@ -220,22 +226,28 @@
     <Compile Include="Forms\MesasForm.Designer.cs">
       <DependentUpon>MesasForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Modulo Inventario\InsumosForm.cs">
+    <Compile Include="Forms\Modulo_Inventario\InsumosForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Modulo Inventario\InsumosForm.Designer.cs">
+    <Compile Include="Forms\Modulo_Inventario\InsumosForm.Designer.cs">
       <DependentUpon>InsumosForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Modulo Inventario\MovimientoInventarioForm.cs">
+    <Compile Include="Forms\Modulo_Inventario\InventarioForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Modulo Inventario\MovimientoInventarioForm.Designer.cs">
+    <Compile Include="Forms\Modulo_Inventario\InventarioForm.Designer.cs">
+      <DependentUpon>InventarioForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Modulo_Inventario\MovimientoInventarioForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Modulo_Inventario\MovimientoInventarioForm.Designer.cs">
       <DependentUpon>MovimientoInventarioForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Modulo Inventario\StockActualForm.cs">
+    <Compile Include="Forms\Modulo_Inventario\StockActualForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Modulo Inventario\StockActualForm.Designer.cs">
+    <Compile Include="Forms\Modulo_Inventario\StockActualForm.Designer.cs">
       <DependentUpon>StockActualForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Modulo Turnos\FrmTurnoApertura.cs">
@@ -256,22 +268,22 @@
     <Compile Include="Forms\Modulo Turnos\FrmTurnosMain.Designer.cs">
       <DependentUpon>FrmTurnosMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\NuevoPedidoForm.cs">
+    <Compile Include="Forms\Modulo_Pedidos\NuevoPedidoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\NuevoPedidoForm.Designer.cs">
+    <Compile Include="Forms\Modulo_Pedidos\NuevoPedidoForm.Designer.cs">
       <DependentUpon>NuevoPedidoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PedidosForm.cs">
+    <Compile Include="Forms\Modulo_Pedidos\PedidosForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\PedidosForm.Designer.cs">
+    <Compile Include="Forms\Modulo_Pedidos\PedidosForm.Designer.cs">
       <DependentUpon>PedidosForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PlatosForm.cs">
+    <Compile Include="Forms\Modulo_CatePlatos\PlatosForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\PlatosForm.Designer.cs">
+    <Compile Include="Forms\Modulo_CatePlatos\PlatosForm.Designer.cs">
       <DependentUpon>PlatosForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ReportesForm.cs">
@@ -280,16 +292,16 @@
     <Compile Include="Forms\ReportesForm.Designer.cs">
       <DependentUpon>ReportesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SeleccionarTipoDocumentoForm.cs">
+    <Compile Include="Forms\Modulo_Facturacion\SeleccionarTipoDocumentoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SeleccionarTipoDocumentoForm.Designer.cs">
+    <Compile Include="Forms\Modulo_Facturacion\SeleccionarTipoDocumentoForm.Designer.cs">
       <DependentUpon>SeleccionarTipoDocumentoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UsuariosForm.cs">
+    <Compile Include="Forms\Modulo_Usuario\UsuariosForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\UsuariosForm.Designer.cs">
+    <Compile Include="Forms\Modulo_Usuario\UsuariosForm.Designer.cs">
       <DependentUpon>UsuariosForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\PlatoPedidoTemp.cs" />
@@ -297,19 +309,22 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DBConnection.cs" />
     <Compile Include="Utils\UtilidadesUI.cs" />
-    <EmbeddedResource Include="Forms\AgregarUsuarioForm.resx">
+    <EmbeddedResource Include="Forms\Modulo_CatePlatos\RecetasForm.resx">
+      <DependentUpon>RecetasForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Modulo_Usuario\AgregarUsuarioForm.resx">
       <DependentUpon>AgregarUsuarioForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EditarPedidoForm.resx">
+    <EmbeddedResource Include="Forms\Modulo_Pedidos\EditarPedidoForm.resx">
       <DependentUpon>EditarPedidoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EmitirFacturaForm.resx">
+    <EmbeddedResource Include="Forms\Modulo_Facturacion\EmitirFacturaForm.resx">
       <DependentUpon>EmitirFacturaForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EmitirTicketForm.resx">
+    <EmbeddedResource Include="Forms\Modulo_Facturacion\EmitirTicketForm.resx">
       <DependentUpon>EmitirTicketForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FacturacionForm.resx">
+    <EmbeddedResource Include="Forms\Modulo_Facturacion\FacturacionForm.resx">
       <DependentUpon>FacturacionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.resx">
@@ -318,16 +333,19 @@
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MenuForm.resx">
+    <EmbeddedResource Include="Forms\Modulo_CatePlatos\MenuForm.resx">
       <DependentUpon>MenuForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Modulo Inventario\InsumosForm.resx">
+    <EmbeddedResource Include="Forms\Modulo_Inventario\InsumosForm.resx">
       <DependentUpon>InsumosForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Modulo Inventario\MovimientoInventarioForm.resx">
+    <EmbeddedResource Include="Forms\Modulo_Inventario\InventarioForm.resx">
+      <DependentUpon>InventarioForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Modulo_Inventario\MovimientoInventarioForm.resx">
       <DependentUpon>MovimientoInventarioForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Modulo Inventario\StockActualForm.resx">
+    <EmbeddedResource Include="Forms\Modulo_Inventario\StockActualForm.resx">
       <DependentUpon>StockActualForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Modulo Turnos\FrmTurnoApertura.resx">
@@ -339,19 +357,19 @@
     <EmbeddedResource Include="Forms\Modulo Turnos\FrmTurnosMain.resx">
       <DependentUpon>FrmTurnosMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\NuevoPedidoForm.resx">
+    <EmbeddedResource Include="Forms\Modulo_Pedidos\NuevoPedidoForm.resx">
       <DependentUpon>NuevoPedidoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PedidosForm.resx">
+    <EmbeddedResource Include="Forms\Modulo_Pedidos\PedidosForm.resx">
       <DependentUpon>PedidosForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PlatosForm.resx">
+    <EmbeddedResource Include="Forms\Modulo_CatePlatos\PlatosForm.resx">
       <DependentUpon>PlatosForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SeleccionarTipoDocumentoForm.resx">
+    <EmbeddedResource Include="Forms\Modulo_Facturacion\SeleccionarTipoDocumentoForm.resx">
       <DependentUpon>SeleccionarTipoDocumentoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UsuariosForm.resx">
+    <EmbeddedResource Include="Forms\Modulo_Usuario\UsuariosForm.resx">
       <DependentUpon>UsuariosForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

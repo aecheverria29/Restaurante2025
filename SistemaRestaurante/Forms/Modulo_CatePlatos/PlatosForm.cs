@@ -1,4 +1,5 @@
-﻿using SistemaRestaurante.Services;
+﻿using SistemaRestaurante.Forms.Modulo_CatePlatos;
+using SistemaRestaurante.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -274,6 +275,20 @@ namespace SistemaRestaurante.Forms
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void btnReceta_Click(object sender, EventArgs e)
+        {
+            if (dgvPlatos.CurrentRow != null)
+            {
+                int idPlato = Convert.ToInt32(dgvPlatos.CurrentRow.Cells["IdPlato"].Value);
+                RecetasForm recetasForm = new RecetasForm(idPlato); 
+                recetasForm.Show(); 
+            }
+            else
+            {
+                MessageBox.Show("Selecciona un plato para agregar su receta.");
             }
         }
     }

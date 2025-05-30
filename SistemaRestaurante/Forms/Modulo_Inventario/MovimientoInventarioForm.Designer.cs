@@ -39,6 +39,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.cbFiltroInsumo = new System.Windows.Forms.ComboBox();
+            this.btnFiltrar = new System.Windows.Forms.Button();
+            this.btnRegresar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMovimientos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,7 +49,7 @@
             // 
             this.cbInsumo.FormattingEnabled = true;
             this.cbInsumo.Location = new System.Drawing.Point(133, 20);
-            this.cbInsumo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbInsumo.Margin = new System.Windows.Forms.Padding(2);
             this.cbInsumo.Name = "cbInsumo";
             this.cbInsumo.Size = new System.Drawing.Size(92, 21);
             this.cbInsumo.TabIndex = 0;
@@ -54,7 +57,7 @@
             // txtCantidad
             // 
             this.txtCantidad.Location = new System.Drawing.Point(172, 60);
-            this.txtCantidad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCantidad.Margin = new System.Windows.Forms.Padding(2);
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(76, 20);
             this.txtCantidad.TabIndex = 1;
@@ -62,7 +65,7 @@
             // txtJustificacion
             // 
             this.txtJustificacion.Location = new System.Drawing.Point(389, 65);
-            this.txtJustificacion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtJustificacion.Margin = new System.Windows.Forms.Padding(2);
             this.txtJustificacion.Name = "txtJustificacion";
             this.txtJustificacion.Size = new System.Drawing.Size(76, 20);
             this.txtJustificacion.TabIndex = 2;
@@ -71,7 +74,7 @@
             // 
             this.rbEntrada.AutoSize = true;
             this.rbEntrada.Location = new System.Drawing.Point(244, 24);
-            this.rbEntrada.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbEntrada.Margin = new System.Windows.Forms.Padding(2);
             this.rbEntrada.Name = "rbEntrada";
             this.rbEntrada.Size = new System.Drawing.Size(138, 17);
             this.rbEntrada.TabIndex = 3;
@@ -83,7 +86,7 @@
             // 
             this.rbSalida.AutoSize = true;
             this.rbSalida.Location = new System.Drawing.Point(389, 24);
-            this.rbSalida.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbSalida.Margin = new System.Windows.Forms.Padding(2);
             this.rbSalida.Name = "rbSalida";
             this.rbSalida.Size = new System.Drawing.Size(129, 17);
             this.rbSalida.TabIndex = 4;
@@ -93,8 +96,8 @@
             // 
             // btnRegistrar
             // 
-            this.btnRegistrar.Location = new System.Drawing.Point(420, 128);
-            this.btnRegistrar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRegistrar.Location = new System.Drawing.Point(425, 138);
+            this.btnRegistrar.Margin = new System.Windows.Forms.Padding(2);
             this.btnRegistrar.Name = "btnRegistrar";
             this.btnRegistrar.Size = new System.Drawing.Size(118, 19);
             this.btnRegistrar.TabIndex = 5;
@@ -105,8 +108,8 @@
             // dgvMovimientos
             // 
             this.dgvMovimientos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMovimientos.Location = new System.Drawing.Point(44, 128);
-            this.dgvMovimientos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvMovimientos.Location = new System.Drawing.Point(40, 138);
+            this.dgvMovimientos.Margin = new System.Windows.Forms.Padding(2);
             this.dgvMovimientos.Name = "dgvMovimientos";
             this.dgvMovimientos.RowHeadersWidth = 51;
             this.dgvMovimientos.RowTemplate.Height = 24;
@@ -146,18 +149,49 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(41, 97);
+            this.label4.Location = new System.Drawing.Point(37, 108);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(213, 13);
             this.label4.TabIndex = 10;
             this.label4.Text = "Historial de movimientos por insumo o fecha";
             // 
+            // cbFiltroInsumo
+            // 
+            this.cbFiltroInsumo.FormattingEnabled = true;
+            this.cbFiltroInsumo.Location = new System.Drawing.Point(44, 286);
+            this.cbFiltroInsumo.Name = "cbFiltroInsumo";
+            this.cbFiltroInsumo.Size = new System.Drawing.Size(121, 21);
+            this.cbFiltroInsumo.TabIndex = 11;
+            // 
+            // btnFiltrar
+            // 
+            this.btnFiltrar.Location = new System.Drawing.Point(197, 283);
+            this.btnFiltrar.Name = "btnFiltrar";
+            this.btnFiltrar.Size = new System.Drawing.Size(75, 23);
+            this.btnFiltrar.TabIndex = 12;
+            this.btnFiltrar.Text = "Filtrar";
+            this.btnFiltrar.UseVisualStyleBackColor = true;
+            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
+            // 
+            // btnRegresar
+            // 
+            this.btnRegresar.Location = new System.Drawing.Point(465, 283);
+            this.btnRegresar.Name = "btnRegresar";
+            this.btnRegresar.Size = new System.Drawing.Size(75, 23);
+            this.btnRegresar.TabIndex = 13;
+            this.btnRegresar.Text = "Regresar";
+            this.btnRegresar.UseVisualStyleBackColor = true;
+            this.btnRegresar.Click += new System.EventHandler(this.btnRegresar_Click);
+            // 
             // MovimientoInventarioForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 366);
+            this.Controls.Add(this.btnRegresar);
+            this.Controls.Add(this.btnFiltrar);
+            this.Controls.Add(this.cbFiltroInsumo);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -169,7 +203,7 @@
             this.Controls.Add(this.txtJustificacion);
             this.Controls.Add(this.txtCantidad);
             this.Controls.Add(this.cbInsumo);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MovimientoInventarioForm";
             this.Text = "MovimientoInventarioForm";
             this.Load += new System.EventHandler(this.MovimientoInventarioForm_Load);
@@ -192,5 +226,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cbFiltroInsumo;
+        private System.Windows.Forms.Button btnFiltrar;
+        private System.Windows.Forms.Button btnRegresar;
     }
 }

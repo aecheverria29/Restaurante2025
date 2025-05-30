@@ -15,7 +15,8 @@ using iText.Layout;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System.Drawing.Drawing2D;
-using SistemaRestaurante.Forms.Modulo_Turnos;              // <- para Document
+using SistemaRestaurante.Forms.Modulo_Turnos;
+using SistemaRestaurante.Forms.Modulo_Inventario;              // <- para Document
 
 namespace SistemaRestaurante.Forms
 {
@@ -139,7 +140,7 @@ namespace SistemaRestaurante.Forms
 
         private void btnInventario_Click(object sender, EventArgs e)
         {
-
+            AbrirFormularioEnPanel(new InventarioForm(this));
         }
 
         private void btnFacturacion_Click_1(object sender, EventArgs e)
