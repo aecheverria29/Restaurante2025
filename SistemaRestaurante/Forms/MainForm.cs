@@ -16,6 +16,8 @@ using MaterialSkin;
 using MaterialSkin.Controls;
 using System.Drawing.Drawing2D;
 using SistemaRestaurante.Forms.Modulo_Turnos;
+using SistemaRestaurante.Forms.Modulo_Inventario;
+using Image = System.Drawing.Image;
 
 namespace SistemaRestaurante.Forms
 {
@@ -24,6 +26,10 @@ namespace SistemaRestaurante.Forms
         public MainForm()
         {
             InitializeComponent();
+            //pictureBox1.Image = Image.FromFile("Resources/logo.png");
+
+            // Establecer tamaño al área de trabajo (pantalla sin la barra de tareas)
+            this.Bounds = Screen.PrimaryScreen.WorkingArea;
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
@@ -38,6 +44,9 @@ namespace SistemaRestaurante.Forms
         private void MainForm_Load(object sender, EventArgs e)
         {
             // 1. Imagen redonda centrada con borde violeta
+            pictureBox1.Image = Image.FromFile("Images/logo_ornitorrinco_82x61.png");
+
+
             GraphicsPath path = new GraphicsPath();
             path.AddEllipse(0, 0, pictureBox1.Width, pictureBox1.Height);
             pictureBox1.Region = new Region(path);
@@ -53,6 +62,7 @@ namespace SistemaRestaurante.Forms
                     pe.Graphics.DrawEllipse(pen, 2, 2, pictureBox1.Width - 4, pictureBox1.Height - 4);
                 }
             };
+
 
             // 2. Estilo y posición de los botones del menú
             List<MaterialButton> botonesMenu = new List<MaterialButton>
@@ -169,7 +179,7 @@ namespace SistemaRestaurante.Forms
         private void btnMenu1_Click(object sender, EventArgs e) => AbrirFormularioEnPanel(new MenuForm());
         private void btnPlatos_Click_1(object sender, EventArgs e) => AbrirFormularioEnPanel(new PlatosForm());
         private void btnPedidos_Click_1(object sender, EventArgs e) => AbrirFormularioEnPanel(new PedidosForm(this));
-        private void btnInventario_Click(object sender, EventArgs e) => AbrirFormularioEnPanel(new Modulo_Inventario.InventarioForm(this));
+        private void btnInventario_Click(object sender, EventArgs e) => AbrirFormularioEnPanel(new InventarioForm(this));
         private void btnFacturacion_Click_1(object sender, EventArgs e) => AbrirFormularioEnPanel(new FacturacionForm(this));
         private void btnTurnos_Click_1(object sender, EventArgs e) => AbrirFormularioEnPanel(new FrmTurnosMain(this));
         private void btnCerrarSesion_Click_1(object sender, EventArgs e) => this.Close();
@@ -186,5 +196,7 @@ namespace SistemaRestaurante.Forms
                 e.Graphics.FillRectangle(brush, panelMenu.ClientRectangle);
             }
         }
+
+        private void btnMesas_Click(object sender, EventArgs e) => AbrirFormularioEnPanel(new MesasForm(this));
     }
 }

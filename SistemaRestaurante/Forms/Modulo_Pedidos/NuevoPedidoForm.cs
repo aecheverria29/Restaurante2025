@@ -14,16 +14,21 @@ namespace SistemaRestaurante.Forms
     {
         private MainForm main;
         List<PlatoPedidoTemp> listaDetalle = new List<PlatoPedidoTemp>();
+        private int? mesaPreseleccionada = null;
 
-        public NuevoPedidoForm(MainForm mainForm)
+
+        public NuevoPedidoForm(MainForm mainForm) 
         {
             InitializeComponent();
             cbTipoConsumo.SelectedIndexChanged += cbTipoConsumo_SelectedIndexChanged;
             this.Load += NuevoPedidoForm_Load;
             main = mainForm;
-
-            // Aplica el diseño al cargar
             this.Load += (s, e) => EstilizarFormulario();
+            
+        }
+        public NuevoPedidoForm(MainForm mainForm, int idMesa) : this(mainForm)
+        {
+            mesaPreseleccionada = idMesa;
         }
 
         private void EstilizarFormulario()
@@ -201,6 +206,12 @@ namespace SistemaRestaurante.Forms
         private void NuevoPedidoForm_Load(object sender, EventArgs e)
         {
             CargarCombos();
+            if (mesaPreseleccionada.HasValue)
+            {
+                cbTipoConsumo.SelectedValue = 1; // Asigna consumo "Cliente"
+                cbMesa.SelectedValue = mesaPreseleccionada.Value;
+                cbMesa.Enabled = false; // Evita cambiarla
+            }
             txtJustificacion.Enabled = false;
         }
         private void btnAgregarPlato_Click(object sender, EventArgs e)

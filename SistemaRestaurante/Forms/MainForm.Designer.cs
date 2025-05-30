@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.panelContenido = new System.Windows.Forms.Panel();
             this.btnUsuarios = new MaterialSkin.Controls.MaterialButton();
             this.btnMenu = new MaterialSkin.Controls.MaterialButton();
@@ -39,9 +38,9 @@
             this.btnTurnos = new MaterialSkin.Controls.MaterialButton();
             this.btnCerrarSesion = new MaterialSkin.Controls.MaterialButton();
             this.panelMenu = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnMesas = new MaterialSkin.Controls.MaterialButton();
             this.btnReportes = new MaterialSkin.Controls.MaterialButton();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -49,10 +48,9 @@
             // panelContenido
             // 
             this.panelContenido.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContenido.Location = new System.Drawing.Point(366, 64);
-            this.panelContenido.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelContenido.Location = new System.Drawing.Point(274, 52);
             this.panelContenido.Name = "panelContenido";
-            this.panelContenido.Size = new System.Drawing.Size(710, 600);
+            this.panelContenido.Size = new System.Drawing.Size(533, 487);
             this.panelContenido.TabIndex = 1;
             this.panelContenido.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContenido_Paint);
             // 
@@ -63,8 +61,8 @@
             this.btnUsuarios.Depth = 0;
             this.btnUsuarios.HighEmphasis = true;
             this.btnUsuarios.Icon = null;
-            this.btnUsuarios.Location = new System.Drawing.Point(51, 82);
-            this.btnUsuarios.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnUsuarios.Location = new System.Drawing.Point(38, 67);
+            this.btnUsuarios.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnUsuarios.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnUsuarios.Name = "btnUsuarios";
             this.btnUsuarios.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -83,8 +81,8 @@
             this.btnMenu.Depth = 0;
             this.btnMenu.HighEmphasis = true;
             this.btnMenu.Icon = null;
-            this.btnMenu.Location = new System.Drawing.Point(51, 130);
-            this.btnMenu.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnMenu.Location = new System.Drawing.Point(38, 106);
+            this.btnMenu.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnMenu.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnMenu.Name = "btnMenu";
             this.btnMenu.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -103,8 +101,8 @@
             this.btnPlatos.Depth = 0;
             this.btnPlatos.HighEmphasis = true;
             this.btnPlatos.Icon = null;
-            this.btnPlatos.Location = new System.Drawing.Point(55, 192);
-            this.btnPlatos.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnPlatos.Location = new System.Drawing.Point(41, 156);
+            this.btnPlatos.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnPlatos.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnPlatos.Name = "btnPlatos";
             this.btnPlatos.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -123,8 +121,8 @@
             this.btnPedidos.Depth = 0;
             this.btnPedidos.HighEmphasis = true;
             this.btnPedidos.Icon = null;
-            this.btnPedidos.Location = new System.Drawing.Point(51, 240);
-            this.btnPedidos.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnPedidos.Location = new System.Drawing.Point(38, 195);
+            this.btnPedidos.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnPedidos.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnPedidos.Name = "btnPedidos";
             this.btnPedidos.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -143,8 +141,8 @@
             this.btnInventario.Depth = 0;
             this.btnInventario.HighEmphasis = true;
             this.btnInventario.Icon = null;
-            this.btnInventario.Location = new System.Drawing.Point(51, 288);
-            this.btnInventario.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnInventario.Location = new System.Drawing.Point(38, 234);
+            this.btnInventario.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnInventario.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnInventario.Name = "btnInventario";
             this.btnInventario.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -163,8 +161,8 @@
             this.btnFacturacion.Depth = 0;
             this.btnFacturacion.HighEmphasis = true;
             this.btnFacturacion.Icon = null;
-            this.btnFacturacion.Location = new System.Drawing.Point(51, 336);
-            this.btnFacturacion.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnFacturacion.Location = new System.Drawing.Point(38, 273);
+            this.btnFacturacion.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnFacturacion.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnFacturacion.Name = "btnFacturacion";
             this.btnFacturacion.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -183,8 +181,8 @@
             this.btnTurnos.Depth = 0;
             this.btnTurnos.HighEmphasis = true;
             this.btnTurnos.Icon = null;
-            this.btnTurnos.Location = new System.Drawing.Point(51, 384);
-            this.btnTurnos.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnTurnos.Location = new System.Drawing.Point(38, 312);
+            this.btnTurnos.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnTurnos.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnTurnos.Name = "btnTurnos";
             this.btnTurnos.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -203,8 +201,8 @@
             this.btnCerrarSesion.Depth = 0;
             this.btnCerrarSesion.HighEmphasis = true;
             this.btnCerrarSesion.Icon = null;
-            this.btnCerrarSesion.Location = new System.Drawing.Point(51, 528);
-            this.btnCerrarSesion.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCerrarSesion.Location = new System.Drawing.Point(38, 429);
+            this.btnCerrarSesion.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnCerrarSesion.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCerrarSesion.Name = "btnCerrarSesion";
             this.btnCerrarSesion.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -231,22 +229,13 @@
             this.panelMenu.Controls.Add(this.btnMenu);
             this.panelMenu.Controls.Add(this.btnUsuarios);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelMenu.Location = new System.Drawing.Point(3, 64);
-            this.panelMenu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelMenu.Location = new System.Drawing.Point(2, 52);
+            this.panelMenu.Margin = new System.Windows.Forms.Padding(0);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(363, 600);
+            this.panelMenu.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.panelMenu.Size = new System.Drawing.Size(272, 487);
             this.panelMenu.TabIndex = 0;
             this.panelMenu.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMenu_Paint);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(110, 2);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(109, 75);
-            this.pictureBox1.TabIndex = 20;
-            this.pictureBox1.TabStop = false;
             // 
             // btnMesas
             // 
@@ -255,8 +244,8 @@
             this.btnMesas.Depth = 0;
             this.btnMesas.HighEmphasis = true;
             this.btnMesas.Icon = null;
-            this.btnMesas.Location = new System.Drawing.Point(51, 432);
-            this.btnMesas.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnMesas.Location = new System.Drawing.Point(38, 351);
+            this.btnMesas.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnMesas.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnMesas.Name = "btnMesas";
             this.btnMesas.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -266,6 +255,7 @@
             this.btnMesas.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnMesas.UseAccentColor = false;
             this.btnMesas.UseVisualStyleBackColor = true;
+            this.btnMesas.Click += new System.EventHandler(this.btnMesas_Click);
             // 
             // btnReportes
             // 
@@ -274,8 +264,8 @@
             this.btnReportes.Depth = 0;
             this.btnReportes.HighEmphasis = true;
             this.btnReportes.Icon = null;
-            this.btnReportes.Location = new System.Drawing.Point(51, 480);
-            this.btnReportes.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnReportes.Location = new System.Drawing.Point(38, 390);
+            this.btnReportes.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnReportes.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnReportes.Name = "btnReportes";
             this.btnReportes.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -286,17 +276,25 @@
             this.btnReportes.UseAccentColor = false;
             this.btnReportes.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.InitialImage = null;
+            this.pictureBox1.Location = new System.Drawing.Point(82, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(82, 61);
+            this.pictureBox1.TabIndex = 20;
+            this.pictureBox1.TabStop = false;
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1079, 666);
+            this.ClientSize = new System.Drawing.Size(809, 541);
             this.Controls.Add(this.panelContenido);
             this.Controls.Add(this.panelMenu);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MainForm";
-            this.Padding = new System.Windows.Forms.Padding(3, 64, 3, 2);
-            this.Text = "MainForm";
+            this.Padding = new System.Windows.Forms.Padding(2, 52, 2, 2);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.panelMenu.ResumeLayout(false);
             this.panelMenu.PerformLayout();

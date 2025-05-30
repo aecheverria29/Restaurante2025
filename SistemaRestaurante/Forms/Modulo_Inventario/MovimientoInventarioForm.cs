@@ -1,13 +1,8 @@
 ﻿using SistemaRestaurante.Services;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SistemaRestaurante.Forms.Modulo_Inventario
@@ -20,7 +15,9 @@ namespace SistemaRestaurante.Forms.Modulo_Inventario
             InitializeComponent();
             this.Load += MovimientoInventarioForm_Load;
             btnRegistrar.Click += btnRegistrar_Click;
-            this.main=main;
+            btnFiltrar.Click += btnFiltrar_Click;
+            btnRegresar.Click += btnRegresar_Click;
+            this.main = main;
         }
 
         private void MovimientoInventarioForm_Load(object sender, EventArgs e)
@@ -32,12 +29,125 @@ namespace SistemaRestaurante.Forms.Modulo_Inventario
             rbEntrada.Checked = true;
             dgvMovimientos.AllowUserToAddRows = false;
             dgvMovimientos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            // --- ESTILOS MODERNOS ---
+            this.BackColor = Color.FromArgb(246, 247, 251);
+
+            // Labels principales
+            label1.Text = "Seleccionar insumo";
+            label1.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
+            label1.ForeColor = Color.FromArgb(56, 65, 120);
+
+            label2.Text = "Cantidad que entra o sale";
+            label2.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
+            label2.ForeColor = Color.FromArgb(56, 65, 120);
+
+            label3.Text = "Motivo del movimiento";
+            label3.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
+            label3.ForeColor = Color.FromArgb(56, 65, 120);
+
+            label4.Text = "Historial de movimientos por insumo o fecha";
+            label4.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
+            label4.ForeColor = Color.FromArgb(56, 65, 120);
+
+            // ComboBox y entradas
+            cbInsumo.Font = new Font("Segoe UI", 12F);
+            cbInsumo.BackColor = Color.White;
+
+            cbFiltroInsumo.Font = new Font("Segoe UI", 11F);
+            cbFiltroInsumo.BackColor = Color.White;
+
+            txtCantidad.Font = new Font("Segoe UI", 12F);
+            txtCantidad.BackColor = Color.White;
+
+            txtJustificacion.Font = new Font("Segoe UI", 12F);
+            txtJustificacion.BackColor = Color.White;
+
+            // RadioButtons
+            rbEntrada.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            rbEntrada.ForeColor = Color.FromArgb(40, 167, 69);
+
+            rbSalida.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            rbSalida.ForeColor = Color.FromArgb(231, 76, 60);
+
+            // Botón registrar
+            btnRegistrar.Text = "Guardar movimiento";
+            btnRegistrar.Width = 180;
+            btnRegistrar.Height = 38;
+            btnRegistrar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnRegistrar.BackColor = Color.FromArgb(52, 152, 219);
+            btnRegistrar.ForeColor = Color.White;
+            btnRegistrar.FlatStyle = FlatStyle.Flat;
+            btnRegistrar.FlatAppearance.BorderSize = 0;
+            btnRegistrar.Cursor = Cursors.Hand;
+            btnRegistrar.TabStop = false;
+            btnRegistrar.MouseEnter += (s, ev) => btnRegistrar.BackColor = ControlPaint.Dark(btnRegistrar.BackColor);
+            btnRegistrar.MouseLeave += (s, ev) => btnRegistrar.BackColor = Color.FromArgb(52, 152, 219);
+
+            // Botón Filtrar
+            btnFiltrar.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnFiltrar.BackColor = Color.FromArgb(39, 174, 96);
+            btnFiltrar.ForeColor = Color.White;
+            btnFiltrar.FlatStyle = FlatStyle.Flat;
+            btnFiltrar.FlatAppearance.BorderSize = 0;
+            btnFiltrar.Cursor = Cursors.Hand;
+            btnFiltrar.TabStop = false;
+            btnFiltrar.Width = 100;
+            btnFiltrar.Height = 32;
+            btnFiltrar.MouseEnter += (s, ev) => btnFiltrar.BackColor = ControlPaint.Dark(btnFiltrar.BackColor);
+            btnFiltrar.MouseLeave += (s, ev) => btnFiltrar.BackColor = Color.FromArgb(39, 174, 96);
+
+            // Botón regresar
+            btnRegresar.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnRegresar.BackColor = Color.FromArgb(155, 89, 182);
+            btnRegresar.ForeColor = Color.White;
+            btnRegresar.FlatStyle = FlatStyle.Flat;
+            btnRegresar.FlatAppearance.BorderSize = 0;
+            btnRegresar.Cursor = Cursors.Hand;
+            btnRegresar.TabStop = false;
+            btnRegresar.Width = 100;
+            btnRegresar.Height = 32;
+            btnRegresar.MouseEnter += (s, ev) => btnRegresar.BackColor = ControlPaint.Dark(btnRegresar.BackColor);
+            btnRegresar.MouseLeave += (s, ev) => btnRegresar.BackColor = Color.FromArgb(155, 89, 182);
+
+            // DataGridView
+            dgvMovimientos.Font = new Font("Segoe UI", 11F);
+            dgvMovimientos.BackgroundColor = Color.White;
+            dgvMovimientos.DefaultCellStyle.BackColor = Color.White;
+            dgvMovimientos.DefaultCellStyle.SelectionBackColor = Color.FromArgb(180, 220, 250);
+            dgvMovimientos.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+
+            // --- Posicionamiento visual (solo para vista, no obligatorio si lo tienes en el diseñador) ---
+            label1.Top = 30; label1.Left = 32;
+            cbInsumo.Top = label1.Top - 3; cbInsumo.Left = 210;
+
+            rbEntrada.Top = label1.Top; rbEntrada.Left = cbInsumo.Right + 40;
+            rbSalida.Top = rbEntrada.Top; rbSalida.Left = rbEntrada.Right + 60;
+
+            label2.Top = cbInsumo.Bottom + 24; label2.Left = 32;
+            txtCantidad.Top = label2.Top - 2; txtCantidad.Left = 270;
+
+            label3.Top = label2.Top; label3.Left = txtCantidad.Right + 50;
+            txtJustificacion.Top = label3.Top - 2; txtJustificacion.Left = label3.Right + 8;
+
+            label4.Top = txtCantidad.Bottom + 30; label4.Left = 32;
+
+            dgvMovimientos.Top = label4.Bottom + 6; dgvMovimientos.Left = 32;
+            dgvMovimientos.Width = 450; dgvMovimientos.Height = 180;
+
+            btnRegistrar.Top = dgvMovimientos.Top + 32; btnRegistrar.Left = dgvMovimientos.Right + 30;
+
+            cbFiltroInsumo.Top = dgvMovimientos.Bottom + 20; cbFiltroInsumo.Left = 32;
+            btnFiltrar.Top = cbFiltroInsumo.Top; btnFiltrar.Left = cbFiltroInsumo.Right + 20;
+
+            btnRegresar.Top = cbFiltroInsumo.Top; btnRegresar.Left = this.ClientSize.Width - btnRegresar.Width - 20;
         }
+
         private void CargarInsumos()
         {
-            using(SqlConnection conn = DBConnection.GetConnection())
+            using (SqlConnection conn = DBConnection.GetConnection())
             {
-                SqlCommand cmd = new SqlCommand("SELECT IdInsumo, Nombre FROM Insumos",conn);
+                SqlCommand cmd = new SqlCommand("SELECT IdInsumo, Nombre FROM Insumos", conn);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -46,6 +156,7 @@ namespace SistemaRestaurante.Forms.Modulo_Inventario
                 cbInsumo.ValueMember = "IdInsumo";
             }
         }
+
         private void CargarMovimientos()
         {
             using (SqlConnection conn = DBConnection.GetConnection())
@@ -69,7 +180,6 @@ namespace SistemaRestaurante.Forms.Modulo_Inventario
             }
         }
 
-
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
             if (cbInsumo.SelectedValue == null || string.IsNullOrWhiteSpace(txtCantidad.Text))
@@ -79,7 +189,7 @@ namespace SistemaRestaurante.Forms.Modulo_Inventario
             }
 
             decimal cantidad;
-            if(!decimal.TryParse(txtCantidad.Text, out cantidad) || cantidad <= 0)
+            if (!decimal.TryParse(txtCantidad.Text, out cantidad) || cantidad <= 0)
             {
                 MessageBox.Show("Cantidad no valida");
                 return;
