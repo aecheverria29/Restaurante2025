@@ -34,46 +34,52 @@
             this.txtContrasena = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.lblTitulo = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblUsuario
             // 
             this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Location = new System.Drawing.Point(53, 38);
+            this.lblUsuario.Location = new System.Drawing.Point(71, 47);
+            this.lblUsuario.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(46, 13);
+            this.lblUsuario.Size = new System.Drawing.Size(57, 16);
             this.lblUsuario.TabIndex = 0;
             this.lblUsuario.Text = "Usuario:";
             // 
             // txtUsuario
             // 
-            this.txtUsuario.Location = new System.Drawing.Point(121, 38);
+            this.txtUsuario.Location = new System.Drawing.Point(161, 47);
+            this.txtUsuario.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(100, 20);
+            this.txtUsuario.Size = new System.Drawing.Size(132, 22);
             this.txtUsuario.TabIndex = 1;
             // 
             // lblContrasena
             // 
             this.lblContrasena.AutoSize = true;
-            this.lblContrasena.Location = new System.Drawing.Point(53, 77);
+            this.lblContrasena.Location = new System.Drawing.Point(71, 95);
+            this.lblContrasena.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblContrasena.Name = "lblContrasena";
-            this.lblContrasena.Size = new System.Drawing.Size(64, 13);
+            this.lblContrasena.Size = new System.Drawing.Size(79, 16);
             this.lblContrasena.TabIndex = 2;
             this.lblContrasena.Text = "Contrasena:";
             // 
             // txtContrasena
             // 
-            this.txtContrasena.Location = new System.Drawing.Point(123, 77);
+            this.txtContrasena.Location = new System.Drawing.Point(164, 95);
+            this.txtContrasena.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtContrasena.Name = "txtContrasena";
-            this.txtContrasena.Size = new System.Drawing.Size(100, 20);
+            this.txtContrasena.Size = new System.Drawing.Size(132, 22);
             this.txtContrasena.TabIndex = 3;
             this.txtContrasena.UseSystemPasswordChar = true;
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(119, 117);
+            this.btnLogin.Location = new System.Drawing.Point(159, 144);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(102, 23);
+            this.btnLogin.Size = new System.Drawing.Size(136, 28);
             this.btnLogin.TabIndex = 4;
             this.btnLogin.Text = "Iniciar Sesion";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -81,25 +87,37 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(123, 147);
+            this.btnSalir.Location = new System.Drawing.Point(164, 181);
+            this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(75, 23);
+            this.btnSalir.Size = new System.Drawing.Size(100, 28);
             this.btnSalir.TabIndex = 5;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // lblTitulo
+            // 
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Location = new System.Drawing.Point(336, 24);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(44, 16);
+            this.lblTitulo.TabIndex = 6;
+            this.lblTitulo.Text = "label1";
+            // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtContrasena);
             this.Controls.Add(this.lblContrasena);
             this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.lblUsuario);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "LoginForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.LoginForm_Load);
@@ -116,6 +134,7 @@
         private System.Windows.Forms.TextBox txtContrasena;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.Label lblTitulo;
     }
 }
 

@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.cbRoles = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblRol = new System.Windows.Forms.Label();
             this.txtContrasena = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblContrasena = new System.Windows.Forms.Label();
             this.txtUsuario = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblUsuario = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblNombre = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -44,84 +44,94 @@
             // cbRoles
             // 
             this.cbRoles.FormattingEnabled = true;
-            this.cbRoles.Location = new System.Drawing.Point(153, 170);
+            this.cbRoles.Location = new System.Drawing.Point(204, 209);
+            this.cbRoles.Margin = new System.Windows.Forms.Padding(4);
             this.cbRoles.Name = "cbRoles";
-            this.cbRoles.Size = new System.Drawing.Size(121, 21);
+            this.cbRoles.Size = new System.Drawing.Size(160, 24);
             this.cbRoles.TabIndex = 15;
             // 
-            // label4
+            // lblRol
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(124, 173);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(23, 13);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "Rol";
+            this.lblRol.AutoSize = true;
+            this.lblRol.Location = new System.Drawing.Point(165, 213);
+            this.lblRol.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblRol.Name = "lblRol";
+            this.lblRol.Size = new System.Drawing.Size(28, 16);
+            this.lblRol.TabIndex = 14;
+            this.lblRol.Text = "Rol";
             // 
             // txtContrasena
             // 
-            this.txtContrasena.Location = new System.Drawing.Point(153, 139);
+            this.txtContrasena.Location = new System.Drawing.Point(204, 171);
+            this.txtContrasena.Margin = new System.Windows.Forms.Padding(4);
             this.txtContrasena.Name = "txtContrasena";
-            this.txtContrasena.Size = new System.Drawing.Size(121, 20);
+            this.txtContrasena.Size = new System.Drawing.Size(160, 22);
             this.txtContrasena.TabIndex = 13;
             this.txtContrasena.UseSystemPasswordChar = true;
             // 
-            // label3
+            // lblContrasena
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(86, 146);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 13);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Contrasena";
+            this.lblContrasena.AutoSize = true;
+            this.lblContrasena.Location = new System.Drawing.Point(115, 180);
+            this.lblContrasena.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblContrasena.Name = "lblContrasena";
+            this.lblContrasena.Size = new System.Drawing.Size(76, 16);
+            this.lblContrasena.TabIndex = 12;
+            this.lblContrasena.Text = "Contrasena";
             // 
             // txtUsuario
             // 
-            this.txtUsuario.Location = new System.Drawing.Point(153, 110);
+            this.txtUsuario.Location = new System.Drawing.Point(204, 135);
+            this.txtUsuario.Margin = new System.Windows.Forms.Padding(4);
             this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(121, 20);
+            this.txtUsuario.Size = new System.Drawing.Size(160, 22);
             this.txtUsuario.TabIndex = 11;
             // 
-            // label2
+            // lblUsuario
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(104, 113);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 13);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Usuario";
+            this.lblUsuario.AutoSize = true;
+            this.lblUsuario.Location = new System.Drawing.Point(139, 139);
+            this.lblUsuario.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblUsuario.Name = "lblUsuario";
+            this.lblUsuario.Size = new System.Drawing.Size(54, 16);
+            this.lblUsuario.TabIndex = 10;
+            this.lblUsuario.Text = "Usuario";
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(153, 70);
+            this.txtNombre.Location = new System.Drawing.Point(204, 86);
+            this.txtNombre.Margin = new System.Windows.Forms.Padding(4);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(121, 20);
+            this.txtNombre.Size = new System.Drawing.Size(160, 22);
             this.txtNombre.TabIndex = 9;
             // 
-            // label1
+            // lblNombre
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(103, 73);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Nombre";
+            this.lblNombre.AutoSize = true;
+            this.lblNombre.Location = new System.Drawing.Point(137, 90);
+            this.lblNombre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblNombre.Name = "lblNombre";
+            this.lblNombre.Size = new System.Drawing.Size(56, 16);
+            this.lblNombre.TabIndex = 8;
+            this.lblNombre.Text = "Nombre";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(66, 29);
+            this.label5.Location = new System.Drawing.Point(88, 36);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(255, 24);
+            this.label5.Size = new System.Drawing.Size(328, 29);
             this.label5.TabIndex = 16;
             this.label5.Text = "Ingrese los datos del usuario:";
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(170, 209);
+            this.btnAgregar.Location = new System.Drawing.Point(227, 257);
+            this.btnAgregar.Margin = new System.Windows.Forms.Padding(4);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregar.Size = new System.Drawing.Size(100, 28);
             this.btnAgregar.TabIndex = 17;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
@@ -129,9 +139,10 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(170, 239);
+            this.btnCancelar.Location = new System.Drawing.Point(227, 294);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.Size = new System.Drawing.Size(100, 28);
             this.btnCancelar.TabIndex = 18;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -139,21 +150,23 @@
             // 
             // AgregarUsuarioForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(414, 408);
+            this.ClientSize = new System.Drawing.Size(763, 502);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.cbRoles);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblRol);
             this.Controls.Add(this.txtContrasena);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblContrasena);
             this.Controls.Add(this.txtUsuario);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblUsuario);
             this.Controls.Add(this.txtNombre);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblNombre);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AgregarUsuarioForm";
+            this.Padding = new System.Windows.Forms.Padding(4, 79, 4, 4);
             this.Text = "AgregarUsuarioForm";
             this.Load += new System.EventHandler(this.AgregarUsuarioForm_Load);
             this.ResumeLayout(false);
@@ -164,13 +177,13 @@
         #endregion
 
         private System.Windows.Forms.ComboBox cbRoles;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblRol;
         private System.Windows.Forms.TextBox txtContrasena;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblContrasena;
         private System.Windows.Forms.TextBox txtUsuario;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnCancelar;

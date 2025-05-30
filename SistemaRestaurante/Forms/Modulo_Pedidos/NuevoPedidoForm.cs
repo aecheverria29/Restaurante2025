@@ -1,13 +1,10 @@
 ﻿using SistemaRestaurante.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SistemaRestaurante.Models;
 
@@ -17,16 +14,131 @@ namespace SistemaRestaurante.Forms
     {
         private MainForm main;
         List<PlatoPedidoTemp> listaDetalle = new List<PlatoPedidoTemp>();
+
         public NuevoPedidoForm(MainForm mainForm)
         {
             InitializeComponent();
             cbTipoConsumo.SelectedIndexChanged += cbTipoConsumo_SelectedIndexChanged;
             this.Load += NuevoPedidoForm_Load;
-            main=mainForm;
+            main = mainForm;
+
+            // Aplica el diseño al cargar
+            this.Load += (s, e) => EstilizarFormulario();
         }
+
+        private void EstilizarFormulario()
+        {
+            // Fondo del form
+            this.BackColor = Color.FromArgb(247, 249, 252);
+
+            // Título grande y centrado
+            label1.Text = "Nuevo Pedido";
+            label1.Font = new Font("Segoe UI", 22, FontStyle.Bold);
+            label1.ForeColor = Color.FromArgb(60, 70, 207);
+            label1.AutoSize = true;
+            label1.Left = (this.ClientSize.Width - label1.Width) / 2;
+            label1.Top = 28;
+
+            // Estilo para los labels
+            Font labelFont = new Font("Segoe UI", 11F, FontStyle.Bold);
+            Color labelColor = Color.FromArgb(40, 40, 40);
+            Label[] labels = { label2, label3, label7, label4, label5, label6 };
+            foreach (var lbl in labels)
+            {
+                lbl.Font = labelFont;
+                lbl.ForeColor = labelColor;
+            }
+
+            // Ajustar posiciones (puedes ajustar los valores si lo deseas más pegado o más separado)
+            int leftLabels = 65, topBase = 90, spaceY = 46, anchoLabel = 140, anchoInput = 220, anchoCombo = 210;
+            int currTop = topBase;
+
+            // Tipo de Consumo
+            label3.Left = leftLabels; label3.Top = currTop;
+            cbTipoConsumo.Left = label3.Right + 12; cbTipoConsumo.Top = label3.Top - 2;
+            cbTipoConsumo.Width = anchoCombo; cbTipoConsumo.Font = new Font("Segoe UI", 11F);
+            cbTipoConsumo.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            // Mesa
+            currTop += spaceY;
+            label2.Left = leftLabels; label2.Top = currTop;
+            cbMesa.Left = label2.Right + 12; cbMesa.Top = label2.Top - 2;
+            cbMesa.Width = anchoCombo; cbMesa.Font = new Font("Segoe UI", 11F);
+
+            // Justificación
+            currTop += spaceY;
+            label7.Left = leftLabels; label7.Top = currTop;
+            txtJustificacion.Left = label7.Right + 12; txtJustificacion.Top = label7.Top - 2;
+            txtJustificacion.Width = anchoInput; txtJustificacion.Font = new Font("Segoe UI", 11F);
+
+            // Plato
+            currTop += spaceY;
+            label4.Left = leftLabels; label4.Top = currTop;
+            cbPlato.Left = label4.Right + 12; cbPlato.Top = label4.Top - 2;
+            cbPlato.Width = anchoCombo; cbPlato.Font = new Font("Segoe UI", 11F);
+
+            // Botón Agregar Plato a la derecha del combo
+            btnAgregarPlato.Left = cbPlato.Right + 12; btnAgregarPlato.Top = cbPlato.Top - 2;
+            btnAgregarPlato.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnAgregarPlato.BackColor = Color.SeaGreen;
+            btnAgregarPlato.ForeColor = Color.White;
+            btnAgregarPlato.FlatStyle = FlatStyle.Flat;
+            btnAgregarPlato.FlatAppearance.BorderSize = 0;
+            btnAgregarPlato.Width = 130;
+            btnAgregarPlato.Height = 35;
+            btnAgregarPlato.Text = "Agregar plato";
+            btnAgregarPlato.Cursor = Cursors.Hand;
+
+            // Cantidad
+            currTop += spaceY;
+            label5.Left = leftLabels; label5.Top = currTop;
+            txtCantidad.Left = label5.Right + 12; txtCantidad.Top = label5.Top - 2;
+            txtCantidad.Width = 90; txtCantidad.Font = new Font("Segoe UI", 11F);
+
+            // Comentario
+            currTop += spaceY;
+            label6.Left = leftLabels; label6.Top = currTop;
+            txtComentario.Left = label6.Right + 12; txtComentario.Top = label6.Top - 2;
+            txtComentario.Width = 410; txtComentario.Font = new Font("Segoe UI", 11F);
+
+            // DataGridView
+            dgvDetalleTemp.Top = label6.Top + 44;
+            dgvDetalleTemp.Left = leftLabels;
+            dgvDetalleTemp.Width = 660;
+            dgvDetalleTemp.Height = 170;
+            dgvDetalleTemp.BackgroundColor = Color.White;
+            dgvDetalleTemp.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
+            dgvDetalleTemp.DefaultCellStyle.BackColor = Color.White;
+            dgvDetalleTemp.DefaultCellStyle.SelectionBackColor = Color.FromArgb(215, 230, 255);
+            dgvDetalleTemp.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            dgvDetalleTemp.BorderStyle = BorderStyle.FixedSingle;
+
+            // Botones guardar/cancelar
+            int baseBtnsTop = dgvDetalleTemp.Bottom + 24;
+            btnGuardarPedido.Left = label6.Left + 70; btnGuardarPedido.Top = baseBtnsTop;
+            btnGuardarPedido.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnGuardarPedido.Width = 140; btnGuardarPedido.Height = 40;
+            btnGuardarPedido.BackColor = Color.FromArgb(72, 175, 90);
+            btnGuardarPedido.ForeColor = Color.White;
+            btnGuardarPedido.FlatStyle = FlatStyle.Flat;
+            btnGuardarPedido.FlatAppearance.BorderSize = 0;
+            btnGuardarPedido.Text = "Guardar pedido";
+            btnGuardarPedido.Cursor = Cursors.Hand;
+
+            btnCancelar.Left = btnGuardarPedido.Right + 30; btnCancelar.Top = baseBtnsTop;
+            btnCancelar.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnCancelar.Width = 140; btnCancelar.Height = 40;
+            btnCancelar.BackColor = Color.FromArgb(213, 89, 89);
+            btnCancelar.ForeColor = Color.White;
+            btnCancelar.FlatStyle = FlatStyle.Flat;
+            btnCancelar.FlatAppearance.BorderSize = 0;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.Cursor = Cursors.Hand;
+        }
+
         private void CargarCombos()
         {
-            using(SqlConnection conn = DBConnection.GetConnection())
+            using (SqlConnection conn = DBConnection.GetConnection())
             {
                 conn.Open();
 
@@ -57,15 +169,12 @@ namespace SistemaRestaurante.Forms
                 cbPlato.ValueMember = "IdPlato";
             }
         }
-        private void label5_Click(object sender, EventArgs e)
-        {
 
-        }
+        private void label5_Click(object sender, EventArgs e) { }
 
         private void cbTipoConsumo_SelectedIndexChanged(object sender, EventArgs e)
         {
             string tipo = cbTipoConsumo.Text;
-
             if (tipo == "Cliente" || tipo == "Para llevar")
             {
                 txtJustificacion.Text = "";
@@ -78,7 +187,6 @@ namespace SistemaRestaurante.Forms
             if (cbTipoConsumo.SelectedItem is DataRowView tipoRow)
             {
                 int idTipoConsumo = Convert.ToInt32(tipoRow["IdTipoConsumo"]);
-
                 if (idTipoConsumo != 1)
                 {
                     cbMesa.Enabled = false;
@@ -154,7 +262,7 @@ namespace SistemaRestaurante.Forms
             int idTipoConsumo = (int)cbTipoConsumo.SelectedValue;
             int? idMesa = null;
 
-            if (idTipoConsumo == 1) 
+            if (idTipoConsumo == 1)
             {
                 if (cbMesa.SelectedValue == null)
                 {
@@ -169,18 +277,15 @@ namespace SistemaRestaurante.Forms
             using (SqlConnection conn = DBConnection.GetConnection())
             {
                 conn.Open();
-                //Se inicia una transaccion para que el proceso de (pedido + detalles
-                // + mesa) se guarde o se cancele en conjunto
                 SqlTransaction transaccion = conn.BeginTransaction();
 
                 try
                 {
-                    
+
                     SqlCommand cmdInsertPedido = new SqlCommand(@"
                     INSERT INTO Pedidos (Fecha, IdMesa, IdEstadoPedido, IdTipoConsumo, Justificacion)
                     VALUES (GETDATE(), @mesa, 1, @tipo, @justif);
                     SELECT SCOPE_IDENTITY();", conn, transaccion);
-                    //SELECT SCOPE_IDENTITY() me sirve para pedir el ID que genero la consulta, el valor de columna con IDENTITY
 
                     if (idMesa.HasValue)
                         cmdInsertPedido.Parameters.AddWithValue("@mesa", idMesa.Value);
@@ -190,7 +295,6 @@ namespace SistemaRestaurante.Forms
                     cmdInsertPedido.Parameters.AddWithValue("@justif", (object)justificacion ?? DBNull.Value);
 
                     int idPedido = Convert.ToInt32(cmdInsertPedido.ExecuteScalar());
-                    //.ExecuteScalar() Esta funcion de vuelve una cosa, la primera columna de la primera fila del resultado es decir el ID
 
                     foreach (var item in listaDetalle)
                     {
@@ -209,9 +313,9 @@ namespace SistemaRestaurante.Forms
 
                         // DESCONTAR INSUMOS SEGÚN RECETA
                         SqlCommand cmdReceta = new SqlCommand(@"
-    SELECT IdInsumo, CantidadNecesaria
-    FROM Recetas
-    WHERE IdPlato = @plato", conn, transaccion);
+                            SELECT IdInsumo, CantidadNecesaria
+                            FROM Recetas
+                            WHERE IdPlato = @plato", conn, transaccion);
                         cmdReceta.Parameters.AddWithValue("@plato", item.IdPlato);
 
                         SqlDataAdapter da = new SqlDataAdapter(cmdReceta);
@@ -225,8 +329,8 @@ namespace SistemaRestaurante.Forms
                             decimal totalUsado = cantidadPorPlato * item.Cantidad;
 
                             SqlCommand cmdDescontar = new SqlCommand(@"
-        INSERT INTO MovimientoInventario (IdInsumo, Fecha, TipoMovimiento, Cantidad, Justificacion)
-        VALUES (@idInsumo, GETDATE(), 'Salida', @cantidad, @justif)", conn, transaccion);
+                                INSERT INTO MovimientoInventario (IdInsumo, Fecha, TipoMovimiento, Cantidad, Justificacion)
+                                VALUES (@idInsumo, GETDATE(), 'Salida', @cantidad, @justif)", conn, transaccion);
 
                             cmdDescontar.Parameters.AddWithValue("@idInsumo", idInsumo);
                             cmdDescontar.Parameters.AddWithValue("@cantidad", totalUsado);
@@ -234,8 +338,6 @@ namespace SistemaRestaurante.Forms
 
                             cmdDescontar.ExecuteNonQuery();
                         }
-
-
                     }
 
                     if (idMesa.HasValue)
@@ -246,7 +348,6 @@ namespace SistemaRestaurante.Forms
                     }
 
                     transaccion.Commit();
-
                     MessageBox.Show("Pedido registrado exitosamente.");
                     main.CargarFormulario(new PedidosForm(main));
                 }

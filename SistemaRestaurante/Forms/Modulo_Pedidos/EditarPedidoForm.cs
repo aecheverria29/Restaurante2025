@@ -2,13 +2,10 @@
 using SistemaRestaurante.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SistemaRestaurante.Forms
@@ -24,11 +21,98 @@ namespace SistemaRestaurante.Forms
         {
             InitializeComponent();
             idPedido = id;
+            this.main = main;
+
             this.Load += EditarPedidoForm_Load;
             dgvDetalleTemp.ReadOnly = false;
             dgvDetalleTemp.CellEndEdit += dgvDetalleTemp_CellEndEdit;
-            this.main=main;
+
+            // Aplica estilos apenas cargue
+            this.Load += (s, e) => PersonalizarEstilo();
         }
+
+        private void PersonalizarEstilo()
+        {
+            // -------- Fondo general --------
+            this.BackColor = Color.FromArgb(246, 247, 251);
+
+            // -------- Título arriba --------
+            Label lblTitulo = new Label();
+            lblTitulo.Text = "Editar Pedido";
+            lblTitulo.Font = new Font("Segoe UI Semibold", 22F, FontStyle.Bold);
+            lblTitulo.ForeColor = Color.FromArgb(49, 70, 194);
+            lblTitulo.AutoSize = true;
+            lblTitulo.Top = 28;
+            lblTitulo.Left = (this.ClientSize.Width - lblTitulo.Width) / 2;
+            lblTitulo.Anchor = AnchorStyles.Top;
+            this.Controls.Add(lblTitulo);
+
+            // -------- Labels --------
+            Label[] labels = { label2, label3, label7, label4, label5, label6 };
+            foreach (var lbl in labels)
+            {
+                lbl.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+                lbl.ForeColor = Color.FromArgb(65, 68, 108);
+            }
+
+            // -------- Entradas --------
+            Control[] entradas = { cbMesa, cbTipoConsumo, txtJustificacion, cbPlato, txtCantidadEdit, txtComentarioEdit };
+            foreach (var ctrl in entradas)
+            {
+                ctrl.Font = new Font("Segoe UI", 11F);
+                ctrl.Width = 180;
+                ctrl.BackColor = Color.White;
+            }
+
+            // -------- Posiciona labels y cajas --------
+            int leftLbl = 60, leftInput = 180, topIni = 90, gapY = 44;
+            for (int i = 0; i < labels.Length; i++)
+            {
+                labels[i].Top = topIni + i * gapY;
+                labels[i].Left = leftLbl;
+                entradas[i].Top = labels[i].Top - 3;
+                entradas[i].Left = leftInput;
+            }
+
+            // -------- Botones --------
+            Button[] botones = { btnAgregarPlato, btnEliminarPlato, btnCancelarPedido, btnActualizar, btnSalir };
+            Color[] colores = {
+                Color.SeaGreen, Color.IndianRed, Color.Gray, Color.RoyalBlue, Color.DarkSlateBlue
+            };
+
+            int btnWidth = 120, btnHeight = 38, btnGap = 18;
+            int btnsTop = txtComentarioEdit.Bottom + 28;
+            int btnsLeft = leftLbl;
+
+            for (int i = 0; i < botones.Length; i++)
+            {
+                Button btn = botones[i];
+                btn.Width = btnWidth;
+                btn.Height = btnHeight;
+                btn.Top = btnsTop;
+                btn.Left = btnsLeft + i * (btnWidth + btnGap);
+                btn.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
+                btn.BackColor = colores[i];
+                btn.ForeColor = Color.White;
+                btn.FlatStyle = FlatStyle.Flat;
+                btn.FlatAppearance.BorderSize = 0;
+                btn.Cursor = Cursors.Hand;
+            }
+
+            // -------- DataGridView --------
+            dgvDetalleTemp.Top = topIni;
+            dgvDetalleTemp.Left = leftInput + 240;
+            dgvDetalleTemp.Width = 420;
+            dgvDetalleTemp.Height = 270;
+            dgvDetalleTemp.BackgroundColor = Color.White;
+            dgvDetalleTemp.DefaultCellStyle.Font = new Font("Segoe UI", 11);
+            dgvDetalleTemp.DefaultCellStyle.BackColor = Color.White;
+            dgvDetalleTemp.DefaultCellStyle.SelectionBackColor = Color.FromArgb(180, 220, 250);
+            dgvDetalleTemp.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            dgvDetalleTemp.BorderStyle = BorderStyle.FixedSingle;
+        }
+
+        // ---- (toda tu lógica original debajo, SIN CAMBIOS) ----
 
         private void EditarPedidoForm_Load(object sender, EventArgs e)
         {
@@ -43,7 +127,7 @@ namespace SistemaRestaurante.Forms
             {
                 conn.Open();
 
-                // Mesas (puedes mostrarlas todas o bloquear el combo luego)
+                // Mesas
                 SqlCommand cmdMesas = new SqlCommand("SELECT IdMesa, NumeroMesa FROM Mesas", conn);
                 SqlDataAdapter daMesas = new SqlDataAdapter(cmdMesas);
                 DataTable dtMesas = new DataTable();
@@ -61,7 +145,7 @@ namespace SistemaRestaurante.Forms
                 cbTipoConsumo.DisplayMember = "NombreTipo";
                 cbTipoConsumo.ValueMember = "IdTipoConsumo";
 
-                // Platos disponibles para agregar nuevos
+                // Platos
                 SqlCommand cmdPlatos = new SqlCommand("SELECT IdPlato, Nombre, Precio FROM Platos WHERE Disponible = 1", conn);
                 SqlDataAdapter daPlatos = new SqlDataAdapter(cmdPlatos);
                 DataTable dtPlatos = new DataTable();
@@ -72,17 +156,16 @@ namespace SistemaRestaurante.Forms
             }
         }
 
-
         private void CargarDatosPedido()
         {
-            using(SqlConnection conn = DBConnection.GetConnection())
+            using (SqlConnection conn = DBConnection.GetConnection())
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand(@"
-                SELECT IdMesa, IdTipoConsumo, Justificacion, ep.NombreEstado
-                FROM Pedidos p
-                INNER JOIN EstadoPedido ep ON p.IdEstadoPedido = ep.IdEstadoPedido
-                WHERE IdPedido = @id", conn);
+                    SELECT IdMesa, IdTipoConsumo, Justificacion, ep.NombreEstado
+                    FROM Pedidos p
+                    INNER JOIN EstadoPedido ep ON p.IdEstadoPedido = ep.IdEstadoPedido
+                    WHERE IdPedido = @id", conn);
 
                 cmd.Parameters.AddWithValue("@id", idPedido);
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -90,13 +173,11 @@ namespace SistemaRestaurante.Forms
                 if (reader.Read())
                 {
                     if (reader["IdMesa"] != DBNull.Value)
-                    {
                         cbMesa.SelectedValue = Convert.ToInt32(reader["IdMesa"]);
-                    }
                     else
                     {
-                        cbMesa.SelectedIndex = -1; 
-                        cbMesa.Enabled = false;    
+                        cbMesa.SelectedIndex = -1;
+                        cbMesa.Enabled = false;
                     }
                     //cbTipoConsumo.SelectedValue = Convert.ToInt32(reader["IdTipoConsumo"]);
                     estadoPedido = reader["NombreEstado"].ToString();
@@ -108,14 +189,14 @@ namespace SistemaRestaurante.Forms
         private void CargarDetallePedido()
         {
             listaDetalle.Clear();
-            using(SqlConnection con = DBConnection.GetConnection())
+            using (SqlConnection con = DBConnection.GetConnection())
             {
                 con.Open();
                 SqlCommand cmd = new SqlCommand(@"SELECT dp.IdPlato, p.Nombre, dp.Cantidad, dp.PrecioUnitario, dp.Comentarios
                 FROM DetallePedido dp
                 INNER JOIN Platos p ON dp.IdPlato = p.IdPlato
                 WHERE dp.IdPedido = @id", con);
-                cmd.Parameters.AddWithValue("@id",idPedido);
+                cmd.Parameters.AddWithValue("@id", idPedido);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -144,7 +225,7 @@ namespace SistemaRestaurante.Forms
             int idPlato = (int)cbPlato.SelectedValue;
             string nombrePlato = cbPlato.Text;
             int cantidad;
-            if (!int.TryParse(txtCantidadEdit.Text, out cantidad) || cantidad <=0)
+            if (!int.TryParse(txtCantidadEdit.Text, out cantidad) || cantidad <= 0)
             {
                 MessageBox.Show("Cantidad invalida");
                 return;
@@ -153,7 +234,7 @@ namespace SistemaRestaurante.Forms
             string comentario = txtComentarioEdit.Text;
 
             var existente = listaDetalle.FirstOrDefault(p => p.IdPlato == idPlato);
-            if(existente != null)
+            if (existente != null)
             {
                 existente.Cantidad += cantidad;
                 existente.Comentario = " | " + comentario;
@@ -190,17 +271,16 @@ namespace SistemaRestaurante.Forms
 
             if (dgvDetalleTemp.Columns.Contains("Comentario"))
                 dgvDetalleTemp.Columns["Comentario"].ReadOnly = false;
-
         }
 
         private void btnEliminarPlato_Click(object sender, EventArgs e)
         {
-            if(dgvDetalleTemp.CurrentRow != null)
+            if (dgvDetalleTemp.CurrentRow != null)
             {
                 string nombre = dgvDetalleTemp.CurrentRow.Cells["NombrePlato"].Value.ToString();
                 DialogResult r = MessageBox.Show($"¿Eliminar {nombre} del pedido?", "Confirmar", MessageBoxButtons.YesNo);
-            
-                if(r== DialogResult.Yes)
+
+                if (r == DialogResult.Yes)
                 {
                     int idPlato = Convert.ToInt32(dgvDetalleTemp.CurrentRow.Cells["IdPlato"].Value);
                     listaDetalle.RemoveAll(p => p.IdPlato == idPlato);
@@ -226,7 +306,7 @@ namespace SistemaRestaurante.Forms
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            if (estadoPedido == "Entregado" || estadoPedido =="Cancelado")
+            if (estadoPedido == "Entregado" || estadoPedido == "Cancelado")
             {
                 MessageBox.Show("No se puede editar un pedido que ya fue entregado.");
                 return;
@@ -240,53 +320,52 @@ namespace SistemaRestaurante.Forms
             DialogResult resultado = MessageBox.Show("¿Estás seguro de que quieres actualizar el pedido?", "Confirmación", MessageBoxButtons.YesNo);
             if (resultado == DialogResult.Yes)
             {
-               
-            string justificacion = txtJustificacion.Enabled ? txtJustificacion.Text : null;
+                string justificacion = txtJustificacion.Enabled ? txtJustificacion.Text : null;
 
-            using (SqlConnection conn = DBConnection.GetConnection())
-            {
-                conn.Open();
-                SqlTransaction trans = conn.BeginTransaction();
-                try
+                using (SqlConnection conn = DBConnection.GetConnection())
                 {
-                    SqlCommand cmdPedido = new SqlCommand(@"
-                UPDATE Pedidos
-                SET Justificacion = @justificacion
-                WHERE IdPedido = @id", conn, trans);
-
-                    cmdPedido.Parameters.AddWithValue("@justificacion", (object)justificacion ?? DBNull.Value);
-                    cmdPedido.Parameters.AddWithValue("@id", idPedido);
-                    cmdPedido.ExecuteNonQuery();
-
-                    SqlCommand cmdDelete = new SqlCommand("DELETE FROM DetallePedido WHERE IdPedido = @id", conn, trans);
-                    cmdDelete.Parameters.AddWithValue("@id", idPedido);
-                    cmdDelete.ExecuteNonQuery();
-
-                    foreach (var plato in listaDetalle)
+                    conn.Open();
+                    SqlTransaction trans = conn.BeginTransaction();
+                    try
                     {
-                        SqlCommand cmdInsert = new SqlCommand(@"
-                    INSERT INTO DetallePedido (IdPedido, IdPlato, Cantidad, PrecioUnitario, Subtotal, Comentarios)
-                    VALUES (@pedido, @plato, @cant, @precio, @sub, @coment)", conn, trans);
+                        SqlCommand cmdPedido = new SqlCommand(@"
+                            UPDATE Pedidos
+                            SET Justificacion = @justificacion
+                            WHERE IdPedido = @id", conn, trans);
 
-                        cmdInsert.Parameters.AddWithValue("@pedido", idPedido);
-                        cmdInsert.Parameters.AddWithValue("@plato", plato.IdPlato);
-                        cmdInsert.Parameters.AddWithValue("@cant", plato.Cantidad);
-                        cmdInsert.Parameters.AddWithValue("@precio", plato.PrecioUnitario);
-                        cmdInsert.Parameters.AddWithValue("@sub", plato.Subtotal);
-                        cmdInsert.Parameters.AddWithValue("@coment", (object)plato.Comentario ?? DBNull.Value);
-                        cmdInsert.ExecuteNonQuery();
+                        cmdPedido.Parameters.AddWithValue("@justificacion", (object)justificacion ?? DBNull.Value);
+                        cmdPedido.Parameters.AddWithValue("@id", idPedido);
+                        cmdPedido.ExecuteNonQuery();
+
+                        SqlCommand cmdDelete = new SqlCommand("DELETE FROM DetallePedido WHERE IdPedido = @id", conn, trans);
+                        cmdDelete.Parameters.AddWithValue("@id", idPedido);
+                        cmdDelete.ExecuteNonQuery();
+
+                        foreach (var plato in listaDetalle)
+                        {
+                            SqlCommand cmdInsert = new SqlCommand(@"
+                                INSERT INTO DetallePedido (IdPedido, IdPlato, Cantidad, PrecioUnitario, Subtotal, Comentarios)
+                                VALUES (@pedido, @plato, @cant, @precio, @sub, @coment)", conn, trans);
+
+                            cmdInsert.Parameters.AddWithValue("@pedido", idPedido);
+                            cmdInsert.Parameters.AddWithValue("@plato", plato.IdPlato);
+                            cmdInsert.Parameters.AddWithValue("@cant", plato.Cantidad);
+                            cmdInsert.Parameters.AddWithValue("@precio", plato.PrecioUnitario);
+                            cmdInsert.Parameters.AddWithValue("@sub", plato.Subtotal);
+                            cmdInsert.Parameters.AddWithValue("@coment", (object)plato.Comentario ?? DBNull.Value);
+                            cmdInsert.ExecuteNonQuery();
+                        }
+
+                        trans.Commit();
+                        MessageBox.Show("Pedido actualizado correctamente.");
+                        main.CargarFormulario(new PedidosForm(main));
                     }
-
-                    trans.Commit();
-                    MessageBox.Show("Pedido actualizado correctamente.");
-                    main.CargarFormulario(new PedidosForm(main));
+                    catch (Exception ex)
+                    {
+                        trans.Rollback();
+                        MessageBox.Show("Error al guardar los cambios: " + ex.Message);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    trans.Rollback();
-                    MessageBox.Show("Error al guardar los cambios: " + ex.Message);
-                }
-            }
             }
             else
             {
@@ -297,10 +376,10 @@ namespace SistemaRestaurante.Forms
         private void btnCancelarPedido_Click(object sender, EventArgs e)
         {
             DialogResult confirm = MessageBox.Show(
-            "¿Estás seguro de cancelar este pedido?",
-            "Confirmación",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Warning
+                "¿Estás seguro de cancelar este pedido?",
+                "Confirmación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
             );
 
             if (confirm != DialogResult.Yes)
@@ -310,7 +389,6 @@ namespace SistemaRestaurante.Forms
             {
                 conn.Open();
 
-                // Validar estado actual del pedido
                 SqlCommand cmdEstado = new SqlCommand("SELECT IdEstadoPedido FROM Pedidos WHERE IdPedido = @id", conn);
                 cmdEstado.Parameters.AddWithValue("@id", idPedido);
                 int estado = Convert.ToInt32(cmdEstado.ExecuteScalar());
@@ -325,13 +403,11 @@ namespace SistemaRestaurante.Forms
 
                 try
                 {
-                    // 1. Cambiar estado del pedido a Cancelado (IdEstadoPedido = 4)
                     SqlCommand cmdCancelar = new SqlCommand(
                         "UPDATE Pedidos SET IdEstadoPedido = 4 WHERE IdPedido = @id", conn, trans);
                     cmdCancelar.Parameters.AddWithValue("@id", idPedido);
                     cmdCancelar.ExecuteNonQuery();
 
-                    // 2. Cambiar estado de la mesa a Disponible (IdEstadoMesa = 1)
                     SqlCommand cmdMesa = new SqlCommand(
                         "UPDATE Mesas SET IdEstadoMesa = 1 WHERE IdMesa = (SELECT IdMesa FROM Pedidos WHERE IdPedido = @id)", conn, trans);
                     cmdMesa.Parameters.AddWithValue("@id", idPedido);
@@ -348,13 +424,11 @@ namespace SistemaRestaurante.Forms
                 }
             }
             main.CargarFormulario(new PedidosForm(main));
-
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
             main.CargarFormulario(new PedidosForm(main));
         }
-        
     }
 }

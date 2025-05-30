@@ -42,16 +42,18 @@
             // cbEstadoFiltro
             // 
             this.cbEstadoFiltro.FormattingEnabled = true;
-            this.cbEstadoFiltro.Location = new System.Drawing.Point(27, 12);
+            this.cbEstadoFiltro.Location = new System.Drawing.Point(36, 15);
+            this.cbEstadoFiltro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbEstadoFiltro.Name = "cbEstadoFiltro";
-            this.cbEstadoFiltro.Size = new System.Drawing.Size(121, 21);
+            this.cbEstadoFiltro.Size = new System.Drawing.Size(160, 24);
             this.cbEstadoFiltro.TabIndex = 0;
             // 
             // btnFiltrar
             // 
-            this.btnFiltrar.Location = new System.Drawing.Point(154, 12);
+            this.btnFiltrar.Location = new System.Drawing.Point(205, 15);
+            this.btnFiltrar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnFiltrar.Name = "btnFiltrar";
-            this.btnFiltrar.Size = new System.Drawing.Size(75, 23);
+            this.btnFiltrar.Size = new System.Drawing.Size(100, 28);
             this.btnFiltrar.TabIndex = 1;
             this.btnFiltrar.Text = "Filtrar";
             this.btnFiltrar.UseVisualStyleBackColor = true;
@@ -60,10 +62,12 @@
             // dgvPedidos
             // 
             this.dgvPedidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPedidos.Location = new System.Drawing.Point(27, 80);
+            this.dgvPedidos.Location = new System.Drawing.Point(36, 98);
+            this.dgvPedidos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvPedidos.Name = "dgvPedidos";
             this.dgvPedidos.ReadOnly = true;
-            this.dgvPedidos.Size = new System.Drawing.Size(537, 150);
+            this.dgvPedidos.RowHeadersWidth = 51;
+            this.dgvPedidos.Size = new System.Drawing.Size(716, 185);
             this.dgvPedidos.TabIndex = 2;
             this.dgvPedidos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPedidos_CellClick);
             // 
@@ -71,18 +75,21 @@
             // 
             this.dgvDetallePedido.AllowUserToAddRows = false;
             this.dgvDetallePedido.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDetallePedido.Location = new System.Drawing.Point(27, 236);
+            this.dgvDetallePedido.Location = new System.Drawing.Point(36, 290);
+            this.dgvDetallePedido.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvDetallePedido.Name = "dgvDetallePedido";
             this.dgvDetallePedido.ReadOnly = true;
+            this.dgvDetallePedido.RowHeadersWidth = 51;
             this.dgvDetallePedido.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetallePedido.Size = new System.Drawing.Size(698, 150);
+            this.dgvDetallePedido.Size = new System.Drawing.Size(931, 185);
             this.dgvDetallePedido.TabIndex = 3;
             // 
             // btnCambiarEstado
             // 
-            this.btnCambiarEstado.Location = new System.Drawing.Point(570, 80);
+            this.btnCambiarEstado.Location = new System.Drawing.Point(746, 30);
+            this.btnCambiarEstado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCambiarEstado.Name = "btnCambiarEstado";
-            this.btnCambiarEstado.Size = new System.Drawing.Size(93, 23);
+            this.btnCambiarEstado.Size = new System.Drawing.Size(124, 28);
             this.btnCambiarEstado.TabIndex = 4;
             this.btnCambiarEstado.Text = "Cambiar Estado";
             this.btnCambiarEstado.UseVisualStyleBackColor = true;
@@ -90,9 +97,10 @@
             // 
             // btnPedidoNuevo
             // 
-            this.btnPedidoNuevo.Location = new System.Drawing.Point(291, 24);
+            this.btnPedidoNuevo.Location = new System.Drawing.Point(388, 30);
+            this.btnPedidoNuevo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnPedidoNuevo.Name = "btnPedidoNuevo";
-            this.btnPedidoNuevo.Size = new System.Drawing.Size(117, 23);
+            this.btnPedidoNuevo.Size = new System.Drawing.Size(156, 28);
             this.btnPedidoNuevo.TabIndex = 5;
             this.btnPedidoNuevo.Text = "Pedido Nuevo";
             this.btnPedidoNuevo.UseVisualStyleBackColor = true;
@@ -100,9 +108,10 @@
             // 
             // btnEditarPedido
             // 
-            this.btnEditarPedido.Location = new System.Drawing.Point(430, 23);
+            this.btnEditarPedido.Location = new System.Drawing.Point(573, 28);
+            this.btnEditarPedido.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEditarPedido.Name = "btnEditarPedido";
-            this.btnEditarPedido.Size = new System.Drawing.Size(102, 23);
+            this.btnEditarPedido.Size = new System.Drawing.Size(136, 28);
             this.btnEditarPedido.TabIndex = 6;
             this.btnEditarPedido.Text = "Editar Pedido";
             this.btnEditarPedido.UseVisualStyleBackColor = true;
@@ -110,9 +119,9 @@
             // 
             // PedidosForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.btnEditarPedido);
             this.Controls.Add(this.btnPedidoNuevo);
             this.Controls.Add(this.btnCambiarEstado);
@@ -120,6 +129,7 @@
             this.Controls.Add(this.dgvPedidos);
             this.Controls.Add(this.btnFiltrar);
             this.Controls.Add(this.cbEstadoFiltro);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "PedidosForm";
             this.Text = "PedidosForm";
             this.Load += new System.EventHandler(this.PedidosForm_Load);
