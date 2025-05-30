@@ -16,6 +16,7 @@ using MaterialSkin;
 using MaterialSkin.Controls;
 using System.Drawing.Drawing2D;
 using SistemaRestaurante.Forms.Modulo_Turnos;
+using SistemaRestaurante.Forms.Modulo_Inventario;
 
 namespace SistemaRestaurante.Forms
 {
@@ -169,7 +170,7 @@ namespace SistemaRestaurante.Forms
         private void btnMenu1_Click(object sender, EventArgs e) => AbrirFormularioEnPanel(new MenuForm());
         private void btnPlatos_Click_1(object sender, EventArgs e) => AbrirFormularioEnPanel(new PlatosForm());
         private void btnPedidos_Click_1(object sender, EventArgs e) => AbrirFormularioEnPanel(new PedidosForm(this));
-        private void btnInventario_Click(object sender, EventArgs e) { }
+        private void btnInventario_Click(object sender, EventArgs e) => AbrirFormularioEnPanel(new InventarioForm(this));
         private void btnFacturacion_Click_1(object sender, EventArgs e) => AbrirFormularioEnPanel(new FacturacionForm(this));
         private void btnTurnos_Click_1(object sender, EventArgs e) => AbrirFormularioEnPanel(new FrmTurnosMain(this));
         private void btnCerrarSesion_Click_1(object sender, EventArgs e) => this.Close();

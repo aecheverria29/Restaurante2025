@@ -86,7 +86,7 @@ namespace SistemaRestaurante.Forms
             dgvUsuarios.Top = btnAgregar.Top + btnAgregar.Height + 32;
             dgvUsuarios.Left = leftBase;
             dgvUsuarios.Width = this.ClientSize.Width - leftBase * 2 - 20;
-            dgvUsuarios.Height = 240;
+            dgvUsuarios.Height = 180;
             dgvUsuarios.BackgroundColor = Color.FromArgb(240, 241, 246);
             dgvUsuarios.DefaultCellStyle.Font = new Font("Segoe UI", 11);
             dgvUsuarios.DefaultCellStyle.BackColor = Color.White;

@@ -9,6 +9,8 @@ namespace SistemaRestaurante
 {
     public partial class LoginForm : Form
     {
+        private Label lblBienvenida;
+
         public LoginForm()
         {
             InitializeComponent();
@@ -86,6 +88,14 @@ namespace SistemaRestaurante
             btnLogin.Left = lblTitulo.Left + 10;
             btnSalir.Left = btnLogin.Right + espacioBotones;
 
+            // Label bienvenida (creado programáticamente)
+            if (lblBienvenida == null)
+            {
+                lblBienvenida = new Label();
+                lblBienvenida.Visible = false;
+                this.Controls.Add(lblBienvenida);
+            }
+
             // Opción: Enter al textbox llama btnLogin
             txtContrasena.KeyDown += (s, ev) =>
             {
@@ -108,20 +118,58 @@ namespace SistemaRestaurante
                     SqlDataReader reader = cmd.ExecuteReader();
                     if (reader.HasRows)
                     {
-                        MessageBox.Show("Bienvenido");
-                        this.Hide();
-                        MainForm main = new MainForm();
-                        main.FormClosed += (s, args) => this.Show();
-                        main.Show();
+                        // --------- Bienvenida Mejorada y Centrada ---------
+                        lblBienvenida.Text = $"¡Bienvenido, {txtUsuario.Text}!";
+                        lblBienvenida.Font = new Font("Segoe UI", 24, FontStyle.Bold);
+                        lblBienvenida.ForeColor = Color.FromArgb(36, 182, 95);
+                        lblBienvenida.AutoSize = true;
+
+                        // CENTRAR: justo debajo del botón Iniciar
+                        lblBienvenida.Top = btnLogin.Bottom + 22;
+                        lblBienvenida.Left = (this.ClientSize.Width - lblBienvenida.PreferredWidth) / 2;
+                        lblBienvenida.BringToFront();
+                        lblBienvenida.Visible = true;
+
+                        // Animación fade-in
+                        Timer timer = new Timer();
+                        int alpha = 0;
+                        lblBienvenida.ForeColor = Color.FromArgb(alpha, 36, 182, 95);
+                        timer.Interval = 15;
+                        timer.Tick += (s2, e2) =>
+                        {
+                            if (alpha < 255)
+                            {
+                                alpha += 15;
+                                lblBienvenida.ForeColor = Color.FromArgb(Math.Min(alpha, 255), 36, 182, 95);
+                            }
+                            else
+                            {
+                                timer.Stop();
+                                // Espera 900ms y abre el main
+                                Timer t2 = new Timer();
+                                t2.Interval = 900;
+                                t2.Tick += (s3, e3) =>
+                                {
+                                    t2.Stop();
+                                    this.Hide();
+                                    MainForm main = new MainForm();
+                                    main.FormClosed += (s, args) => this.Show();
+                                    main.Show();
+                                    lblBienvenida.Visible = false;
+                                };
+                                t2.Start();
+                            }
+                        };
+                        timer.Start();
                     }
                     else
                     {
-                        MessageBox.Show("Credenciales Incorrectas");
+                        MessageBox.Show("Credenciales Incorrectas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al conectar: " + ex.Message);
+                    MessageBox.Show("Error al conectar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

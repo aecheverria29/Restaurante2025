@@ -81,7 +81,7 @@ namespace SistemaRestaurante.Forms
             };
 
             int btnWidth = 120, btnHeight = 38, btnGap = 18;
-            int btnsTop = txtComentarioEdit.Bottom + 28;
+            int btnsTop = txtComentarioEdit.Bottom + 60;
             int btnsLeft = leftLbl;
 
             for (int i = 0; i < botones.Length; i++)
