@@ -169,6 +169,7 @@
             this.Controls.Add(this.label1);
             this.Name = "UsuariosForm";
             this.Text = "UsuariosForm";
+            this.Load += new System.EventHandler(this.UsuariosForm_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

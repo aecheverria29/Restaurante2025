@@ -108,5 +108,10 @@ namespace SistemaRestaurante.Forms
             txtContrasena.Clear();
             cbRoles.SelectedIndex = -1;
         }
+
+        private void UsuariosForm_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
