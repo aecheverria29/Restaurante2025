@@ -15,15 +15,12 @@ using iText.Layout;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System.Drawing.Drawing2D;
-using SistemaRestaurante.Forms.Modulo_Turnos;
-using SistemaRestaurante.Forms.Modulo_Inventario;              // <- para Document
+using SistemaRestaurante.Forms.Modulo_Turnos; // <- para Document
 
 namespace SistemaRestaurante.Forms
 {
     public partial class MainForm : MaterialForm
     {
-        
-
         public MainForm()
         {
             InitializeComponent();
@@ -35,23 +32,56 @@ namespace SistemaRestaurante.Forms
                 Primary.Blue200, Accent.LightBlue200,
                 TextShade.WHITE
             );
+            // Evento Load
+            this.Load += MainForm_Load;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            // ---- Imagen redonda centrada ----
             GraphicsPath path = new GraphicsPath();
             path.AddEllipse(0, 0, pictureBox1.Width, pictureBox1.Height);
             pictureBox1.Region = new Region(path);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-
-            // Centra horizontalmente
             pictureBox1.Left = (panelMenu.Width - pictureBox1.Width) / 2;
-            // Opcional: establece la ubicación en Y (Top)
             pictureBox1.Top = 20;
-           
 
+            // ---- Botones centrados y del mismo tamaño ----
+            // Agrega aquí tus botones exactamente como se llaman en tu formulario:
+            List<MaterialButton> botonesMenu = new List<MaterialButton>
+            {
+                btnUsuarios,
+                btnMenu,
+                btnPlatos,
+                btnPedidos,
+                btnInventario,
+                btnFacturacion,
+                btnTurnos,
+                btnMesas,
+                btnReportes,
+                btnCerrarSesion
+            };
+
+            int anchoBoton = 160;
+            int altoBoton = 45;
+            int espacioEntreBotones = 18;
+
+            // Calcula altura total ocupada por los botones y los espacios
+            int alturaTotal = botonesMenu.Count * altoBoton + (botonesMenu.Count - 1) * espacioEntreBotones;
+            // Deja espacio extra arriba para el logo
+            int topInicial = pictureBox1.Bottom + 30; // 30 píxeles de espacio debajo del logo
+
+            for (int i = 0; i < botonesMenu.Count; i++)
+            {
+                var btn = botonesMenu[i];
+                btn.AutoSize = false;
+                btn.Size = new Size(anchoBoton, altoBoton);
+                btn.Left = (panelMenu.Width - anchoBoton) / 2;
+                btn.Top = topInicial + i * (altoBoton + espacioEntreBotones);
+                btn.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+                btn.Cursor = Cursors.Hand;
+            }
         }
-
 
         private void AbrirFormularioEnPanel(Form formHijo)
         {
@@ -62,13 +92,10 @@ namespace SistemaRestaurante.Forms
             panelContenido.Controls.Add(formHijo);
             panelContenido.Tag = formHijo;
             formHijo.Show();
-
-
         }
 
         private void btnUsuarios_Click(object sender, EventArgs e)
         {
-           
             AbrirFormularioEnPanel(new UsuariosForm(this));
         }
 
@@ -105,7 +132,7 @@ namespace SistemaRestaurante.Forms
 
         private void panelContenido_Paint(object sender, PaintEventArgs e)
         {
-
+            // No necesitas código aquí de momento.
         }
 
         private void btnFacturacion_Click(object sender, EventArgs e)
@@ -140,7 +167,7 @@ namespace SistemaRestaurante.Forms
 
         private void btnInventario_Click(object sender, EventArgs e)
         {
-            AbrirFormularioEnPanel(new InventarioForm(this));
+            // Implementa lógica aquí si es necesario.
         }
 
         private void btnFacturacion_Click_1(object sender, EventArgs e)
@@ -151,23 +178,21 @@ namespace SistemaRestaurante.Forms
         private void btnTurnos_Click_1(object sender, EventArgs e)
         {
             AbrirFormularioEnPanel(new FrmTurnosMain(this));
-
         }
 
         private void btnCerrarSesion_Click_1(object sender, EventArgs e)
         {
             this.Close();
-
         }
 
         private void panelMenu_Paint(object sender, PaintEventArgs e)
         {
-            // Degradado vertical tipo PlatyPlus
-            using (var brush = new System.Drawing.Drawing2D.LinearGradientBrush(
+            // Fondo degradado vertical
+            using (var brush = new LinearGradientBrush(
                 panelMenu.ClientRectangle,
-                Color.FromArgb(72, 49, 240),    // Color arriba (azul fuerte)
-                Color.FromArgb(199, 195, 255),  // Color abajo (azul/violeta claro)
-                System.Drawing.Drawing2D.LinearGradientMode.Vertical))
+                Color.FromArgb(72, 49, 240),    // Azul fuerte arriba
+                Color.FromArgb(199, 195, 255),  // Azul/violeta claro abajo
+                LinearGradientMode.Vertical))
             {
                 e.Graphics.FillRectangle(brush, panelMenu.ClientRectangle);
             }

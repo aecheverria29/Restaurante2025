@@ -100,7 +100,17 @@ namespace SistemaRestaurante.Forms
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("INSERT INTO Platos (Nombre, Precio, Descripcion, Imagen, Disponible, IdSubcategoria) VALUES (@nombre, @precio, @desc, @imagen, @disp, @idSub)", conn);
                 cmd.Parameters.AddWithValue("@nombre", txtNombrePlato.Text);
-                cmd.Parameters.AddWithValue("@precio", Convert.ToDecimal(txtPrecio.Text));
+                if (decimal.TryParse(txtPrecio.Text, out decimal precio))
+                {
+                    cmd.Parameters.AddWithValue("@precio", precio);
+                }
+                else
+                {
+                    MessageBox.Show("Ingrese un precio válido.");
+                    return;
+                }
+
+               // cmd.Parameters.AddWithValue("@precio", Convert.ToDecimal(txtPrecio.Text));
                 cmd.Parameters.AddWithValue("@desc", txtDescripcion.Text);
                 cmd.Parameters.AddWithValue("@imagen", pbImagen.Tag ?? (object)DBNull.Value);
 
