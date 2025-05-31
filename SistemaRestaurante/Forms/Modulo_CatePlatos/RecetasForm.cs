@@ -35,7 +35,8 @@ namespace SistemaRestaurante.Forms.Modulo_CatePlatos
                 cbPlato.SelectedValue = idPlatoInicial;
             }
             CargarReceta();
-            
+            PersonalizarEstilo();
+
         }
         private void CargarPlatos()
         {
@@ -189,5 +190,61 @@ namespace SistemaRestaurante.Forms.Modulo_CatePlatos
                 cbPlato.ValueMember = "IdPlato";
             }
         }
+
+        private void PersonalizarEstilo()
+        {
+            // Fondo general
+            this.BackColor = Color.FromArgb(246, 247, 251);
+
+            // Fuente pequeña y elegante para labels
+            float tamLabel = 8f;
+            Label[] labels = { label1, label2, label3 }; // Agrega aquí todos tus labels
+            foreach (var lbl in labels)
+            {
+                lbl.Font = new Font("Segoe UI", tamLabel, FontStyle.Regular);
+                lbl.ForeColor = Color.FromArgb(44, 62, 80);
+                lbl.AutoSize = true;
+            }
+
+            // TextBox
+            txtBuscarPlato.Font = txtCantidad.Font = new Font("Segoe UI", 10F);
+            txtBuscarPlato.BackColor = txtCantidad.BackColor = Color.White;
+
+            // ComboBox
+            cbPlato.Font = cbInsumo.Font = new Font("Segoe UI", 10F);
+
+            // DataGridView
+            dgvReceta.BackgroundColor = Color.White;
+            dgvReceta.DefaultCellStyle.Font = new Font("Segoe UI", 10.5F);
+            dgvReceta.DefaultCellStyle.BackColor = Color.White;
+            dgvReceta.DefaultCellStyle.SelectionBackColor = Color.FromArgb(180, 220, 250);
+            dgvReceta.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+
+            // Botones principales
+            Button[] btns = { btnAgregar, btnEliminar, btnRegresar };
+            Color[] colors = {
+        Color.FromArgb(39, 174, 96),     // Verde
+        Color.FromArgb(192, 57, 43),     // Rojo
+        Color.FromArgb(52, 152, 219)     // Azul
+    };
+            string[] texts = { "Agregar", "Eliminar", "Regresar" };
+
+            for (int i = 0; i < btns.Length; i++)
+            {
+                btns[i].Font = new Font("Segoe UI", 11.5F, FontStyle.Bold);
+                btns[i].BackColor = colors[i];
+                btns[i].ForeColor = Color.White;
+                btns[i].FlatStyle = FlatStyle.Flat;
+                btns[i].FlatAppearance.BorderSize = 0;
+                btns[i].Cursor = Cursors.Hand;
+                btns[i].Width = 95;
+                btns[i].Height = 36;
+                btns[i].Text = texts[i];
+                int idx = i; // Para evitar el closure bug
+                btns[i].MouseEnter += (s, e) => btns[idx].BackColor = ControlPaint.Dark(colors[idx]);
+                btns[i].MouseLeave += (s, e) => btns[idx].BackColor = colors[idx];
+            }
+        }
+
     }
 }

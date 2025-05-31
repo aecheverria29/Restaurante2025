@@ -33,7 +33,6 @@
             this.lblMontoFinal = new System.Windows.Forms.Label();
             this.btnGuardarCierre = new System.Windows.Forms.Button();
             this.btnCancelarCierre = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.lblEfectivo = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblTransferencia = new System.Windows.Forms.Label();
@@ -76,7 +75,7 @@
             // btnGuardarCierre
             // 
             this.btnGuardarCierre.Location = new System.Drawing.Point(353, 368);
-            this.btnGuardarCierre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnGuardarCierre.Margin = new System.Windows.Forms.Padding(4);
             this.btnGuardarCierre.Name = "btnGuardarCierre";
             this.btnGuardarCierre.Size = new System.Drawing.Size(100, 28);
             this.btnGuardarCierre.TabIndex = 6;
@@ -88,24 +87,13 @@
             // 
             this.btnCancelarCierre.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelarCierre.Location = new System.Drawing.Point(461, 368);
-            this.btnCancelarCierre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancelarCierre.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancelarCierre.Name = "btnCancelarCierre";
             this.btnCancelarCierre.Size = new System.Drawing.Size(100, 28);
             this.btnCancelarCierre.TabIndex = 7;
             this.btnCancelarCierre.Text = "Cancelar";
             this.btnCancelarCierre.UseVisualStyleBackColor = true;
             this.btnCancelarCierre.Click += new System.EventHandler(this.btnCancelarCierre_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(363, 11);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(175, 31);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Corte de caja";
             // 
             // lblEfectivo
             // 
@@ -161,7 +149,7 @@
             // btnGenerarPDF
             // 
             this.btnGenerarPDF.Location = new System.Drawing.Point(529, 267);
-            this.btnGenerarPDF.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnGenerarPDF.Margin = new System.Windows.Forms.Padding(4);
             this.btnGenerarPDF.Name = "btnGenerarPDF";
             this.btnGenerarPDF.Size = new System.Drawing.Size(120, 28);
             this.btnGenerarPDF.TabIndex = 14;
@@ -191,13 +179,12 @@
             this.Controls.Add(this.lblTransferencia);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblEfectivo);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCancelarCierre);
             this.Controls.Add(this.btnGuardarCierre);
             this.Controls.Add(this.lblMontoFinal);
             this.Controls.Add(this.lblMontoIniVal);
             this.Controls.Add(this.lblFechaIni);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FrmTurnoCierre";
             this.Text = "FrmTurnoCierre";
             this.Load += new System.EventHandler(this.FrmTurnoCierre_Load);
@@ -213,7 +200,6 @@
         private System.Windows.Forms.Label lblMontoFinal;
         private System.Windows.Forms.Button btnGuardarCierre;
         private System.Windows.Forms.Button btnCancelarCierre;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblEfectivo;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblTransferencia;

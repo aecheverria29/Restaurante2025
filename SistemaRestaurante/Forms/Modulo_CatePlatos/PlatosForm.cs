@@ -22,6 +22,8 @@ namespace SistemaRestaurante.Forms
             InitializeComponent();
             this.Load += PlatosForm_Load;
             dgvPlatos.CellClick += dgvPlatos_CellClick;
+            this.Load += (s, e) => PersonalizarEstilo();
+
 
         }
         private void CargarSubcategorias()
@@ -205,7 +207,15 @@ namespace SistemaRestaurante.Forms
                     WHERE IdPlato = @id", conn);
 
                     cmd.Parameters.AddWithValue("@nombre", txtNombrePlato.Text);
-                    cmd.Parameters.AddWithValue("@precio", Convert.ToDecimal(txtPrecio.Text));
+                    decimal precio;
+                    if (!decimal.TryParse(txtPrecio.Text.Replace(',', '.'), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out precio))
+                    {
+                        MessageBox.Show("Ingrese un precio válido (solo números, use punto para decimales).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txtPrecio.Focus();
+                        return;
+                    }
+                    cmd.Parameters.AddWithValue("@precio", precio);
+
                     cmd.Parameters.AddWithValue("@desc", txtDescripcion.Text);
                     cmd.Parameters.AddWithValue("@imagen", pbImagen.Tag ?? (object)DBNull.Value);
 
@@ -301,5 +311,91 @@ namespace SistemaRestaurante.Forms
                 MessageBox.Show("Selecciona un plato para agregar su receta.");
             }
         }
+
+        private void PersonalizarEstilo()
+        {
+            // Fondo principal
+            this.BackColor = Color.FromArgb(246, 247, 251);
+
+            // ---- Labels ----
+            foreach (var lbl in new[] { label1, label2, label3, label4 })
+            {
+                lbl.Font = new Font("Segoe UI", 10.5f, FontStyle.Bold);
+                lbl.ForeColor = Color.FromArgb(44, 62, 80);
+                lbl.AutoSize = true;
+            }
+
+            // ---- TextBox ----
+            foreach (var txt in new[] { txtNombrePlato, txtPrecio, txtDescripcion, txtBuscar })
+            {
+                txt.Font = new Font("Segoe UI", 12);
+                txt.BackColor = Color.White;
+                txt.BorderStyle = BorderStyle.FixedSingle;
+            }
+
+            // ---- ComboBox ----
+            cbSubcategoria.Font = new Font("Segoe UI", 12);
+            cbFiltroDisponibilidad.Font = new Font("Segoe UI", 12);
+
+            // ---- CheckBox ----
+            chkDisponible.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+            chkDisponible.ForeColor = Color.FromArgb(41, 128, 185);
+            chkDisponible.AutoSize = true;
+
+            // ---- PictureBox ----
+            pbImagen.BackColor = Color.White;
+            pbImagen.BorderStyle = BorderStyle.FixedSingle;
+            pbImagen.SizeMode = PictureBoxSizeMode.Zoom;
+
+            // ---- Botones principales ----
+            Button[] btnsAccion = { btnAgregar, btnEditar, btnSeleccionarImg, btnReceta };
+            Color[] colores = {
+        Color.FromArgb(39, 174, 96), // verde agregar
+        Color.FromArgb(41, 128, 185), // azul editar
+        Color.FromArgb(52, 73, 94),   // gris oscuro imagen
+        Color.FromArgb(142, 68, 173)  // morado receta
+    };
+            for (int i = 0; i < btnsAccion.Length; i++)
+            {
+                btnsAccion[i].Font = new Font("Segoe UI", 11, FontStyle.Bold);
+                btnsAccion[i].ForeColor = Color.White;
+                btnsAccion[i].BackColor = colores[i];
+                btnsAccion[i].FlatStyle = FlatStyle.Flat;
+                btnsAccion[i].FlatAppearance.BorderSize = 0;
+                btnsAccion[i].Cursor = Cursors.Hand;
+                int idx = i;
+                btnsAccion[i].MouseEnter += (s, e) => btnsAccion[idx].BackColor = ControlPaint.Dark(colores[idx]);
+                btnsAccion[i].MouseLeave += (s, e) => btnsAccion[idx].BackColor = colores[idx];
+            }
+            btnSeleccionarImg.Text = "Cargar Imagen";
+            btnReceta.Text = "Agregar receta";
+
+            // ---- Botones secundarios ----
+            Button[] btnsSec = { btnFiltrar, btnBuscar, btnLimpiar };
+            foreach (var btn in btnsSec)
+            {
+                btn.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+                btn.ForeColor = Color.White;
+                btn.BackColor = Color.FromArgb(127, 140, 141);
+                btn.FlatStyle = FlatStyle.Flat;
+                btn.FlatAppearance.BorderSize = 0;
+                btn.Cursor = Cursors.Hand;
+                btn.MouseEnter += (s, e) => btn.BackColor = ControlPaint.Dark(Color.FromArgb(127, 140, 141));
+                btn.MouseLeave += (s, e) => btn.BackColor = Color.FromArgb(127, 140, 141);
+            }
+            btnFiltrar.Text = "Aplicar filtro";
+            btnBuscar.Text = "Buscar";
+            btnLimpiar.Text = "Limpiar y mostrar";
+
+            // ---- DataGridView ----
+            dgvPlatos.BackgroundColor = Color.White;
+            dgvPlatos.DefaultCellStyle.Font = new Font("Segoe UI", 11);
+            dgvPlatos.DefaultCellStyle.BackColor = Color.White;
+            dgvPlatos.DefaultCellStyle.SelectionBackColor = Color.FromArgb(180, 220, 250);
+            dgvPlatos.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 13, FontStyle.Bold);
+            dgvPlatos.GridColor = Color.FromArgb(220, 220, 220);
+            dgvPlatos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
     }
 }
