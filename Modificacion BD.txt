@@ -5,3 +5,12 @@ ALTER TABLE Pedidos
 ALTER COLUMN IdMesa INT NULL;
 
 INSERT INTO Clientes (Nombre, NIT, NRC) VALUES ('Consumidor Final', 'CF', NULL);
+
+
+ALTER TABLE Turnos
+ADD Estado VARCHAR(20) DEFAULT 'Abierto';
+
+
+ALTER TABLE Insumos ADD MinimoStock DECIMAL(10,2) DEFAULT 0;
+
+

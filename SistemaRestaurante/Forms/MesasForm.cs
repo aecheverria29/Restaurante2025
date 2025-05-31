@@ -25,15 +25,16 @@ namespace SistemaRestaurante.Forms
             InitializeComponent();
             main=mainForm;
             this.Load += MesasForm_Load;
-            btnAgregar.Click += btnAgregar_Click;
-            btnLimpiar.Click += btnLimpiar_Click;
-            btnRegresar.Click += btnRegresar_Click;
+           // btnAgregar.Click += btnAgregar_Click;
+           // btnLimpiar.Click += btnLimpiar_Click;
+            //btnRegresar.Click += btnRegresar_Click;
             InicializarMenuContextual();
         }
         private void InicializarMenuContextual()
         {
             menuMesa = new ContextMenuStrip();
-            menuMesa.Items.Add("Editar", null, MenuEditar_Click);
+            menuMesa.Items.Add("Editar", null, (s, e) => AbrirDialogoEditar());
+
             menuMesa.Items.Add("Eliminar", null, MenuEliminar_Click);
         }
         private void MesasForm_Load(object sender, EventArgs e)
@@ -200,6 +201,43 @@ namespace SistemaRestaurante.Forms
                 CargarMesasVisual();
             }
         }
+        private void AbrirDialogoEditar()
+        {
+            if (mesaSeleccionadaId <= 0)
+            {
+                MessageBox.Show("Seleccione una mesa válida.");
+                return;
+            }
+
+            // Evita abrir InputBox si no hay texto original (por precaución)
+            if (string.IsNullOrWhiteSpace(txtNumero.Text))
+            {
+                MessageBox.Show("No hay número de mesa seleccionado.");
+                return;
+            }
+
+            string nuevoNumero = Interaction.InputBox(
+                "Ingrese el nuevo número para la mesa:", "Editar Mesa", txtNumero.Text);
+
+            if (string.IsNullOrWhiteSpace(nuevoNumero))
+            {
+                return; // Usuario canceló o dejó vacío, no hacemos nada
+            }
+
+            using (SqlConnection conn = DBConnection.GetConnection())
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE Mesas SET NumeroMesa = @numero WHERE IdMesa = @id", conn);
+                cmd.Parameters.AddWithValue("@numero", nuevoNumero);
+                cmd.Parameters.AddWithValue("@id", mesaSeleccionadaId);
+                cmd.ExecuteNonQuery();
+            }
+
+            MessageBox.Show("Mesa actualizada correctamente.");
+            LimpiarCampos();
+            CargarMesasVisual();
+        }
+
 
     }
 }

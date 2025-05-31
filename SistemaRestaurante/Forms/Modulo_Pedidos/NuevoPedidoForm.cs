@@ -15,7 +15,7 @@ namespace SistemaRestaurante.Forms
         private MainForm main;
         List<PlatoPedidoTemp> listaDetalle = new List<PlatoPedidoTemp>();
         private int? mesaPreseleccionada = null;
-
+        private bool cargando = false;
 
         public NuevoPedidoForm(MainForm mainForm) 
         {
@@ -143,12 +143,14 @@ namespace SistemaRestaurante.Forms
 
         private void CargarCombos()
         {
+            cargando = true;
+
             using (SqlConnection conn = DBConnection.GetConnection())
             {
                 conn.Open();
 
-                //Cargar mesas disponibles
-                SqlCommand cmdMesas = new SqlCommand("SELECT IdMesa,NumeroMesa FROM Mesas WHERE IdEstadoMesa = 1", conn);
+                // Cargar mesas disponibles
+                SqlCommand cmdMesas = new SqlCommand("SELECT IdMesa, NumeroMesa FROM Mesas WHERE IdEstadoMesa = 1", conn);
                 SqlDataAdapter daMesas = new SqlDataAdapter(cmdMesas);
                 DataTable dtMesas = new DataTable();
                 daMesas.Fill(dtMesas);
@@ -156,6 +158,7 @@ namespace SistemaRestaurante.Forms
                 cbMesa.DisplayMember = "NumeroMesa";
                 cbMesa.ValueMember = "IdMesa";
 
+                // Cargar tipos de consumo
                 SqlCommand cmdTipos = new SqlCommand("SELECT IdTipoConsumo, NombreTipo FROM TiposConsumo", conn);
                 SqlDataAdapter daTipos = new SqlDataAdapter(cmdTipos);
                 DataTable dtTipos = new DataTable();
@@ -173,34 +176,31 @@ namespace SistemaRestaurante.Forms
                 cbPlato.DisplayMember = "Nombre";
                 cbPlato.ValueMember = "IdPlato";
             }
+
+            cargando = false;
         }
+
 
         private void label5_Click(object sender, EventArgs e) { }
 
         private void cbTipoConsumo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string tipo = cbTipoConsumo.Text;
-            if (tipo == "Cliente" || tipo == "Para llevar")
+            if (cbTipoConsumo.SelectedItem == null) return;
+
+            string tipoTexto = cbTipoConsumo.Text.Trim().ToLower();
+
+            // Habilitar o deshabilitar el campo de justificación
+            txtJustificacion.Enabled = tipoTexto != "cliente" && tipoTexto != "para llevar";
+
+            // Habilitar o deshabilitar selección de mesa
+            if (tipoTexto == "cliente")
             {
-                txtJustificacion.Text = "";
-                txtJustificacion.Enabled = false;
+                cbMesa.Enabled = true;
             }
             else
             {
-                txtJustificacion.Enabled = true;
-            }
-            if (cbTipoConsumo.SelectedItem is DataRowView tipoRow)
-            {
-                int idTipoConsumo = Convert.ToInt32(tipoRow["IdTipoConsumo"]);
-                if (idTipoConsumo != 1)
-                {
-                    cbMesa.Enabled = false;
-                    cbMesa.SelectedIndex = -1;
-                }
-                else
-                {
-                    cbMesa.Enabled = true;
-                }
+                cbMesa.Enabled = false;
+                cbMesa.SelectedIndex = -1;
             }
         }
         private void NuevoPedidoForm_Load(object sender, EventArgs e)
@@ -208,10 +208,21 @@ namespace SistemaRestaurante.Forms
             CargarCombos();
             if (mesaPreseleccionada.HasValue)
             {
-                cbTipoConsumo.SelectedValue = 1; // Asigna consumo "Cliente"
+                // Seleccionar el tipo de consumo "Cliente" por nombre
+                foreach (DataRowView item in cbTipoConsumo.Items)
+                {
+                    if (item["NombreTipo"].ToString().Trim().ToLower() == "cliente")
+                    {
+                        cbTipoConsumo.SelectedItem = item;
+                        break;
+                    }
+                }
+
+                // Preseleccionar la mesa, pero permitir cambiarla
                 cbMesa.SelectedValue = mesaPreseleccionada.Value;
-                cbMesa.Enabled = false; // Evita cambiarla
+                cbMesa.Enabled = true;
             }
+
             txtJustificacion.Enabled = false;
         }
         private void btnAgregarPlato_Click(object sender, EventArgs e)
